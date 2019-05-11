@@ -51,7 +51,7 @@ namespace Technicien_capteurs
             {
                 //id[j] = byte.Parse(rdr[0].ToString());//id
                 id.Add(byte.Parse(rdr[0].ToString()));//id
-                stockage = rdr[1].ToString();//nom
+                stockage = rdr[1].ToString();//nom/
 
                 cmbBox_capteur.Items.Add(stockage);
                 //j++;
