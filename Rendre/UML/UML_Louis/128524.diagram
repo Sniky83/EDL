@@ -1,0 +1,116 @@
+format 221
+
+classinstance 128012 class_ref 128140 // C_EDL_Recorder
+  name ""   xyz 374 41 2000 life_line_z 2000
+classinstance 128140 class_ref 128652 // Technicien
+  name ""   xyz 73 33 2000 life_line_z 2000
+classinstance 128268 class_ref 128524 // IHM
+  name ""   xyz 257 39 2000 life_line_z 2000
+fragment 128524 "alt"
+  xyzwh 237 290 2000 453 275
+  separator 5988
+end
+classinstance 130828 class_ref 135308 // C_Recorder
+  name ""   xyz 541 41 2000 life_line_z 2000
+note 131340 "Ex: \"Test?\""
+  xyzwh 605 295 2000 57 51
+note 131724 "Ex: \"Oui!\""
+  xyzwh 603 359 2005 81 37
+durationcanvas 128002 classinstance_ref 128268 // :IHM
+  xyzwh 276 407 2010 11 40
+end
+durationcanvas 128258 classinstance_ref 128268 // :IHM
+  xyzwh 276 523 2010 11 40
+end
+durationcanvas 128652 classinstance_ref 128268 // :IHM
+  xyzwh 276 118 2010 11 25
+end
+durationcanvas 128780 classinstance_ref 128268 // :IHM
+  xyzwh 276 202 2010 11 48
+end
+durationcanvas 129036 classinstance_ref 128012 // :C_EDL_Recorder
+  xyzwh 417 258 2010 11 26
+end
+durationcanvas 129164 classinstance_ref 128012 // :C_EDL_Recorder
+  xyzwh 417 475 2010 11 53
+end
+durationcanvas 129292 classinstance_ref 128012 // :C_EDL_Recorder
+  xyzwh 417 342 2010 11 59
+end
+durationcanvas 129420 classinstance_ref 128140 // :Technicien
+  xyzwh 96 118 2010 11 40
+end
+durationcanvas 129548 classinstance_ref 128268 // :IHM
+  xyzwh 276 344 2010 11 58
+end
+durationcanvas 129676 classinstance_ref 128268 // :IHM
+  xyzwh 276 468 2010 11 46
+end
+durationcanvas 129804 classinstance_ref 128268 // :IHM
+  xyzwh 276 258 2010 11 26
+end
+durationcanvas 129932 classinstance_ref 128140 // :Technicien
+  xyzwh 96 189 2010 11 38
+end
+durationcanvas 130956 classinstance_ref 128012 // :C_EDL_Recorder
+  xyzwh 417 307 2010 11 40
+end
+durationcanvas 131084 classinstance_ref 130828 // :C_Recorder
+  xyzwh 572 307 2010 11 25
+end
+durationcanvas 131468 classinstance_ref 130828 // :C_Recorder
+  xyzwh 572 358 2010 11 40
+end
+reflexivemsg 128130 synchronous
+  to durationcanvas_ref 128002
+  yz 407 2015 explicitmsg "AfficherMessageReussi()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 291 419
+reflexivemsg 128386 synchronous
+  to durationcanvas_ref 128258
+  yz 523 2015 explicitmsg "AfficherMessageErreur()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 292 537
+msg 130060 synchronous
+  from durationcanvas_ref 129420
+  to durationcanvas_ref 128652
+  yz 118 2015 explicitmsg "Remplissage du formulaire"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 118 105
+msg 130188 return
+  from durationcanvas_ref 129292
+  to durationcanvas_ref 129548
+  yz 372 2015 explicitmsg "True"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 352 358
+msg 130316 return
+  from durationcanvas_ref 129164
+  to durationcanvas_ref 129676
+  yz 485 2015 explicitmsg "False"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 349 473
+msg 130572 synchronous
+  from durationcanvas_ref 129804
+  to durationcanvas_ref 129036
+  yz 258 2015 msg operation_ref 128140 // "TesterConnexion() : bool"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 319 243
+msg 130700 synchronous
+  from durationcanvas_ref 129932
+  to durationcanvas_ref 128780
+  yz 202 2015 explicitmsg "Appui sur le bouton de validation"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 112 189
+msg 131212 synchronous
+  from durationcanvas_ref 130956
+  to durationcanvas_ref 131084
+  yz 307 2015 explicitmsg "Socket de connexion"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 457 293
+msg 131596 return
+  from durationcanvas_ref 131468
+  to durationcanvas_ref 129292
+  yz 358 2020 explicitmsg "Envoi une réponse"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 462 344
+end

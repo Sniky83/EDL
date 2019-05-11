@@ -1,0 +1,45 @@
+format 221
+
+classcanvas 128012 class_ref 128012 // C_BDD
+  classdiagramsettings show_members_full_definition yes show_members_visibility yes member_max_width 0 end
+  xyzwh 17 122 2000 587 347
+end
+classcanvas 128140 class_ref 128140 // C_EDL_Recorder
+  classdiagramsettings show_members_full_definition yes show_members_visibility yes member_max_width 0 end
+  xyzwh 609 62 2000 207 139
+end
+classcanvas 128396 class_ref 128396 // C_Config
+  classdiagramsettings show_members_full_definition yes show_members_visibility yes member_max_width 0 end
+  xyzwh 642 448 2000 149 139
+end
+classcanvas 129420 class_ref 128524 // IHM
+  classdiagramsettings member_max_width 0 end
+  xyzwh 663 243 2000 107 149
+end
+classcanvas 131212 class_ref 135308 // C_Recorder
+  classdiagramsettings member_max_width 0 end
+  xyz 427 52 2000
+end
+note 131724 "Arduino"
+  xyzwh 427 9 2000 75 35
+relationcanvas 132236 relation_ref 136588 // <association>
+  from ref 128012 z 2001 to ref 129420
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132364 relation_ref 136716 // <association>
+  from ref 131212 z 2001 to ref 128140
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132492 relation_ref 136844 // <association>
+  from ref 128140 z 2001 to ref 129420
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132620 relation_ref 136972 // <association>
+  from ref 129420 z 2001 to ref 128396
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

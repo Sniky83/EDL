@@ -1,0 +1,79 @@
+format 221
+
+note 128780 "Au lancement de la form"
+  xyzwh 912 388.5 2000 95 57
+classinstance 129036 class_ref 128012 // C_BDD
+  name ""   xyz 859 23 2000 life_line_z 2000
+note 131340 "Au lancement de la form"
+  xyzwh 651 385.5 2000 95 57
+fragment 131468 "alt"
+  xyzwh 266 463.5 2000 345 207
+end
+classinstance 131596 class_ref 128012 // C_BDD
+  name ""   xyz 560 322.5 2000 life_line_z 2000
+classinstance 131724 class_ref 128524 // IHM
+  name ""   xyz 291 326 2000 life_line_z 2000
+classinstance 131852 class_ref 128652 // Technicien
+  name ""   xyz 69 310 2000 life_line_z 2000
+durationcanvas 131980 classinstance_ref 131724 // :IHM
+  xyzwh 310 397.5 2010 11 27
+end
+durationcanvas 132108 classinstance_ref 131852 // :Technicien
+  xyzwh 92 397.5 2010 11 40
+end
+durationcanvas 132236 classinstance_ref 131596 // :C_BDD
+  xyzwh 579 417.5 2010 11 73
+end
+durationcanvas 132364 classinstance_ref 131724 // :IHM
+  xyzwh 310 580.5 2010 11 25
+end
+durationcanvas 132492 classinstance_ref 131724 // :IHM
+  xyzwh 310 429.5 2010 11 33
+end
+durationcanvas 132620 classinstance_ref 131724 // :IHM
+  xyzwh 310 631.5 2010 11 40
+end
+durationcanvas 132748 classinstance_ref 131724 // :IHM
+  xyzwh 310 509.5 2010 11 40
+end
+durationcanvas 132876 classinstance_ref 131596 // :C_BDD
+  xyzwh 579 580.5 2010 11 40
+end
+durationcanvas 133004 classinstance_ref 131724 // :IHM
+  xyzwh 310 477.5 2010 11 25
+end
+msg 133132 return
+  from durationcanvas_ref 132236
+  to durationcanvas_ref 133004
+  yz 479.5 2015 explicitmsg "Données entrées"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 369 465.5
+reflexivemsg 133260 synchronous
+  to durationcanvas_ref 132748
+  yz 509 2015 explicitmsg "AfficherDonneesEntrees()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 329 523.5
+msg 133388 asynchronous
+  from durationcanvas_ref 132492
+  to durationcanvas_ref 132236
+  yz 451.5 2015 explicitmsg "RequeteSelectEntrees() : MySqlDataReader"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 356 438.5
+reflexivemsg 133516 synchronous
+  to durationcanvas_ref 132620
+  yz 631 2015 explicitmsg "AfficherMessageErreur"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 325 640.5
+msg 133644 synchronous
+  from durationcanvas_ref 132108
+  to durationcanvas_ref 131980
+  yz 405.5 2015 explicitmsg "Clic sur gestion des entrées"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 132 389.5
+msg 133772 return
+  from durationcanvas_ref 132876
+  to durationcanvas_ref 132364
+  yz 582.5 2015 explicitmsg "Null"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 400 566.5
+end

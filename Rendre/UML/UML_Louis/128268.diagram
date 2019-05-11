@@ -1,0 +1,97 @@
+format 221
+
+classinstance 128012 class_ref 128652 // Technicien
+  name ""   xyz 64 21 2000 life_line_z 2000
+classinstance 128140 class_ref 128524 // IHM
+  name ""   xyz 270 28 2000 life_line_z 2000
+classinstance 128268 class_ref 128012 // C_BDD
+  name ""   xyz 417 22 2000 life_line_z 2000
+fragment 128514 "alt"
+  xyzwh 189 407 2000 457 306
+  separator 5091
+end
+durationcanvas 128002 classinstance_ref 128140 // :IHM
+  xyzwh 289 515 2010 11 40
+end
+durationcanvas 128258 classinstance_ref 128140 // :IHM
+  xyzwh 289 636 2010 11 37
+end
+durationcanvas 128396 classinstance_ref 128012 // :Technicien
+  xyzwh 87 105 2010 11 40
+end
+durationcanvas 128524 classinstance_ref 128140 // :IHM
+  xyzwh 289 105 2010 11 26
+end
+durationcanvas 128780 classinstance_ref 128012 // :Technicien
+  xyzwh 87 154 2010 11 38
+end
+durationcanvas 128908 classinstance_ref 128140 // :IHM
+  xyzwh 289 146 2010 11 92
+end
+durationcanvas 129164 classinstance_ref 128140 // :IHM
+  xyzwh 289 246 2010 11 32
+end
+durationcanvas 129548 classinstance_ref 128140 // :IHM
+  xyzwh 289 357 2010 11 40
+end
+durationcanvas 129676 classinstance_ref 128268 // :C_BDD
+  xyzwh 436 357 2010 11 25
+end
+durationcanvas 130060 classinstance_ref 128268 // :C_BDD
+  xyzwh 436 430 2010 11 59
+end
+durationcanvas 130188 classinstance_ref 128140 // :IHM
+  xyzwh 289 432 2010 11 58
+end
+durationcanvas 130444 classinstance_ref 128268 // :C_BDD
+  xyzwh 436 582 2010 11 39
+end
+durationcanvas 130572 classinstance_ref 128140 // :IHM
+  xyzwh 289 571 2010 11 55
+end
+reflexivemsg 128130 synchronous
+  to durationcanvas_ref 128002
+  yz 515 2015 explicitmsg "AfficherMessageReussi()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 306 529
+reflexivemsg 128386 synchronous
+  to durationcanvas_ref 128258
+  yz 636 2015 explicitmsg "AfficherMessageErreur()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 304 649
+msg 128652 synchronous
+  from durationcanvas_ref 128396
+  to durationcanvas_ref 128524
+  yz 105 2015 explicitmsg "Remplissage du formulaire"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 127 93
+msg 129036 synchronous
+  from durationcanvas_ref 128780
+  to durationcanvas_ref 128908
+  yz 154 2015 explicitmsg "Appui sur le bouton de validation"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 126 140
+reflexivemsg 129292 synchronous
+  to durationcanvas_ref 129164
+  yz 246 2015 explicitmsg "btn_ok_Click()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 306 261
+msg 129804 synchronous
+  from durationcanvas_ref 129548
+  to durationcanvas_ref 129676
+  yz 357 2015 msg operation_ref 128268 // "TesterConnexion()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 306 338
+msg 130316 return
+  from durationcanvas_ref 130060
+  to durationcanvas_ref 130188
+  yz 460 2015 explicitmsg "Connexion réussie"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 307 443
+msg 130700 return
+  from durationcanvas_ref 130444
+  to durationcanvas_ref 130572
+  yz 590 2015 explicitmsg "Problème de connexion"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 303 572
+end

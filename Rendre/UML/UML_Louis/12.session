@@ -1,0 +1,37 @@
+window_sizes 1920 1017 448 1467 0 971
+
+diagrams
+  classdiagram_ref 128012 // class
+    1173 776 100 A4 0 0
+  active  sequencediagram_ref 128268 // Connexion à la BDD
+    1173 776 100 A4 0 0
+  sequencediagram_ref 128140 // Connexion à l'application
+    1173 776 100 A4 0 0
+  sequencediagram_ref 128524 // Connexion à l'Arduino
+    1173 776 100 A4 0 0
+  sequencediagram_ref 128396 // Aide en ligne
+    1173 776 100 A4 0 0
+  sequencediagram_ref 128780 // Affichage de la liste des Capteurs
+    1173 776 100 A4 0 0
+  sequencediagram_ref 128908 // Ajout, Modification, Superssion d'un Capteur
+    1173 776 79 A4 0 0
+  sequencediagram_ref 128002 // Afficher Mesures Instant
+    114 86 100 A4 0 0
+  sequencediagram_ref 135436 // Entree
+    114 86 78 A4 0 0
+  sequencediagram_ref 135564 // Liste entrées
+    114 86 100 A4 0 0
+  sequencediagram_ref 135692 // Envoi message Arduino
+    114 86 100 A4 0 0
+  sequencediagram_ref 135948 // Sauvegarde config
+    114 86 100 A4 0 0
+  sequencediagram_ref 136076 // Load config
+    1467 86 100 A4 0 0
+end
+show_stereotypes
+selected sequencediagram_ref 128268 // Connexion à la BDD
+open
+  classview_ref 128012 // class
+  usecaseview_ref 128012 // Acteurs
+end
+end

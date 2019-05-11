@@ -1,0 +1,61 @@
+format 221
+
+classinstance 128012 class_ref 128652 // Technicien
+  name ""   xyz 67 47 2000 life_line_z 2000
+classinstance 128140 class_ref 128780 // IHM_SITE
+  name ""   xyz 271 54 2000 life_line_z 2000
+textcanvas 128652 "Choix de la rubrique d'aide voulue"
+  xyzwh 114 111 2020 162 14
+textcanvas 129164 "Appui sur le lien de la rubrique"
+  xyzwh 120 182 2020 146 14
+fragment 129932 "alt"
+  xyzwh 17 242 2000 312 165
+  separator 4688
+end
+durationcanvas 128268 classinstance_ref 128012 // :Technicien
+  xyzwh 90 127 2010 11 40
+end
+durationcanvas 128396 classinstance_ref 128140 // :IHM_SITE
+  xyzwh 295 127 2010 11 25
+end
+durationcanvas 128780 classinstance_ref 128012 // :Technicien
+  xyzwh 90 195 2010 11 40
+end
+durationcanvas 128908 classinstance_ref 128140 // :IHM_SITE
+  xyzwh 295 195 2010 11 25
+end
+durationcanvas 134668 classinstance_ref 128140 // :IHM_SITE
+  xyzwh 295 261 2010 11 40
+end
+durationcanvas 134796 classinstance_ref 128012 // :Technicien
+  xyzwh 90 262 2010 11 51
+end
+durationcanvas 135052 classinstance_ref 128140 // :IHM_SITE
+  xyzwh 295 348 2010 11 45
+end
+durationcanvas 135180 classinstance_ref 128012 // :Technicien
+  xyzwh 90 348 2010 11 35
+end
+msg 128524 synchronous
+  from durationcanvas_ref 128268
+  to durationcanvas_ref 128396
+  yz 127 2015 unspecifiedmsg
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+msg 129036 synchronous
+  from durationcanvas_ref 128780
+  to durationcanvas_ref 128908
+  yz 195 2015 unspecifiedmsg
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+msg 134924 return
+  from durationcanvas_ref 134668
+  to durationcanvas_ref 134796
+  yz 262 2015 explicitmsg "Afficher Rubrique"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 158 245
+msg 135308 return
+  from durationcanvas_ref 135052
+  to durationcanvas_ref 135180
+  yz 348 2015 explicitmsg "Afficher Erreur"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 155 335
+end

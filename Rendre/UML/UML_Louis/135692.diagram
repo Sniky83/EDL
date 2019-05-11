@@ -1,0 +1,125 @@
+format 221
+
+classinstance 128012 class_ref 128652 // Technicien
+  name ""   xyz 78 51 2000 life_line_z 2000
+classinstance 128140 class_ref 128524 // IHM
+  name ""   xyz 256 63 2000 life_line_z 2000
+classinstance 128268 class_ref 135308 // C_Recorder
+  name ""   xyz 575 49 2000 life_line_z 2000
+classinstance 128396 class_ref 128140 // C_EDL_Recorder
+  name ""   xyz 380 55 2000 life_line_z 2000
+note 130060 "Ex:
+\"INT_ALT_A:30.0_B:4.2?\""
+  xyzwh 639 213 2000 145 51
+note 130188 "Ex:
+\"L1_1.5:L2_2.3!\""
+  xyzwh 652 285 2000 103 49
+fragment 131596 "alt"
+  xyzwh 172 192 2000 641 311
+  separator 7090
+end
+fragment 132108 "alt"
+  xyzwh 251 330 3005 182 80
+  separator 5000
+end
+durationcanvas 128524 classinstance_ref 128012 // :Technicien
+  xyzwh 101 133 2010 11 40
+end
+durationcanvas 128652 classinstance_ref 128140 // :IHM
+  xyzwh 275 133 2010 11 25
+end
+durationcanvas 128908 classinstance_ref 128140 // :IHM
+  xyzwh 275 180 2010 11 40
+end
+durationcanvas 129036 classinstance_ref 128396 // :C_EDL_Recorder
+  xyzwh 423 180 2010 11 25
+end
+durationcanvas 129292 classinstance_ref 128396 // :C_EDL_Recorder
+  xyzwh 423 225 2010 11 40
+end
+durationcanvas 129420 classinstance_ref 128268 // :C_Recorder
+  xyzwh 606 225 2010 11 25
+end
+durationcanvas 129676 classinstance_ref 128268 // :C_Recorder
+  xyzwh 606 289 2010 11 40
+end
+durationcanvas 129804 classinstance_ref 128396 // :C_EDL_Recorder
+  xyzwh 423 289 2010 11 25
+end
+durationcanvas 130316 classinstance_ref 128396 // :C_EDL_Recorder
+  xyzwh 423 321 2010 11 26
+end
+durationcanvas 130444 classinstance_ref 128140 // :IHM
+  xyzwh 275 321 2010 11 25
+end
+durationcanvas 130700 classinstance_ref 128140 // :IHM
+  xyzwh 275 379 2010 11 28
+end
+durationcanvas 130956 classinstance_ref 128396 // :C_EDL_Recorder
+  xyzwh 423 426 2010 11 40
+end
+durationcanvas 131084 classinstance_ref 128140 // :IHM
+  xyzwh 275 426 2010 11 25
+end
+durationcanvas 131340 classinstance_ref 128140 // :IHM
+  xyzwh 275 456 2010 11 40
+end
+durationcanvas 131724 classinstance_ref 128140 // :IHM
+  xyzwh 275 349 2010 11 25
+end
+durationcanvas 131852 classinstance_ref 128396 // :C_EDL_Recorder
+  xyzwh 423 349 2010 11 27
+end
+msg 128780 synchronous
+  from durationcanvas_ref 128524
+  to durationcanvas_ref 128652
+  yz 133 2015 explicitmsg "Lance le formulaire des mesures"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 115 118
+msg 129164 synchronous
+  from durationcanvas_ref 128908
+  to durationcanvas_ref 129036
+  yz 180 2015 msg operation_ref 135820 // "EnvoiMessageMesureInstant() : string"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 285 166
+msg 129548 synchronous
+  from durationcanvas_ref 129292
+  to durationcanvas_ref 129420
+  yz 225 2015 explicitmsg "Socket de connexion"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 470 211
+msg 129932 return
+  from durationcanvas_ref 129676
+  to durationcanvas_ref 129804
+  yz 289 2015 explicitmsg "Envoi une réponse"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 475 275
+msg 130572 return
+  from durationcanvas_ref 130316
+  to durationcanvas_ref 130444
+  yz 321 2015 explicitmsg "Valeurs des mesures"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 304 304
+reflexivemsg 130828 synchronous
+  to durationcanvas_ref 130700
+  yz 379 2015 explicitmsg "AfficherValeursTableau()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 292 394
+msg 131212 return
+  from durationcanvas_ref 130956
+  to durationcanvas_ref 131084
+  yz 426 2015 explicitmsg "Null"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 343 412
+reflexivemsg 131468 synchronous
+  to durationcanvas_ref 131340
+  yz 456 2015 explicitmsg "AfficherMessageErreur()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 292 473
+msg 131980 synchronous
+  from durationcanvas_ref 131724
+  to durationcanvas_ref 131852
+  yz 355 2015 msg operation_ref 135948 // "LectureMesureInstant() : string"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 298 341
+end

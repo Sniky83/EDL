@@ -1,0 +1,86 @@
+format 221
+
+classinstance 128396 class_ref 128652 // Technicien
+  name ""   xyz 157 34 2000 life_line_z 2000
+classinstance 128652 class_ref 128524 // IHM
+  name ""   xyz 294 38 2000 life_line_z 2000
+fragment 130700 "alt"
+  xyzwh 237 234 2000 335 125
+  separator 4784
+end
+classinstance 130828 class_ref 128012 // C_BDD
+  name ""   xyz 442 23 2000 life_line_z 2000
+durationcanvas 128258 classinstance_ref 128652 // :IHM
+  xyzwh 313 258 2010 11 39
+end
+durationcanvas 128514 classinstance_ref 128652 // :IHM
+  xyzwh 313 318 2010 11 35
+end
+durationcanvas 129036 classinstance_ref 128396 // :Technicien
+  xyzwh 180 111 2010 11 40
+end
+durationcanvas 129164 classinstance_ref 128652 // :IHM
+  xyzwh 313 111 2010 11 25
+end
+durationcanvas 129548 classinstance_ref 128396 // :Technicien
+  xyzwh 180 181 2010 11 40
+end
+durationcanvas 129676 classinstance_ref 128652 // :IHM
+  xyzwh 313 181 2010 11 32
+end
+durationcanvas 130956 classinstance_ref 130828 // :C_BDD
+  xyzwh 461 202 2010 11 25
+end
+durationcanvas 131212 classinstance_ref 130828 // :C_BDD
+  xyzwh 461 249 2010 11 40
+end
+durationcanvas 131340 classinstance_ref 128652 // :IHM
+  xyzwh 313 249 2010 11 25
+end
+durationcanvas 131596 classinstance_ref 130828 // :C_BDD
+  xyzwh 461 299 2010 11 30
+end
+durationcanvas 131724 classinstance_ref 128652 // :IHM
+  xyzwh 313 299 2010 11 28
+end
+reflexivemsg 128386 synchronous
+  to durationcanvas_ref 128258
+  yz 258 2015 explicitmsg "AfficherMessageReussi()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 325 280
+reflexivemsg 128642 synchronous
+  to durationcanvas_ref 128514
+  yz 318 2015 explicitmsg "AfficherMessageErreur()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 330 331
+msg 129292 synchronous
+  from durationcanvas_ref 129036
+  to durationcanvas_ref 129164
+  yz 111 2015 explicitmsg "Saisie nom et mdp"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 192 94
+msg 129804 synchronous
+  from durationcanvas_ref 129548
+  to durationcanvas_ref 129676
+  yz 181 2015 explicitmsg "Clic sur connexion"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 193 161
+msg 131084 synchronous
+  from durationcanvas_ref 129676
+  to durationcanvas_ref 130956
+  yz 202 2015 msg operation_ref 136588 // "SeConnecter(in username : string, in password : string) : MySqlDataReader"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 357 188
+msg 131468 return
+  from durationcanvas_ref 131212
+  to durationcanvas_ref 131340
+  yz 251 3005 explicitmsg "True"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 381 237
+msg 131852 return
+  from durationcanvas_ref 131596
+  to durationcanvas_ref 131724
+  yz 310 2015 explicitmsg "False"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 379 296
+end
