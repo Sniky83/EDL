@@ -16,46 +16,49 @@ namespace Technicien_capteurs
 
         private C_BDD BDD;
 
-        //private byte[] id;
-        private List<byte> id = new List<byte>();
+        private byte[] id;
+        //private List<byte> id = new List<byte>();
         public FormAjoutEntrees(C_Config configIni)
         {
             InitializeComponent();
 
-            Dictionary<string, C_Capteur> dico = new Dictionary<int, C_Capteur>();
-            dico.Add("a", new C_Capteur());
+            Dictionary<int, C_Capteur> dico = new Dictionary<int, C_Capteur>();
+            /*dico.Add("a", new C_Capteur());
             dico.Add("b", new C_Capteur());
 
-            dico["b"].
+            dico["b"];*/
 
             confIni = configIni;
 
-            BDD = new C_BDD(confIni.ip, confIni.dbn, confIni.username, confIni.password);
+            BDD = new C_BDD(configIni.ip, configIni.dbn, configIni.username, configIni.password);
+
             byte nbEntrees = 0;
-            var rdrCount = BDD.RequeteCountCapteurs();
+            var rdr = BDD.RequeteCountCapteurs();
 
-            while (rdrCount.Read())
+            while (rdr.Read())
             {
-                nbEntrees = byte.Parse(rdrCount[0].ToString());//Nombre d'entrées
+                nbEntrees = byte.Parse(rdr[0].ToString());//Nombre d'entrées
             }
+            rdr.Close();
+            BDD.connection.Close();
 
-            //id = new byte[nbEntrees];
+            id = new byte[nbEntrees];
 
-            BDD = new C_BDD(confIni.ip, confIni.dbn, confIni.username, confIni.password);
-
-            var rdr = BDD.RequeteSelectIdNomCapteurs();
+            rdr = BDD.RequeteSelectIdNomCapteurs();
             byte j = 0;
             string stockage = "";
 
             while (rdr.Read())
             {
-                //id[j] = byte.Parse(rdr[0].ToString());//id
-                id.Add(byte.Parse(rdr[0].ToString()));//id
-                stockage = rdr[1].ToString();//nom/
+                id[j] = byte.Parse(rdr[0].ToString());//id
+                //id.Add(byte.Parse(rdr[0].ToString()));//id
+                stockage = rdr[1].ToString();//nom
 
                 cmbBox_capteur.Items.Add(stockage);
-                //j++;
+                j++;
             }
+            rdr.Close();
+            BDD.connection.Close();
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
@@ -66,7 +69,11 @@ namespace Technicien_capteurs
         private void btn_ok_Click(object sender, EventArgs e)
         {
             int id_capteur = cmbBox_capteur.SelectedIndex;
+            /*C_Capteur capteur = cmbBox_capteur.SelectedItem as C_Capteur;
+            int id_capteur = capteur.Id;*/
             BDD.RequeteInsertEntree(txtBox_nom_entree.Text, byte.Parse(cmbBox_input.Text), id[id_capteur]);
+
+            Close();
         }
     }
 }

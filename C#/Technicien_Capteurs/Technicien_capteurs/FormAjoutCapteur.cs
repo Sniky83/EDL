@@ -14,7 +14,7 @@ namespace Technicien_capteurs
 {
     public partial class FormAjoutCapteur : Form
     {
-        C_BDD BDD;
+        private C_BDD BDD;
 
         public string[] Tableau { get; set; }
 

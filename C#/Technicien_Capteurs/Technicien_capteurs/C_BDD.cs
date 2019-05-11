@@ -86,7 +86,7 @@ namespace Technicien_capteurs
             catch (Exception)
             {
                 FermerConnexion();
-                MessageBox.Show("Problème lors de l'envoi des informations à la base de données !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Problème de connexion ou de requête !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
         }
@@ -102,7 +102,7 @@ namespace Technicien_capteurs
             }
             catch
             {
-                MessageBox.Show("Erreur de connexion ou de requête !", "Succès !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Problème de connexion ou de requête !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return null;
             }
         }
@@ -220,9 +220,10 @@ namespace Technicien_capteurs
             //WHERE `cpt`.`Adresse_IP` = '{ip}'
             return rdr;
         }
-        public void RequeteInsertEntree(string nom, byte ligne, byte id_capteur)
+        public bool RequeteInsertEntree(string nom, byte ligne, byte id_capteur)
         {
-            string requete = $"INSERT INTO `config_enregistrement`(`Nom_Ligne`,`Ligne`,`ID_Capteur`,`Utilisisation`)VALUES('{nom}','{ligne}','{id_capteur}','0');";
+            string requete = $"INSERT INTO `config_enregistrement`(`Nom_Ligne`,`Ligne`,`ID_Capteur`,`Utilisisation`)VALUES('{nom}',{ligne},{id_capteur},0);";
+            return NonQuery(requete);
         }
 
         public void RequeteUpdateEntree()
