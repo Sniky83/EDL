@@ -62,6 +62,7 @@ namespace Technicien_capteurs
                 if (entreeToAdd.Entree != 0)
                 {
                     entreeList.Add(entreeToAdd);
+                    entreeToAdd.IpArduino = confIni.ipArduino;
                 }
             }
 
@@ -72,7 +73,6 @@ namespace Technicien_capteurs
                 MessageBox.Show("Aucune entrée n'est présent dans la liste, vous pouvez en ajouter un !", "Attention !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            entreeToAdd.IpArduino = confIni.ipArduino;
             tab_listeEnr.DataSource = entreeList;
             tab_listeEnr.Columns[2].HeaderText = "Entrée";
             tab_listeEnr.Columns[3].HeaderText = "Nom Entrée";

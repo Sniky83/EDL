@@ -222,7 +222,6 @@ namespace Technicien_capteurs
         }
         public bool RequeteInsertEntree(string nom, byte ligne, byte id_capteur)
         {
-            //string requete = $"INSERT INTO `config_enregistrement`(`Nom_Ligne`,`Ligne`,`ID_Capteur`,`Utilisation`)VALUES('{nom}',{ligne},{id_capteur},0);";
             string requete = $"INSERT INTO `config_enregistrement`(`Ligne`,`ID_Capteur`,`Nom_Ligne`)VALUES({ligne},{id_capteur},'{nom}');";
             return NonQuery(requete);
         }
