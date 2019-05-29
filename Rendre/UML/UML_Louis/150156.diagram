@@ -1,0 +1,109 @@
+format 221
+
+classinstance 128130 class_ref 128524 // IHM
+  name ""   xyz 530.4 8 2000 life_line_z 2000
+classinstance 128258 class_ref 128012 // C_BDD
+  name ""   xyz 729.6 4.4 2000 life_line_z 2000
+classinstance 128386 class_ref 128652 // Technicien
+  name ""   xyz 278.4 4 2000 life_line_z 2000
+fragment 131970 "alt"
+  xyzwh 477.4 247.2 2005 315 214
+  separator 4717
+end
+durationcanvas 129292 classinstance_ref 128386 // :Technicien
+  xyzwh 301 137 2010 11 40
+end
+durationcanvas 129420 classinstance_ref 128130 // :IHM
+  xyzwh 549 137 2010 11 30
+end
+durationcanvas 130316 classinstance_ref 128386 // :Technicien
+  xyzwh 301 181 2010 11 40
+end
+durationcanvas 130444 classinstance_ref 128130 // :IHM
+  xyzwh 549 181 2010 11 25
+end
+durationcanvas 130946 classinstance_ref 128386 // :Technicien
+  xyzwh 301 89 2010 11 40
+end
+durationcanvas 131074 classinstance_ref 128130 // :IHM
+  xyzwh 549 89 2010 11 58
+  overlappingdurationcanvas 129676
+    xyzwh 555 116 2020 11 25
+  end
+end
+durationcanvas 131586 classinstance_ref 128130 // :IHM
+  xyzwh 549 195 2010 11 32
+end
+durationcanvas 131714 classinstance_ref 128258 // :C_BDD
+  xyzwh 748 209 2010 11 27
+end
+durationcanvas 132098 classinstance_ref 128258 // :C_BDD
+  xyzwh 748 270 2010 11 25
+end
+durationcanvas 132226 classinstance_ref 128130 // :IHM
+  xyzwh 549 259 2010 11 37
+end
+durationcanvas 132482 classinstance_ref 128258 // :C_BDD
+  xyzwh 748 371 2010 11 25
+end
+durationcanvas 132610 classinstance_ref 128130 // :IHM
+  xyzwh 549 358 2010 11 44
+end
+durationcanvas 132866 classinstance_ref 128130 // :IHM
+  xyzwh 549 311 2010 11 37
+end
+durationcanvas 133122 classinstance_ref 128130 // :IHM
+  xyzwh 549 417 2010 11 40
+end
+msg 129548 synchronous
+  from durationcanvas_ref 129292
+  to durationcanvas_ref 129420
+  yz 156 2015 explicitmsg "Modification des infos de l'entrée"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 340 142
+reflexivemsg 129804 synchronous
+  to durationcanvas_ref 129676
+  yz 116 2025 explicitmsg "AfficherFenetreAjoutEntree()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 572 126
+msg 130572 synchronous
+  from durationcanvas_ref 130316
+  to durationcanvas_ref 130444
+  yz 181 2020 explicitmsg "Clic sur valider"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 396 167
+msg 131202 synchronous
+  from durationcanvas_ref 130946
+  to durationcanvas_ref 131074
+  yz 89 2015 explicitmsg "Le technicien clic sur une entrée du tableau pour le modifier"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 309 67
+msg 131842 synchronous
+  from durationcanvas_ref 131586
+  to durationcanvas_ref 131714
+  yz 209 2015 msg operation_ref 135436 // "RequeteUpdateEntree()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 614 195
+msg 132354 return
+  from durationcanvas_ref 132098
+  to durationcanvas_ref 132226
+  yz 270 2015 explicitmsg "True"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 658 256
+msg 132738 return
+  from durationcanvas_ref 132482
+  to durationcanvas_ref 132610
+  yz 371 2015 explicitmsg "False"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 659 362
+reflexivemsg 132994 asynchronous
+  to durationcanvas_ref 132866
+  yz 311 2015 explicitmsg "AfficherMessageReussi()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 566 325
+reflexivemsg 133250 asynchronous
+  to durationcanvas_ref 133122
+  yz 419 2015 explicitmsg "AfficherMessageErreur()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 566 434
+end

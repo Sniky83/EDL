@@ -20,25 +20,26 @@ namespace Technicien_capteurs
         {
             try
             {
-                byte[] bytes = new byte[10];
+                byte[] bytes = new byte[8];
                 IPAddress ipAddress = IPAddress.Parse(ip);
                 IPEndPoint remoteEP = new IPEndPoint(ipAddress, 2000);
                 Socket sender = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                IAsyncResult result = sender.BeginConnect(ipAddress, 2000, null, null);
+                sender.BeginConnect(ipAddress, 2000, null, null);
+                sender.ReceiveTimeout = 2000; //si il se connecte sur la bonne ip, port mais qu'il ne reçoit rien
 
                 string reception = "";
                 bool isConnected = false;
                 byte i = 0;
                 int bytesRec = 0;
 
-                while(i < 3 && isConnected == false)
+                while (i < 3 && isConnected == false)
                 {
                     if(sender.Connected)//connected == true quand on ping une ip sur le port 2000 (serveur)
                     {
                         byte[] msg = Encoding.ASCII.GetBytes("EDL_TEST?$");
 
                         int bytesSent = sender.Send(msg);//count le nb de bytes envoyées
-
+                        
                         bytesRec = sender.Receive(bytes);//count le nb de bytes reçus
 
                         reception = Encoding.ASCII.GetString(bytes, 0, bytesRec);

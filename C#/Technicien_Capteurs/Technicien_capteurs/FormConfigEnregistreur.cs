@@ -22,7 +22,7 @@ namespace Technicien_capteurs
 
         private C_Entree entreeToAdd;
 
-        private byte indexCapteur;
+        //private byte indexCapteur;
 
         public FormConfigEnregistreur(C_Config configIni)
         {
@@ -69,25 +69,24 @@ namespace Technicien_capteurs
             {
                 btn_delete.Enabled = false;
                 btn_modifier.Enabled = false;
-                MessageBox.Show("Aucun capteur n'est présent dans la liste, vous pouvez en ajouter un !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Aucune entrée n'est présent dans la liste, vous pouvez en ajouter un !", "Attention !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else
+
+            entreeToAdd.IpArduino = confIni.ipArduino;
+            tab_listeEnr.DataSource = entreeList;
+            tab_listeEnr.Columns[2].HeaderText = "Entrée";
+            tab_listeEnr.Columns[3].HeaderText = "Nom Entrée";
+            tab_listeEnr.Columns[4].HeaderText = "Nom Capteur";
+
+            for (byte i = 0; i < 2; i++)
             {
-                entreeToAdd.IpArduino = confIni.ipArduino;
-                tab_listeEnr.DataSource = entreeList;
-                tab_listeEnr.Columns[2].HeaderText = "Entrée";
-                tab_listeEnr.Columns[3].HeaderText = "Nom Entrée";
-                tab_listeEnr.Columns[4].HeaderText = "Nom Capteur";
-
-                for (byte i = 0; i < 2; i++)
-                {
-                    tab_listeEnr.Columns[i].Visible = false;
-                }
-
-                tab_listeEnr.Columns[2].Width = 50;
-                tab_listeEnr.Columns[3].Width = 150;
-                tab_listeEnr.Columns[4].Width = 150;
+                tab_listeEnr.Columns[i].Visible = false;
             }
+
+            tab_listeEnr.Columns[2].Width = 50;
+            tab_listeEnr.Columns[3].Width = 150;
+            tab_listeEnr.Columns[4].Width = 150;
+            
 
             rdr.Close();
             BDD.connection.Close();

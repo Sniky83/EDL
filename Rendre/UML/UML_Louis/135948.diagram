@@ -7,10 +7,10 @@ classinstance 128140 class_ref 128396 // C_Config
 classinstance 128268 class_ref 128524 // IHM
   name ""   xyz 286 36 2000 life_line_z 2000
 classinstance 130060 class_ref 128012 // C_BDD
-  name ""   xyz 447 27 2000 life_line_z 2000
+  name ""   xyz 486 27 2000 life_line_z 2000
 fragment 130572 "alt"
-  xyzwh 242 161 2000 347 195
-  separator 5153
+  xyzwh 229 164 2000 445 194
+  separator 5152
 end
 durationcanvas 128396 classinstance_ref 128012 // :Technicien
   xyzwh 105 111 2010 11 40
@@ -22,16 +22,19 @@ durationcanvas 128780 classinstance_ref 128268 // :IHM
   xyzwh 305 239 2010 11 42
 end
 durationcanvas 128908 classinstance_ref 128140 // :C_Config
-  xyzwh 572 239 2010 11 42
+  xyzwh 572 249 2010 11 56
+  overlappingdurationcanvas 131980
+    xyzwh 578 272 2020 11 25
+  end
 end
 durationcanvas 130188 classinstance_ref 128268 // :IHM
   xyzwh 305 144 2010 11 40
 end
 durationcanvas 130316 classinstance_ref 130060 // :C_BDD
-  xyzwh 466 144 2010 11 25
+  xyzwh 505 144 2010 11 25
 end
 durationcanvas 130700 classinstance_ref 130060 // :C_BDD
-  xyzwh 466 179 2010 11 40
+  xyzwh 505 179 2010 11 40
 end
 durationcanvas 130828 classinstance_ref 128268 // :IHM
   xyzwh 305 179 2010 11 25
@@ -40,7 +43,7 @@ durationcanvas 131084 classinstance_ref 128268 // :IHM
   xyzwh 305 213 2010 11 40
 end
 durationcanvas 131340 classinstance_ref 130060 // :C_BDD
-  xyzwh 466 284 2010 11 40
+  xyzwh 505 284 2010 11 40
 end
 durationcanvas 131468 classinstance_ref 128268 // :IHM
   xyzwh 305 284 2010 11 25
@@ -57,9 +60,9 @@ msg 128652 synchronous
 msg 129036 synchronous
   from durationcanvas_ref 128780
   to durationcanvas_ref 128908
-  yz 251 2015 msg operation_ref 136076 // "SaveConfig()"
+  yz 249 2015 msg operation_ref 136076 // "SaveConfig()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 376 237
+  label_xy 376 235
 msg 130444 synchronous
   from durationcanvas_ref 130188
   to durationcanvas_ref 130316
@@ -76,7 +79,7 @@ reflexivemsg 131212 synchronous
   to durationcanvas_ref 131084
   yz 213 2015 explicitmsg "AfficherMessageReussi()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 323 225
+  label_xy 333 221
 msg 131596 return
   from durationcanvas_ref 131340
   to durationcanvas_ref 131468
@@ -88,4 +91,9 @@ reflexivemsg 131852 synchronous
   yz 315 2015 explicitmsg "AfficherMessageErreur()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
   label_xy 317 327
+reflexivemsg 132108 asynchronous
+  to durationcanvas_ref 131980
+  yz 273 2025 msg operation_ref 150028 // "EncryptFile()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 595 283
 end

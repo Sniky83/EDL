@@ -1,17 +1,30 @@
 window_sizes 1920 1017 450 1465 917 54
 
 diagrams
-  sequencediagram_ref 128908 // Ajout, Modification, Superssion d'un Capteur
-    1172 711 100 A4 0 0
-  active  sequencediagram_ref 128002 // Afficher Mesures Instant
+  active  classdiagram_ref 128012 // class
+    1465 917 100 A4 0 0
+  sequencediagram_ref 134530 // Mesures instant Technicien
     1172 733 100 A4 0 0
   sequencediagram_ref 128780 // Affichage de la liste des Capteurs
-    1172 733 100 A4 24 0
+    1172 733 100 A4 0 0
+  sequencediagram_ref 134658 // Mesures instant Arduino + moyenne
+    1172 733 100 A4 0 0
+  sequencediagram_ref 134786 // Arduino recup sa conf
+    114 86 100 A4 0 0
+  sequencediagram_ref 128908 // Ajout d'un Capteur
+    114 86 100 A4 0 0
+  sequencediagram_ref 150412 // Supression de la ligne
+    114 86 100 A4 0 0
+  sequencediagram_ref 135564 // Liste entrées
+    114 86 100 A4 0 0
 end
 show_stereotypes
-selected class_ref 128140 // C_Arduino
+selected classdiagram_ref 128012 // class
 open
-  classview_ref 128012 // class
-  usecaseview_ref 128012 // Acteurs
+  class_ref 141964 // C_Daemon_BDD
+  class_ref 134658 // Daemon_Main
+  sequencediagram_ref 128396 // Aide en ligne
+  sequencediagram_ref 128140 // Connexion à l'application
+  class_ref 142220 // Temps
 end
 end

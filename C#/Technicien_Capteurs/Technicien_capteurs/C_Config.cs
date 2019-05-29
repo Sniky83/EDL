@@ -20,7 +20,6 @@ namespace Technicien_capteurs
         public string ipArduino = "";
 
         private static string file = "Paramètres.ini";
-        private static string pass = "?,A82:3X2§!^*ù";
 
         public void SaveConfig()
         {
@@ -143,6 +142,7 @@ namespace Technicien_capteurs
         private void EncryptFile()
         {
             byte[] bytesOfFile = File.ReadAllBytes(file);
+            string pass = "?,A82:3X2§!^*ù";
             byte[] passwordBytes = Encoding.UTF8.GetBytes(pass);
             passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
 
@@ -154,6 +154,7 @@ namespace Technicien_capteurs
         private void DecryptFile()
         {
             byte[] bytesOfFile = File.ReadAllBytes(file);
+            string pass = "?,A82:3X2§!^*ù";
             byte[] passwordBytes = Encoding.UTF8.GetBytes(pass);
             passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
 

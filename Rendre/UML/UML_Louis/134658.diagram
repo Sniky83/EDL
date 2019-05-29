@@ -1,0 +1,296 @@
+format 221
+
+classinstance 128002 class_ref 135308 // C_Recorder
+  name ""   xyz 330 36 2000 life_line_z 2000
+classinstance 128130 class_ref 142092 // Arduino
+  name ""   xyz 179 38 2000 life_line_z 2000
+classinstance 128258 class_ref 134658 // Daemon_Main
+  name ""   xyz 441 36 2000 life_line_z 2000
+classinstance 129026 class_ref 128652 // Technicien
+  name ""   xyz 43 31 2000 life_line_z 2000
+classinstance 129154 class_ref 142220 // Temps
+  name ""   xyz 111 32 2000 life_line_z 2000
+note 130434 "Loop"
+  xyzwh 139 162 2000 53 35
+classinstance 133122 class_ref 141964 // C_Daemon_BDD
+  name ""   xyz 638 32 2000 life_line_z 2000
+note 134914 "Une fois que la moyenne a pu être calculée"
+  xyzwh 869 602 2000 35 35
+note 135042 "Une fois la moyenne calculée et chaque heure"
+  xyzwh 720 535 3005 95 75
+note 135170 "Ex:
+\"EDL_L1_INT_ALT_30A_12.3_L2_11!\""
+  xyzwh 634 365 2000 205 49
+durationcanvas 129282 classinstance_ref 129026 // :Technicien
+  xyzwh 66 98 2010 11 40
+end
+durationcanvas 129410 classinstance_ref 128130 // :Arduino
+  xyzwh 200 98 2010 11 25
+end
+durationcanvas 129666 classinstance_ref 128130 // :Arduino
+  xyzwh 200 158 2010 11 41
+end
+durationcanvas 129794 classinstance_ref 128002 // :C_Recorder
+  xyzwh 361 171 2010 11 26
+end
+durationcanvas 130050 classinstance_ref 129154 // :Temps
+  xyzwh 124 129 2010 11 40
+end
+durationcanvas 130178 classinstance_ref 128130 // :Arduino
+  xyzwh 200 129 2010 11 25
+end
+durationcanvas 130562 classinstance_ref 128002 // :C_Recorder
+  xyzwh 361 216 2010 11 31
+end
+durationcanvas 130690 classinstance_ref 128130 // :Arduino
+  xyzwh 200 216 2010 11 25
+end
+durationcanvas 130946 classinstance_ref 128130 // :Arduino
+  xyzwh 200 263 2010 11 26
+end
+durationcanvas 131074 classinstance_ref 128002 // :C_Recorder
+  xyzwh 361 263 2010 11 26
+end
+durationcanvas 131330 classinstance_ref 128002 // :C_Recorder
+  xyzwh 361 304 2010 11 40
+end
+durationcanvas 131458 classinstance_ref 128130 // :Arduino
+  xyzwh 200 304 2010 11 25
+end
+durationcanvas 131714 classinstance_ref 128130 // :Arduino
+  xyzwh 200 351 2010 11 40
+end
+durationcanvas 131842 classinstance_ref 128002 // :C_Recorder
+  xyzwh 361 351 2010 11 25
+end
+durationcanvas 132098 classinstance_ref 128002 // :C_Recorder
+  xyzwh 361 394 2010 11 40
+end
+durationcanvas 132226 classinstance_ref 128258 // :Daemon_Main
+  xyzwh 476 394 2010 11 25
+end
+durationcanvas 133250 classinstance_ref 128258 // :Daemon_Main
+  xyzwh 476 436 2010 11 40
+end
+durationcanvas 133378 classinstance_ref 133122 // :C_Daemon_BDD
+  xyzwh 679 436 2010 11 25
+end
+durationcanvas 133634 classinstance_ref 129154 // :Temps
+  xyzwh 124 478 2010 11 40
+end
+durationcanvas 133762 classinstance_ref 128258 // :Daemon_Main
+  xyzwh 476 478 2010 11 25
+end
+durationcanvas 134018 classinstance_ref 128258 // :Daemon_Main
+  xyzwh 476 546 2010 11 36
+end
+durationcanvas 134274 classinstance_ref 128258 // :Daemon_Main
+  xyzwh 476 549 2010 11 59
+end
+durationcanvas 134402 classinstance_ref 133122 // :C_Daemon_BDD
+  xyzwh 679 549 2010 11 56
+end
+durationcanvas 134658 classinstance_ref 133122 // :C_Daemon_BDD
+  xyzwh 679 598 2010 11 25
+end
+durationcanvas 136066 classinstance_ref 129154 // :Temps
+  xyzwh 124 606 2010 11 42
+end
+durationcanvas 136194 classinstance_ref 128258 // :Daemon_Main
+  xyzwh 476 619 2010 11 35
+end
+durationcanvas 136450 classinstance_ref 129154 // :Temps
+  xyzwh 124 725 2010 11 25
+end
+durationcanvas 136578 classinstance_ref 128258 // :Daemon_Main
+  xyzwh 476 725 2010 11 25
+end
+durationcanvas 136834 classinstance_ref 128258 // :Daemon_Main
+  xyzwh 476 668 2010 11 25
+end
+durationcanvas 137090 classinstance_ref 128258 // :Daemon_Main
+  xyzwh 476 708 2010 11 40
+end
+durationcanvas 137218 classinstance_ref 133122 // :C_Daemon_BDD
+  xyzwh 679 708 2010 11 25
+end
+durationcanvas 137730 classinstance_ref 128258 // :Daemon_Main
+  xyzwh 476 795 2010 11 28
+end
+durationcanvas 137986 classinstance_ref 128258 // :Daemon_Main
+  xyzwh 476 835 2010 11 25
+end
+durationcanvas 138114 classinstance_ref 133122 // :C_Daemon_BDD
+  xyzwh 679 829 2010 11 30
+end
+durationcanvas 138370 classinstance_ref 128258 // :Daemon_Main
+  xyzwh 476 508 2010 11 40
+end
+durationcanvas 138498 classinstance_ref 133122 // :C_Daemon_BDD
+  xyzwh 679 508 2010 11 35
+end
+durationcanvas 138882 classinstance_ref 133122 // :C_Daemon_BDD
+  xyzwh 679 643 2010 11 25
+end
+durationcanvas 139138 classinstance_ref 133122 // :C_Daemon_BDD
+  xyzwh 679 654 2010 11 25
+end
+durationcanvas 139266 classinstance_ref 128258 // :Daemon_Main
+  xyzwh 476 653 2010 11 25
+end
+durationcanvas 139522 classinstance_ref 128258 // :Daemon_Main
+  xyzwh 476 754 2010 11 40
+end
+durationcanvas 139650 classinstance_ref 133122 // :C_Daemon_BDD
+  xyzwh 679 754 2010 11 25
+end
+durationcanvas 139906 classinstance_ref 133122 // :C_Daemon_BDD
+  xyzwh 679 781 2010 11 40
+end
+msg 129538 synchronous
+  from durationcanvas_ref 129282
+  to durationcanvas_ref 129410
+  yz 98 2015 explicitmsg "Appui sur un bouton"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 80 84
+msg 129922 synchronous
+  from durationcanvas_ref 129666
+  to durationcanvas_ref 129794
+  yz 179 2015 msg operation_ref 128130 // "Mesurer(in A : float, in B : float) : string"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 263 165
+msg 130306 synchronous
+  from durationcanvas_ref 130050
+  to durationcanvas_ref 130178
+  yz 129 2015 explicitmsg "Toutes les 2 secondes"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 87 113
+msg 130818 return
+  from durationcanvas_ref 130562
+  to durationcanvas_ref 130690
+  yz 216 2015 explicitmsg "Données des capteurs"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 232 202
+msg 131202 synchronous
+  from durationcanvas_ref 130946
+  to durationcanvas_ref 131074
+  yz 263 2015 msg operation_ref 128258 // "ComposerTrame(in mesures : string) : string"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 243 249
+msg 131586 return
+  from durationcanvas_ref 131330
+  to durationcanvas_ref 131458
+  yz 304 2015 explicitmsg "Trame structurée"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 245 290
+msg 131970 synchronous
+  from durationcanvas_ref 131714
+  to durationcanvas_ref 131842
+  yz 351 2015 msg operation_ref 128386 // "Emettre(in trame : string)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 264 337
+msg 132354 synchronous
+  from durationcanvas_ref 132098
+  to durationcanvas_ref 132226
+  yz 394 2015 explicitmsg "Socket daemon + envoi mesures instant"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 371 380
+msg 133506 synchronous
+  from durationcanvas_ref 133250
+  to durationcanvas_ref 133378
+  yz 436 2015 msg operation_ref 128514 // "RequeteInsertMesuresInstant(in ushort : ligne, in string : intensite)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 495 422
+msg 133890 synchronous
+  from durationcanvas_ref 133634
+  to durationcanvas_ref 133762
+  yz 478 2015 explicitmsg "Au bout d'une heure"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 217 465
+reflexivemsg 134146 synchronous
+  to durationcanvas_ref 134018
+  yz 546 2015 explicitmsg "CalculerMoyenneHeure()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 492 559
+msg 134530 synchronous
+  from durationcanvas_ref 134274
+  to durationcanvas_ref 134402
+  yz 587 2015 msg operation_ref 128770 // "RequeteInsertMoyenneHeureMesures(in mesures : string[])"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 488 575
+reflexivemsg 134786 synchronous
+  to durationcanvas_ref 134658
+  yz 598 2015 msg operation_ref 128898 // "RequeteDeleteMesures()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 694 610
+msg 136322 synchronous
+  from durationcanvas_ref 136066
+  to durationcanvas_ref 136194
+  yz 619 2015 explicitmsg "Au bout d'un jour"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 240 603
+msg 136706 synchronous
+  from durationcanvas_ref 136450
+  to durationcanvas_ref 136578
+  yz 725 2015 explicitmsg "Au bout d'un mois"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 243 711
+reflexivemsg 136962 synchronous
+  to durationcanvas_ref 136834
+  yz 668 2015 msg operation_ref 129666 // "CalculerMoyenneJour(in tabMesures : string[]) : float"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 490 679
+msg 137346 synchronous
+  from durationcanvas_ref 137090
+  to durationcanvas_ref 137218
+  yz 708 2015 msg operation_ref 129794 // "RequeteInsertMoyenneJourMesures(in mesures : string[])"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 492 694
+reflexivemsg 137858 asynchronous
+  to durationcanvas_ref 137730
+  yz 809 2015 msg operation_ref 129922 // "CalculerMoyenneMois(in tabMesures : string[]) : float"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 491 819
+msg 138242 synchronous
+  from durationcanvas_ref 137986
+  to durationcanvas_ref 138114
+  yz 848 2015 msg operation_ref 130050 // "RequeteInsertMoyenneMoisMesures(in mesures : string[])"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 492 834
+msg 138626 synchronous
+  from durationcanvas_ref 138370
+  to durationcanvas_ref 138498
+  yz 508 2020 msg operation_ref 130306 // "RequeteSelectMesuresSecondes() : string[]"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 509 494
+msg 138754 return
+  from durationcanvas_ref 138498
+  to durationcanvas_ref 138370
+  yz 532 3005 explicitmsg "Données des mesures"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 529 518
+msg 139010 synchronous
+  from durationcanvas_ref 136194
+  to durationcanvas_ref 138882
+  yz 643 2015 msg operation_ref 130434 // "RequeteSelectMesuresHeures() : string[]"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 506 629
+msg 139394 return
+  from durationcanvas_ref 139138
+  to durationcanvas_ref 139266
+  yz 658 3005 explicitmsg "Données des mesures"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 528 648
+msg 139778 synchronous
+  from durationcanvas_ref 139522
+  to durationcanvas_ref 139650
+  yz 754 2015 msg operation_ref 130562 // "RequeteSelectMesuresJours() : string[]"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 510 740
+msg 140034 return
+  from durationcanvas_ref 139906
+  to durationcanvas_ref 139522
+  yz 781 2015 explicitmsg "Données des mesures"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 529 767
+end

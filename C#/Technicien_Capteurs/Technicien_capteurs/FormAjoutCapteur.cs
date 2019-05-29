@@ -16,11 +16,11 @@ namespace Technicien_capteurs
     {
         private C_BDD BDD;
 
-        public string[] Tableau { get; set; }
+        public string[] Tableau;
 
-        public ushort id { get; set; }
+        public ushort id;
 
-        public bool IsSendToServer { get; set; } = false;
+        public bool IsSendToServer = false;
 
         private C_Config configIni;
 

@@ -1,37 +1,47 @@
-window_sizes 1920 1017 448 1467 0 971
+window_sizes 1920 1017 343 1572 904 67
 
 diagrams
-  classdiagram_ref 128012 // class
-    1173 776 100 A4 0 0
-  active  sequencediagram_ref 128268 // Connexion à la BDD
-    1173 776 100 A4 0 0
-  sequencediagram_ref 128140 // Connexion à l'application
-    1173 776 100 A4 0 0
-  sequencediagram_ref 128524 // Connexion à l'Arduino
-    1173 776 100 A4 0 0
-  sequencediagram_ref 128396 // Aide en ligne
-    1173 776 100 A4 0 0
-  sequencediagram_ref 128780 // Affichage de la liste des Capteurs
-    1173 776 100 A4 0 0
-  sequencediagram_ref 128908 // Ajout, Modification, Superssion d'un Capteur
-    1173 776 79 A4 0 0
-  sequencediagram_ref 128002 // Afficher Mesures Instant
-    114 86 100 A4 0 0
-  sequencediagram_ref 135436 // Entree
-    114 86 78 A4 0 0
+  active  classdiagram_ref 128012 // class
+    1572 904 97 A4 0 0
   sequencediagram_ref 135564 // Liste entrées
+    1257 723 100 A4 0 0
+  sequencediagram_ref 128780 // Affichage de la liste des Capteurs
+    1257 723 100 A4 0 0
+  sequencediagram_ref 128396 // Aide en ligne
     114 86 100 A4 0 0
-  sequencediagram_ref 135692 // Envoi message Arduino
+  sequencediagram_ref 128140 // Connexion à l'application
+    114 86 100 A4 0 0
+  sequencediagram_ref 128524 // Connexion à l'Arduino
+    114 86 100 A4 0 0
+  sequencediagram_ref 128268 // Connexion à la BDD
+    114 86 100 A4 0 0
+  sequencediagram_ref 128908 // Ajout d'un Capteur
+    114 86 100 A4 0 0
+  sequencediagram_ref 143628 // Supression d'un capteur
+    1257 723 100 A4 0 0
+  sequencediagram_ref 143372 // Modification d'un capteur
+    114 86 100 A4 0 0
+  sequencediagram_ref 136076 // Load config
     114 86 100 A4 0 0
   sequencediagram_ref 135948 // Sauvegarde config
     114 86 100 A4 0 0
-  sequencediagram_ref 136076 // Load config
-    1467 86 100 A4 0 0
+  sequencediagram_ref 135436 // Ajout d'une nouvelle Ligne
+    114 86 100 A4 0 0
+  sequencediagram_ref 150156 // Modification d'une ligne
+    114 86 100 A4 0 0
+  sequencediagram_ref 150412 // Supression de la ligne
+    114 86 100 A4 0 0
+  sequencediagram_ref 134530 // Mesures instant Technicien
+    114 86 100 A4 0 0
+  sequencediagram_ref 134658 // Mesures instant Arduino + moyenne
+    114 86 100 A4 12 0
+  sequencediagram_ref 134786 // Arduino recup sa conf
+    114 86 100 A4 0 0
 end
 show_stereotypes
-selected sequencediagram_ref 128268 // Connexion à la BDD
+selected classdiagram_ref 128012 // class
 open
-  classview_ref 128012 // class
+  class_ref 128396 // C_Config
   usecaseview_ref 128012 // Acteurs
 end
 end

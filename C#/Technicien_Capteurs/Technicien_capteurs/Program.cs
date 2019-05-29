@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,9 +17,7 @@ namespace Technicien_capteurs
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            FormAccueil frmMain = new FormAccueil();
-            frmMain.Show();
-            Application.Run();
+            Application.Run(new FormAccueil());
         }
     }
 }

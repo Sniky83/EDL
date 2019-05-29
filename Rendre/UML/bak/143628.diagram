@@ -1,0 +1,97 @@
+format 221
+
+classinstance 128130 class_ref 128524 // IHM
+  name ""   xyz 530.4 8 2000 life_line_z 2000
+classinstance 128258 class_ref 128012 // C_BDD
+  name ""   xyz 729.6 4.4 2000 life_line_z 2000
+classinstance 128386 class_ref 128652 // Technicien
+  name ""   xyz 278.4 4 2000 life_line_z 2000
+fragment 130956 "alt"
+  xyzwh 514 162 2005 245 204
+  separator 7728
+end
+fragment 135682 "alt"
+  xyzwh 474 192 2020 324 130
+  separator 4260
+end
+durationcanvas 130700 classinstance_ref 128130 // :IHM
+  xyzwh 549 126 2010 11 40
+end
+durationcanvas 131084 classinstance_ref 128130 // :IHM
+  xyzwh 549 324 2010 11 40
+end
+durationcanvas 133378 classinstance_ref 128386 // :Technicien
+  xyzwh 301 85 2010 11 39
+end
+durationcanvas 133506 classinstance_ref 128130 // :IHM
+  xyzwh 549 85 2010 11 36
+end
+durationcanvas 134018 classinstance_ref 128130 // :IHM
+  xyzwh 549 178 2010 11 37
+end
+durationcanvas 134146 classinstance_ref 128258 // :C_BDD
+  xyzwh 748 178 2010 11 32
+end
+durationcanvas 134402 classinstance_ref 128258 // :C_BDD
+  xyzwh 748 199 2010 11 77
+end
+durationcanvas 134530 classinstance_ref 128130 // :IHM
+  xyzwh 549 199 2010 11 72
+end
+durationcanvas 134786 classinstance_ref 128258 // :C_BDD
+  xyzwh 748 256 2010 11 58
+end
+durationcanvas 134914 classinstance_ref 128130 // :IHM
+  xyzwh 549 256 2010 11 30
+end
+durationcanvas 135170 classinstance_ref 128130 // :IHM
+  xyzwh 549 230 2010 11 29
+end
+durationcanvas 135426 classinstance_ref 128130 // :IHM
+  xyzwh 549 245 2010 11 71
+end
+reflexivemsg 130828 synchronous
+  to durationcanvas_ref 130700
+  yz 126 2015 explicitmsg "MessageConfirmationSuppression()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 562 137
+reflexivemsg 131212 synchronous
+  to durationcanvas_ref 131084
+  yz 324 2015 explicitmsg "Annuler()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 561 336
+msg 133634 synchronous
+  from durationcanvas_ref 133378
+  to durationcanvas_ref 133506
+  yz 90 2015 explicitmsg "Le technicien clic sur un capteur du tableau pour le supprimer"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 324 70
+msg 134274 synchronous
+  from durationcanvas_ref 134018
+  to durationcanvas_ref 134146
+  yz 178 2015 msg operation_ref 128780 // "RequeteDeleteCapteur(in id : int) : bool"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 611 164
+msg 134658 return
+  from durationcanvas_ref 134402
+  to durationcanvas_ref 134530
+  yz 208 2015 explicitmsg "True"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 641 192
+msg 135042 return
+  from durationcanvas_ref 134786
+  to durationcanvas_ref 134914
+  yz 259 2015 explicitmsg "False"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 635 246
+reflexivemsg 135298 asynchronous
+  to durationcanvas_ref 135170
+  yz 234 2015 explicitmsg "AfficherMessageReussi()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 581 230
+reflexivemsg 135554 asynchronous
+  to durationcanvas_ref 135426
+  yz 269 2015 explicitmsg "AfficherMessageErreur()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 559 277
+end

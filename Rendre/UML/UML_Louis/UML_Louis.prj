@@ -1,6 +1,6 @@
 format 221
 "UML_Louis"
-  revision 5
+  revision 13
   modified_by 12 "BTS_SN"
 
 
@@ -270,8 +270,8 @@ ${members}}
 	
       end
 
-      operation 135692 "RequeteSelectEntree"
-	public explicit_return_type ""
+      operation 135692 "RequeteSelectEntrees"
+	public explicit_return_type "MySqlDataReader"
 	nparams 0
 	
 	
@@ -411,20 +411,8 @@ ${members}}
 	    classrelation_ref 137484 // <association>
       end
 
-      operation 135820 "EnvoiMessageMesureInstant"
-	private explicit_return_type "string"
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 135948 "LectureMesureInstant"
-	public explicit_return_type "string"
+      operation 129026 "EnvoiConfigurationActuelle"
+	public explicit_return_type ""
 	nparams 0
 	
 	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
@@ -435,6 +423,41 @@ ${members}}
 	
       end
 
+      operation 129410 "EnvoiMessageMesuresInstant"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 129538 "LectureMesuresInstant"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 135426 // <association>
+	relation 134914 ----
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135426 // <association>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135554 // <association>
+      end
     end
 
     class 128268 "C_Config_Capteur"
@@ -534,8 +557,8 @@ ${members}}
 	
       end
 
-      attribute 135308 "fConfRes"
-	private explicit_type ""
+      attribute 135308 "file"
+	private explicit_type "static string"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -547,7 +570,7 @@ ${members}}
       end
 
       attribute 135436 "ip"
-	public explicit_type ""
+	public explicit_type "string"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -559,7 +582,7 @@ ${members}}
       end
 
       attribute 135564 "username"
-	public explicit_type ""
+	public explicit_type "string"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -571,7 +594,7 @@ ${members}}
       end
 
       attribute 135692 "password"
-	public explicit_type ""
+	public explicit_type "string"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -583,7 +606,7 @@ ${members}}
       end
 
       attribute 135820 "dbn"
-	public explicit_type ""
+	public explicit_type "string"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -592,6 +615,42 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+      end
+
+      attribute 142348 "ipArduino"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 150028 "EncryptFile"
+	private explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 150156 "DecryptFile"
+	private explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
       end
     end
 
@@ -674,6 +733,14 @@ ${members}}
 "
 	    classrelation_ref 137996 // <association>
       end
+
+      classrelation 128386 // <association>
+	relation_ref 128130 // <association>
+      end
+
+      classrelation 128642 // <association>
+	relation_ref 128258 // <association>
+      end
     end
 
     class 128780 "IHM_SITE"
@@ -723,9 +790,538 @@ ${members}}
 "
 	    classrelation_ref 137228 // <association>
       end
+
+      classrelation 144524 // <association>
+	relation 143628 ----
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144524 // <association>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144652 // <association>
+      end
+
+      classrelation 145164 // <association>
+	relation_ref 143884 // <association>
+      end
+
+      operation 128130 "Mesurer"
+	public explicit_return_type "string"
+	nparams 2
+	  param in name "A" explicit_type "float"
+	  param in name "B" explicit_type "float"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128258 "ComposerTrame"
+	public explicit_return_type "string"
+	nparams 1
+	  param in name "mesures" explicit_type "string"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128386 "Emettre"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "trame" explicit_type "string"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
-    sequencediagram 128268 "Connexion à la BDD"
+    class 141964 "C_Daemon_BDD"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 144652 // <association>
+	relation_ref 143628 // <association>
+      end
+
+      operation 128514 "RequeteInsertMesuresInstant"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "ushort" explicit_type "ligne"
+	  param in name "string" explicit_type "intensite"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128770 "RequeteInsertMoyenneHeureMesures"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "mesures" explicit_type "string[]"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128898 "RequeteDeleteMesures"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      classrelation 135298 // <association>
+	relation_ref 134786 // <association>
+      end
+
+      operation 129794 "RequeteInsertMoyenneJourMesures"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "mesures" explicit_type "string[]"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 130050 "RequeteInsertMoyenneMoisMesures"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "mesures" explicit_type "string[]"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 130306 "RequeteSelectMesuresSecondes"
+	public explicit_return_type "string[]"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 130434 "RequeteSelectMesuresHeures"
+	public explicit_return_type "string[]"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 130562 "RequeteSelectMesuresJours"
+	public explicit_return_type "string[]"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 142092 "Arduino"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 144780 // <association>
+	relation 143756 ----
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144780 // <association>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144908 // <association>
+      end
+
+      classrelation 144908 // <association>
+	relation_ref 143756 // <association>
+      end
+
+      classrelation 145036 // <association>
+	relation 143884 ----
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 145036 // <association>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 145164 // <association>
+      end
+
+      operation 143500 "ConnexionApplication"
+	private explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 129282 "DecompositionConfiguration"
+	private explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 128002 "C_Capteur"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 128002 "Id"
+	public explicit_type "ushort"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 128002 // <association>
+	relation 128002 ----
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128002 // <association>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128130 // <association>
+      end
+
+      classrelation 128130 // <association>
+	relation_ref 128002 // <association>
+      end
+
+      classrelation 128258 // <association>
+	relation 128130 ----
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128258 // <association>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128386 // <association>
+      end
+
+      attribute 128130 "Nom"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128258 "Marque"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128386 "Model"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128514 "Calibre"
+	public explicit_type "byte"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128642 "A"
+	public explicit_type "float"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128770 "B"
+	public explicit_type "float"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 128130 "C_Entree"
+      visibility protected 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 128898 "Id"
+	public explicit_type "ushort"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129026 "Entree"
+	public explicit_type "byte"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129154 "Nom_Entree"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129282 "Nom_Capteur"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129410 "Intensite"
+	public explicit_type "float"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 128514 // <association>
+	relation 128258 ----
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128514 // <association>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128642 // <association>
+      end
+
+      attribute 148876 "Puissance"
+	public explicit_type "float"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 134658 "Daemon_Main"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 128642 "CalculerMoyenneHeure"
+	private explicit_return_type "float"
+	nparams 1
+	  param in name "tabMesures" explicit_type "string[]"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 135170 // <association>
+	relation 134786 ----
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135170 // <association>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135298 // <association>
+      end
+
+      operation 129666 "CalculerMoyenneJour"
+	private explicit_return_type "float"
+	nparams 1
+	  param in name "tabMesures" explicit_type "string[]"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 129922 "CalculerMoyenneMois"
+	private explicit_return_type "float"
+	nparams 1
+	  param in name "tabMesures" explicit_type "string[]"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 135554 // <association>
+	relation_ref 134914 // <association>
+      end
+    end
+
+    sequencediagram 128396 "Aide en ligne"
       sequencediagramsettings end
       overlapping_bars size A4
     end
@@ -740,7 +1336,7 @@ ${members}}
       overlapping_bars size A4
     end
 
-    sequencediagram 128396 "Aide en ligne"
+    sequencediagram 128268 "Connexion à la BDD"
       sequencediagramsettings end
       overlapping_bars size A4
     end
@@ -750,27 +1346,22 @@ ${members}}
       overlapping_bars size A4
     end
 
-    sequencediagram 128908 "Ajout, Modification, Superssion d'un Capteur"
+    sequencediagram 128908 "Ajout d'un Capteur"
       sequencediagramsettings end
       overlapping_bars size A4
     end
 
-    sequencediagram 128002 "Afficher Mesures Instant"
+    sequencediagram 143372 "Modification d'un capteur"
       sequencediagramsettings end
       overlapping_bars size A4
     end
 
-    sequencediagram 135436 "Entree"
+    sequencediagram 143628 "Supression d'un capteur"
       sequencediagramsettings end
       overlapping_bars size A4
     end
 
-    sequencediagram 135564 "Liste entrées"
-      sequencediagramsettings end
-      overlapping_bars size A4
-    end
-
-    sequencediagram 135692 "Envoi message Arduino"
+    sequencediagram 136076 "Load config"
       sequencediagramsettings end
       overlapping_bars size A4
     end
@@ -780,7 +1371,37 @@ ${members}}
       overlapping_bars size A4
     end
 
-    sequencediagram 136076 "Load config"
+    sequencediagram 135564 "Liste entrées"
+      sequencediagramsettings end
+      overlapping_bars size A4
+    end
+
+    sequencediagram 135436 "Ajout d'une nouvelle Ligne"
+      sequencediagramsettings end
+      overlapping_bars size A4
+    end
+
+    sequencediagram 150156 "Modification d'une ligne"
+      sequencediagramsettings end
+      overlapping_bars size A4
+    end
+
+    sequencediagram 150412 "Supression de la ligne"
+      sequencediagramsettings end
+      overlapping_bars size A4
+    end
+
+    sequencediagram 134530 "Mesures instant Technicien"
+      sequencediagramsettings end
+      overlapping_bars size A4
+    end
+
+    sequencediagram 134658 "Mesures instant Arduino + moyenne"
+      sequencediagramsettings end
+      overlapping_bars size A4
+    end
+
+    sequencediagram 134786 "Arduino recup sa conf"
       sequencediagramsettings end
       overlapping_bars size A4
     end
@@ -808,6 +1429,20 @@ ${members}}
     activitydiagramsettings
      end
     class 128652 "Technicien"
+      visibility package stereotype "actor"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 142220 "Temps"
       visibility package stereotype "actor"
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {

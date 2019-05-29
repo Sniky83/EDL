@@ -1,0 +1,60 @@
+format 221
+
+classinstance 128002 class_ref 128652 // Technicien
+  name ""   xyz 89 53 2000 life_line_z 2000
+classinstance 128130 class_ref 128140 // C_EDL_Recorder
+  name ""   xyz 414 63 2000 life_line_z 2000
+classinstance 128258 class_ref 128524 // IHM
+  name ""   xyz 280 65 2000 life_line_z 2000
+note 128770 "Formulaire de configuration de l'enregistreur"
+  xyzwh 159 34 2000 103 61
+note 129282 "EX:
+\"EDL_TECH_SET_CONF_EDL_L1_A_12_B_10?\""
+  xyzwh 375 230 2000 251 47
+classinstance 129410 class_ref 142092 // Arduino
+  name ""   xyz 608 60 2000 life_line_z 2000
+durationcanvas 128386 classinstance_ref 128002 // :Technicien
+  xyzwh 112 124 2010 11 40
+end
+durationcanvas 128514 classinstance_ref 128258 // :IHM
+  xyzwh 299 124 2010 11 25
+end
+durationcanvas 128898 classinstance_ref 128258 // :IHM
+  xyzwh 299 168 2010 11 40
+end
+durationcanvas 129026 classinstance_ref 128130 // :C_EDL_Recorder
+  xyzwh 457 168 2010 11 25
+end
+durationcanvas 129538 classinstance_ref 128130 // :C_EDL_Recorder
+  xyzwh 457 203 2010 11 25
+end
+durationcanvas 129666 classinstance_ref 129410 // :Arduino
+  xyzwh 629 203 2010 11 26
+end
+durationcanvas 129922 classinstance_ref 129410 // :Arduino
+  xyzwh 629 236 2010 11 35
+end
+msg 128642 synchronous
+  from durationcanvas_ref 128386
+  to durationcanvas_ref 128514
+  yz 124 2015 explicitmsg "Ajoute ou modifie une ligne/entrée"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 132 110
+msg 129154 synchronous
+  from durationcanvas_ref 128898
+  to durationcanvas_ref 129026
+  yz 168 2015 msg operation_ref 129026 // "EnvoiConfigurationActuelle()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 315 155
+msg 129794 synchronous
+  from durationcanvas_ref 129538
+  to durationcanvas_ref 129666
+  yz 203 2015 explicitmsg "Socket + envoi de la configuration"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 467 190
+reflexivemsg 130050 synchronous
+  to durationcanvas_ref 129922
+  yz 236 2015 msg operation_ref 129282 // "DecompositionConfiguration()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 644 248
+end

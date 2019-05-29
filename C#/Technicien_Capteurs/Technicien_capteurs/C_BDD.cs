@@ -53,9 +53,9 @@ namespace Technicien_capteurs
             return Query(requeteCount, requeteMain, 2);
         }*/
 
-        public MySqlDataReader SeConnecter(string username, string password)
+        public MySqlDataReader SeConnecter(string nom, string password)
         {
-            string requete = "SELECT `Pseudo`,`MDP` FROM `membres` WHERE `Pseudo`='" + username + "' AND `MDP`='" + password + "';";
+            string requete = "SELECT `Nom`,`MDP` FROM `membres` WHERE `Nom`='" + nom + "' AND `MDP`='" + password + "';";
             MySqlDataReader rdr = Query(requete);
             return rdr;
         }
@@ -158,13 +158,13 @@ namespace Technicien_capteurs
         public bool RequeteInsertCapteur(string nom, string adresseIp, string marque, string model, byte calibre, float a, float b)
         {
             string nom_config = $"INT_ALT_A:{a}_B:{b}";
-            string requete = "INSERT INTO `capteurs`(`Nom`,`Type`,`Adresse_IP`,`Grandeur`,`Calibre_Max`,`A`,`B`,`Nom_Config`,`Model`,`Marque`)VALUES('"+nom+ "','Intensite','"+adresseIp+"','Alternatif','" + calibre+"','"+a+"','"+b+"','"+nom_config+"','"+model+"','"+marque+"')";
+            string requete = "INSERT INTO `capteurs`(`Nom`,`Adresse_IP`,`Calibre_Max`,`Type_Courant`,`A`,`B`,`Nom_Config`,`Model`,`Marque`)VALUES('"+ nom+"','"+adresseIp+"','"+calibre+ "','Alternatif','"+a+"','"+b+"','"+nom_config+"','"+model+"','"+marque+"')";
             return NonQuery(requete);
         }
 
         public bool RequeteDeleteCapteur(int id)
         {
-            string requete = "DELETE FROM `capteurs` WHERE `id` = '"+ id +"';";
+            string requete = "DELETE FROM `capteurs` WHERE `id` = '"+id+"';";
             return NonQuery(requete);
         }
 
@@ -177,21 +177,21 @@ namespace Technicien_capteurs
 
         public MySqlDataReader RequeteSelectCapteurs()
         {
-            string requete = "SELECT `id`,`Adresse_IP`,`Nom`,`Marque`,`Model`,`Calibre_Max`,`A`,`B` FROM `capteurs` WHERE `Type` = 'Intensite';";
+            string requete = "SELECT `id`,`Adresse_IP`,`Nom`,`Marque`,`Model`,`Calibre_Max`,`A`,`B` FROM `capteurs`;";
             MySqlDataReader rdr = Query(requete);
             return rdr;
         }
 
         public MySqlDataReader RequeteSelectIdNomCapteurs()
         {
-            string requete = "SELECT `id`,`Nom` FROM `capteurs` WHERE `Type` = 'Intensite';";
+            string requete = "SELECT `id`,`Nom` FROM `capteurs`;";
             MySqlDataReader rdr = Query(requete);
             return rdr;
         }
 
         public MySqlDataReader RequeteCountCapteurs()
         {
-            string requete = "SELECT COUNT(`Nom`) FROM `capteurs` WHERE `Type` = 'Intensite';";
+            string requete = "SELECT COUNT(`Nom`) FROM `capteurs`;";
             MySqlDataReader rdr = Query(requete);
             return rdr;
         }
@@ -222,7 +222,8 @@ namespace Technicien_capteurs
         }
         public bool RequeteInsertEntree(string nom, byte ligne, byte id_capteur)
         {
-            string requete = $"INSERT INTO `config_enregistrement`(`Nom_Ligne`,`Ligne`,`ID_Capteur`,`Utilisisation`)VALUES('{nom}',{ligne},{id_capteur},0);";
+            //string requete = $"INSERT INTO `config_enregistrement`(`Nom_Ligne`,`Ligne`,`ID_Capteur`,`Utilisation`)VALUES('{nom}',{ligne},{id_capteur},0);";
+            string requete = $"INSERT INTO `config_enregistrement`(`Ligne`,`ID_Capteur`,`Nom_Ligne`)VALUES({ligne},{id_capteur},'{nom}');";
             return NonQuery(requete);
         }
 

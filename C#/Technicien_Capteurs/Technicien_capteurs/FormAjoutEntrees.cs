@@ -22,7 +22,7 @@ namespace Technicien_capteurs
         {
             InitializeComponent();
 
-            Dictionary<int, C_Capteur> dico = new Dictionary<int, C_Capteur>();
+            //Dictionary<int, C_Capteur> dico = new Dictionary<int, C_Capteur>();
             /*dico.Add("a", new C_Capteur());
             dico.Add("b", new C_Capteur());
 

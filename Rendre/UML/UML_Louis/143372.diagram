@@ -1,0 +1,109 @@
+format 221
+
+classinstance 128130 class_ref 128524 // IHM
+  name ""   xyz 530.4 8 2000 life_line_z 2000
+classinstance 128258 class_ref 128012 // C_BDD
+  name ""   xyz 729.6 4.4 2000 life_line_z 2000
+classinstance 128386 class_ref 128652 // Technicien
+  name ""   xyz 278.4 4 2000 life_line_z 2000
+fragment 131970 "alt"
+  xyzwh 468.4 246.2 2005 315 214
+  separator 4717
+end
+durationcanvas 129292 classinstance_ref 128386 // :Technicien
+  xyzwh 301 131 2010 11 40
+end
+durationcanvas 129420 classinstance_ref 128130 // :IHM
+  xyzwh 549 131 2010 11 30
+end
+durationcanvas 130316 classinstance_ref 128386 // :Technicien
+  xyzwh 301 175 2010 11 40
+end
+durationcanvas 130444 classinstance_ref 128130 // :IHM
+  xyzwh 549 175 2010 11 25
+end
+durationcanvas 130946 classinstance_ref 128386 // :Technicien
+  xyzwh 301 83 2010 11 40
+end
+durationcanvas 131074 classinstance_ref 128130 // :IHM
+  xyzwh 549 83 2010 11 58
+  overlappingdurationcanvas 129676
+    xyzwh 555 110 2020 11 25
+  end
+end
+durationcanvas 131586 classinstance_ref 128130 // :IHM
+  xyzwh 549 189 2010 11 32
+end
+durationcanvas 131714 classinstance_ref 128258 // :C_BDD
+  xyzwh 748 189 2010 11 37
+end
+durationcanvas 132098 classinstance_ref 128258 // :C_BDD
+  xyzwh 748 265 2010 11 40
+end
+durationcanvas 132226 classinstance_ref 128130 // :IHM
+  xyzwh 549 265 2010 11 25
+end
+durationcanvas 132482 classinstance_ref 128258 // :C_BDD
+  xyzwh 748 354 2010 11 48
+end
+durationcanvas 132610 classinstance_ref 128130 // :IHM
+  xyzwh 549 352 2010 11 44
+end
+durationcanvas 132866 classinstance_ref 128130 // :IHM
+  xyzwh 549 305 2010 11 37
+end
+durationcanvas 133122 classinstance_ref 128130 // :IHM
+  xyzwh 549 411 2010 11 40
+end
+msg 129548 synchronous
+  from durationcanvas_ref 129292
+  to durationcanvas_ref 129420
+  yz 150 2015 explicitmsg "Modification des infos du capteur"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 338 136
+reflexivemsg 129804 synchronous
+  to durationcanvas_ref 129676
+  yz 110 2025 explicitmsg "AfficherFenetreAjoutCapteur()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 570 120
+msg 130572 synchronous
+  from durationcanvas_ref 130316
+  to durationcanvas_ref 130444
+  yz 175 2020 explicitmsg "Clic sur valider"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 394 161
+msg 131202 synchronous
+  from durationcanvas_ref 130946
+  to durationcanvas_ref 131074
+  yz 83 2015 explicitmsg "Le technicien clic sur un capteur du tableau pour le modifier"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 307 61
+msg 131842 synchronous
+  from durationcanvas_ref 131586
+  to durationcanvas_ref 131714
+  yz 204 2015 msg operation_ref 128652 // "RequeteUpdateCapteur(in nom : string, in marque : string, in modele : string, in calibre : int, in a : int, in b : int, in id : int)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 612 190
+msg 132354 return
+  from durationcanvas_ref 132098
+  to durationcanvas_ref 132226
+  yz 265 2015 explicitmsg "True"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 656 251
+msg 132738 return
+  from durationcanvas_ref 132482
+  to durationcanvas_ref 132610
+  yz 368 2015 explicitmsg "False"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 657 359
+reflexivemsg 132994 asynchronous
+  to durationcanvas_ref 132866
+  yz 305 2015 explicitmsg "AfficherMessageReussi()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 564 319
+reflexivemsg 133250 asynchronous
+  to durationcanvas_ref 133122
+  yz 413 2015 explicitmsg "AfficherMessageErreur()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 564 428
+end

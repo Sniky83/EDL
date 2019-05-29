@@ -1,0 +1,22 @@
+format 221
+
+classinstance 128012 class_ref 128652 // Technicien
+  name ""   xyz 108 38 2000 life_line_z 2000
+classinstance 128140 class_ref 128524 // IHM
+  name ""   xyz 252 41 2000 life_line_z 2000
+classinstance 128268 class_ref 135308 // C_Recorder
+  name ""   xyz 393 40 2000 life_line_z 2000
+classinstance 128396 class_ref 128140 // C_EDL_Recorder
+  name ""   xyz 533 37 2000 life_line_z 2000
+durationcanvas 128524 classinstance_ref 128012 // :Technicien
+  xyzwh 131 124 2010 11 40
+end
+durationcanvas 128652 classinstance_ref 128140 // :IHM
+  xyzwh 271 124 2010 11 25
+end
+msg 128780 synchronous
+  from durationcanvas_ref 128524
+  to durationcanvas_ref 128652
+  yz 124 2015 unspecifiedmsg
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+end
