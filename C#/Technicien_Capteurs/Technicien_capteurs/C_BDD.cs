@@ -177,7 +177,7 @@ namespace Technicien_capteurs
 
         public MySqlDataReader RequeteSelectCapteurs()
         {
-            string requete = "SELECT `id`,`Adresse_IP`,`Nom`,`Marque`,`Model`,`Calibre_Max`,`A`,`B` FROM `capteurs`;";
+            string requete = "SELECT `id`,`Nom`,`Marque`,`Model`,`Calibre_Max`,`A`,`B` FROM `capteurs`;";
             MySqlDataReader rdr = Query(requete);
             return rdr;
         }
@@ -196,7 +196,7 @@ namespace Technicien_capteurs
             return rdr;
         }
 
-        public MySqlDataReader RequeteSelectLastIdCapteur()
+        public MySqlDataReader RequeteSelectLastIdCapteurs()
         {
             string requete = "SELECT MAX(`id`) FROM `capteurs`;";
             MySqlDataReader rdr = Query(requete);
@@ -215,30 +215,34 @@ namespace Technicien_capteurs
 
         public MySqlDataReader RequeteSelectEntrees(string ip)
         {
-            string requete = $"SELECT `cpt`.`ID`,`Nom`,`Ligne`,`Nom_Ligne` FROM `capteurs` cpt INNER JOIN `config_enregistrement` conf ON `conf`.`ID_Capteur` = `cpt`.`ID`;";
+            string requete = $"SELECT `conf`.`ID`,`Ligne`,`Nom_Ligne`,`cpt`.`Nom` FROM `capteurs` cpt INNER JOIN `config_enregistrement` conf ON `conf`.`ID_Capteur` = `cpt`.`ID`;";
             MySqlDataReader rdr = Query(requete);
             //WHERE `cpt`.`Adresse_IP` = '{ip}'
             return rdr;
         }
-        public bool RequeteInsertEntree(string nom, byte ligne, byte id_capteur)
+        public bool RequeteInsertEntree(string nom, byte ligne, ushort id_capteur)
         {
             string requete = $"INSERT INTO `config_enregistrement`(`Ligne`,`ID_Capteur`,`Nom_Ligne`)VALUES({ligne},{id_capteur},'{nom}');";
             return NonQuery(requete);
         }
 
-        public void RequeteUpdateEntree()
+        public bool RequeteUpdateEntree(string nom, byte ligne, ushort id_capteur, ushort id)
         {
-
+            string requete = $"UPDATE `config_enregistrement` SET `Nom_Ligne` = '{nom}',`Ligne` = {ligne},`ID_Capteur` = {id_capteur} WHERE `ID` = {id};";
+            return NonQuery(requete);
         }
 
-        public void RequeteDeleteEntree()
+        public bool RequeteDeleteEntree(ushort id)
         {
-
+            string requete = $"DELETE FROM `config_enregistrement` WHERE `id` = {id};";
+            return NonQuery(requete);
         }
 
-        public void RequeteSelectEntree()
+        public MySqlDataReader RequeteSelectLastIdEntrees()
         {
-
+            string requete = "SELECT MAX(`id`) FROM `config_enregistrement`;";
+            MySqlDataReader rdr = Query(requete);
+            return rdr;
         }
         #endregion
     }

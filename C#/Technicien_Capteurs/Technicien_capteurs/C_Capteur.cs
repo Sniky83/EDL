@@ -9,7 +9,6 @@ namespace Technicien_capteurs
     public class C_Capteur
     {
         public ushort Id { get; set; }
-        public string IpArduino { get; set; }
         public string Nom { get; set; }
         public string Marque { get; set; }
         public string Model { get; set; }

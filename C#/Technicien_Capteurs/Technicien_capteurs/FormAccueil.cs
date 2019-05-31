@@ -20,6 +20,7 @@ namespace Technicien_capteurs
         private C_BDD BDD;
 
         private BindingList<C_Capteur> capteurList = new BindingList<C_Capteur>();
+        private BindingList<C_Entree> entreeList = new BindingList<C_Entree>();
 
         private bool TesterConnexionArduino = false;
         private bool TesterConnexionBDD = false;
@@ -75,6 +76,7 @@ namespace Technicien_capteurs
             btn_configEnr.Enabled = true;
             btn_mesurer.Enabled = true;
             btn_connexion.Enabled = true;
+            BDD = new C_BDD(ConfigIni.ip, ConfigIni.dbn, ConfigIni.username, ConfigIni.password);
         }
 
         private void btn_mesurer_Click(object sender, EventArgs e)
@@ -104,8 +106,12 @@ namespace Technicien_capteurs
 
         private void btn_configEnr_Click(object sender, EventArgs e)
         {
-            FormConfigEnregistreur fEnr = new FormConfigEnregistreur(ConfigIni);
+            FormConfigEnregistreur fEnr = new FormConfigEnregistreur(ConfigIni, entreeList, capteurList);
             fEnr.ShowDialog();
+            /*if(IsNewEntree == true)
+            {
+                btn_mesurer.enabled = true;
+            }*/
         }
 
         private void btn_configRes_Click(object sender, EventArgs e)
@@ -167,6 +173,10 @@ namespace Technicien_capteurs
             FormGestionCapteurs fGestCapt = new FormGestionCapteurs(ConfigIni, capteurList);
 
             fGestCapt.ShowDialog();
+            if(fGestCapt.IsNewCapteur == true)
+            {
+                btn_configRes.Enabled = true;
+            }
         }
 
         private void btn_connexion_Click(object sender, EventArgs e)
@@ -180,14 +190,12 @@ namespace Technicien_capteurs
 
                 C_Capteur capteurToAdd;
 
-                BDD = new C_BDD(ConfigIni.ip, ConfigIni.dbn, ConfigIni.username, ConfigIni.password);
-
                 var rdr = BDD.RequeteSelectCapteurs();
                 string stockage = "";
                 while (rdr.Read())
                 {
                     capteurToAdd = new C_Capteur();
-                    for (byte i = 0; i < 8; i++)
+                    for (byte i = 0; i < 7; i++)
                     {
                         stockage = rdr[i].ToString();
                         switch (i)
@@ -196,24 +204,21 @@ namespace Technicien_capteurs
                                 capteurToAdd.Id = ushort.Parse(stockage);
                                 break;
                             case 1:
-                                capteurToAdd.IpArduino = stockage;
-                                break;
-                            case 2:
                                 capteurToAdd.Nom = stockage;
                                 break;
-                            case 3:
+                            case 2:
                                 capteurToAdd.Marque = stockage;
                                 break;
-                            case 4:
+                            case 3:
                                 capteurToAdd.Model = stockage;
                                 break;
-                            case 5:
+                            case 4:
                                 capteurToAdd.Calibre = byte.Parse(stockage);
                                 break;
-                            case 6:
+                            case 5:
                                 capteurToAdd.A = float.Parse(stockage);
                                 break;
-                            case 7:
+                            case 6:
                                 capteurToAdd.B = float.Parse(stockage);
                                 break;
                             default:
@@ -229,6 +234,42 @@ namespace Technicien_capteurs
                     btn_mesurer.Enabled = false;
                 }
                 rdr.Close();
+                BDD.connection.Close();
+
+                var reader = BDD.RequeteSelectEntrees(ConfigIni.ipArduino);
+                string stock = "";
+                while (reader.Read())
+                {
+                    C_Entree entreeToAdd = new C_Entree();
+                    for (byte i = 0; i < 4; i++)
+                    {
+                        stock = reader[i].ToString();
+                        switch (i)
+                        {
+                            case 0:
+                                entreeToAdd.Id = ushort.Parse(stock);
+                                break;
+                            case 1:
+                                entreeToAdd.Entree = byte.Parse(stock);
+                                break;
+                            case 2:
+                                entreeToAdd.Nom_Entree = stock;
+                                break;
+                            case 3:
+                                entreeToAdd.Nom_Capteur = stock;
+                                break;
+                            default:
+
+                                break;
+                        }
+                    }
+                    entreeList.Add(entreeToAdd);
+                }
+                if (entreeList.Count == 0)
+                {
+                    btn_mesurer.Enabled = false;
+                }
+                reader.Close();
                 BDD.connection.Close();
             }
 

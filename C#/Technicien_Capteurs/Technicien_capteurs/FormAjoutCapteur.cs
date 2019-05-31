@@ -24,9 +24,14 @@ namespace Technicien_capteurs
 
         private C_Config configIni;
 
-        public FormAjoutCapteur(C_Config confIni)
+        public FormAjoutCapteur(C_Config confIni, bool modif)
         {
             InitializeComponent();
+
+            if(modif == true)
+            {
+                this.Text = "Modification";
+            }
 
             configIni = confIni;
 
@@ -45,12 +50,12 @@ namespace Technicien_capteurs
                 if (id != 0)
                 {
                     bool result = BDD.RequeteUpdateCapteur(txtBox_name.Text, configIni.ipArduino,txtBox_marque.Text, txtBox_model.Text, (byte)numUpDown_calibre.Value, float.Parse(txtBox_a.Text), float.Parse(txtBox_b.Text), id);
-                    IsSendToServer = result;
                     if (result == true)
                     {
+                        IsSendToServer = result;
                         Tableau = new string[]
                         {
-                            id.ToString(),configIni.ipArduino,txtBox_name.Text,txtBox_marque.Text,txtBox_model.Text,numUpDown_calibre.Value.ToString(),txtBox_a.Text,txtBox_b.Text
+                            txtBox_name.Text,txtBox_marque.Text,txtBox_model.Text,numUpDown_calibre.Value.ToString(),txtBox_a.Text,txtBox_b.Text
                         };
                     }
                 }
@@ -59,6 +64,7 @@ namespace Technicien_capteurs
                     bool result = BDD.RequeteInsertCapteur(txtBox_name.Text, configIni.ipArduino, txtBox_marque.Text, txtBox_model.Text, (byte)numUpDown_calibre.Value, float.Parse(txtBox_a.Text), float.Parse(txtBox_b.Text));
                     if (result == true)
                     {
+                        IsSendToServer = result;
                         //On envoi la ligne dans le tableau si on a reussi
                         Tableau = new string[]
                         {
