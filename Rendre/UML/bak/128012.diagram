@@ -1,0 +1,70 @@
+format 221
+
+classcanvas 128012 class_ref 128012 // C_BDD
+  classdiagramsettings show_members_full_definition yes show_members_visibility yes member_max_width 0 end
+  xyzwh 25 306 2000 587 347
+end
+classcanvas 128140 class_ref 128140 // C_EDL_Recorder
+  classdiagramsettings show_members_full_definition yes show_members_visibility yes member_max_width 0 end
+  xyzwh 622 151 2000 207 139
+end
+classcanvas 128396 class_ref 128396 // C_Config
+  classdiagramsettings show_members_full_definition yes show_members_visibility yes member_max_width 0 end
+  xyzwh 647 533 2000 149 155
+end
+classcanvas 129420 class_ref 128524 // IHM
+  classdiagramsettings member_max_width 0 end
+  xyzwh 665 333 2000 107 149
+end
+classcanvas 131212 class_ref 135308 // C_Recorder
+  classdiagramsettings member_max_width 0 end
+  xyzwh 437 31 2000 83 39
+end
+fragment 132876 "Enregistreur"
+  xyzwh 309 23 2000 221 103
+end
+classcanvas 133004 class_ref 141964 // C_Daemon_BDD
+  classdiagramsettings member_max_width 0 end
+  xyz 177 50 2000
+end
+fragment 133132 "Passerelle"
+  xyzwh 148 24 2005 135 80
+end
+fragment 133388 "Application Technicien"
+  xyzwh 14 138 2000 818 558
+end
+classcanvas 133516 class_ref 142092 // Arduino
+  classdiagramsettings member_max_width 0 end
+  xyzwh 336 72 2005 133 49
+end
+relationcanvas 132236 relation_ref 136588 // <association>
+  from ref 128012 z 2001 to ref 129420
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132364 relation_ref 136716 // <association>
+  from ref 131212 z 2001 to ref 128140
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132492 relation_ref 136844 // <association>
+  from ref 128140 z 2001 to ref 129420
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 132620 relation_ref 136972 // <association>
+  from ref 129420 z 2001 to ref 128396
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 133260 relation_ref 143628 // <association>
+  from ref 131212 z 2001 to ref 133004
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134156 relation_ref 143884 // <association>
+  from ref 133516 z 2006 to ref 131212
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

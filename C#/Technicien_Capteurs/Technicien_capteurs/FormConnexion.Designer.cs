@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_connexion = new System.Windows.Forms.Button();
-            this.txtBox_username = new System.Windows.Forms.TextBox();
+            this.txtBox_nom = new System.Windows.Forms.TextBox();
             this.txtBox_password = new System.Windows.Forms.TextBox();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -65,13 +65,13 @@
             this.btn_connexion.UseVisualStyleBackColor = true;
             this.btn_connexion.Click += new System.EventHandler(this.btn_connexion_Click);
             // 
-            // txtBox_username
+            // txtBox_nom
             // 
-            this.txtBox_username.Location = new System.Drawing.Point(102, 12);
-            this.txtBox_username.Name = "txtBox_username";
-            this.txtBox_username.Size = new System.Drawing.Size(145, 20);
-            this.txtBox_username.TabIndex = 3;
-            this.txtBox_username.Text = "zeleph";
+            this.txtBox_nom.Location = new System.Drawing.Point(102, 12);
+            this.txtBox_nom.Name = "txtBox_nom";
+            this.txtBox_nom.Size = new System.Drawing.Size(145, 20);
+            this.txtBox_nom.TabIndex = 3;
+            this.txtBox_nom.Text = "Client";
             // 
             // txtBox_password
             // 
@@ -99,7 +99,7 @@
             this.ClientSize = new System.Drawing.Size(260, 102);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.txtBox_password);
-            this.Controls.Add(this.txtBox_username);
+            this.Controls.Add(this.txtBox_nom);
             this.Controls.Add(this.btn_connexion);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -119,7 +119,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_connexion;
-        private System.Windows.Forms.TextBox txtBox_username;
+        private System.Windows.Forms.TextBox txtBox_nom;
         private System.Windows.Forms.TextBox txtBox_password;
         private System.Windows.Forms.Button btn_cancel;
     }

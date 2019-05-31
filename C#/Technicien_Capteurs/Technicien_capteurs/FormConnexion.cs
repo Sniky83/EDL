@@ -25,33 +25,29 @@ namespace Technicien_capteurs
 
         private void btn_connexion_Click(object sender, EventArgs e)
         {
-            var rdr = BDD.SeConnecter(txtBox_username.Text, txtBox_password.Text);
+            var rdr = BDD.SeConnecter(txtBox_nom.Text, txtBox_password.Text);
 
-            if(rdr != null)
+            string nom = "";
+            string password = "";
+
+            while (rdr.Read())
             {
-                string id = "";
-                string password = "";
-                while (rdr.Read())
+                nom = rdr[0].ToString();
+                password = rdr[1].ToString();
+                if (nom == txtBox_nom.Text && password == txtBox_password.Text)
                 {
-                    if (rdr.FieldCount == 2)
-                    {
-                        id = rdr[0].ToString();
-                        password = rdr[1].ToString();
-                        if (id == txtBox_username.Text && password == txtBox_password.Text)
-                        {
-                            IsConnexionDone = true;
-                            MessageBox.Show("Connexion réussie !", "Succès !", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Mot de passe ou nom d'utilisateur incorrect !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
+                    IsConnexionDone = true;
+                    MessageBox.Show("Connexion réussie !", "Succès !", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Close();
                 }
-                rdr.Close();
-                BDD.connection.Close();
             }
+
+            if (nom == "")
+            {
+                MessageBox.Show("Mot de passe ou nom d'utilisateur incorrect !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            rdr.Close();
+            BDD.connection.Close();
         }
 
         private void btn_quitter_Click(object sender, EventArgs e)

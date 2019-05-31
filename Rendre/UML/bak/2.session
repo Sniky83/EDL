@@ -1,0 +1,17 @@
+window_sizes 1920 1017 450 1465 917 54
+
+diagrams
+  sequencediagram_ref 128908 // Ajout, Modification, Superssion d'un Capteur
+    1172 711 100 A4 0 0
+  active  sequencediagram_ref 128002 // Afficher Mesures Instant
+    1172 733 100 A4 0 0
+  sequencediagram_ref 128780 // Affichage de la liste des Capteurs
+    1172 733 100 A4 24 0
+end
+show_stereotypes
+selected class_ref 128140 // C_Arduino
+open
+  classview_ref 128012 // class
+  usecaseview_ref 128012 // Acteurs
+end
+end

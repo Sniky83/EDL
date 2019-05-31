@@ -1,0 +1,91 @@
+format 221
+
+classinstance 128012 class_ref 128652 // Technicien
+  name ""   xyz 82 32 2000 life_line_z 2000
+classinstance 128140 class_ref 128396 // C_Config
+  name ""   xyz 548 25 2000 life_line_z 2000
+classinstance 128268 class_ref 128524 // IHM
+  name ""   xyz 286 36 2000 life_line_z 2000
+classinstance 130060 class_ref 128012 // C_BDD
+  name ""   xyz 447 27 2000 life_line_z 2000
+fragment 130572 "alt"
+  xyzwh 242 161 2000 347 195
+  separator 5153
+end
+durationcanvas 128396 classinstance_ref 128012 // :Technicien
+  xyzwh 105 111 2010 11 40
+end
+durationcanvas 128524 classinstance_ref 128268 // :IHM
+  xyzwh 305 111 2010 11 25
+end
+durationcanvas 128780 classinstance_ref 128268 // :IHM
+  xyzwh 305 239 2010 11 42
+end
+durationcanvas 128908 classinstance_ref 128140 // :C_Config
+  xyzwh 572 239 2010 11 42
+end
+durationcanvas 130188 classinstance_ref 128268 // :IHM
+  xyzwh 305 144 2010 11 40
+end
+durationcanvas 130316 classinstance_ref 130060 // :C_BDD
+  xyzwh 466 144 2010 11 25
+end
+durationcanvas 130700 classinstance_ref 130060 // :C_BDD
+  xyzwh 466 179 2010 11 40
+end
+durationcanvas 130828 classinstance_ref 128268 // :IHM
+  xyzwh 305 179 2010 11 25
+end
+durationcanvas 131084 classinstance_ref 128268 // :IHM
+  xyzwh 305 213 2010 11 40
+end
+durationcanvas 131340 classinstance_ref 130060 // :C_BDD
+  xyzwh 466 284 2010 11 40
+end
+durationcanvas 131468 classinstance_ref 128268 // :IHM
+  xyzwh 305 284 2010 11 25
+end
+durationcanvas 131724 classinstance_ref 128268 // :IHM
+  xyzwh 305 315 2010 11 40
+end
+msg 128652 synchronous
+  from durationcanvas_ref 128396
+  to durationcanvas_ref 128524
+  yz 111 2015 explicitmsg "L'utilisateur s'authentifie à la base de données"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 99 97
+msg 129036 synchronous
+  from durationcanvas_ref 128780
+  to durationcanvas_ref 128908
+  yz 251 2015 msg operation_ref 136076 // "SaveConfig()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 376 237
+msg 130444 synchronous
+  from durationcanvas_ref 130188
+  to durationcanvas_ref 130316
+  yz 144 2015 explicitmsg "TesterConnexion()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 347 130
+msg 130956 return
+  from durationcanvas_ref 130700
+  to durationcanvas_ref 130828
+  yz 179 2015 explicitmsg "True"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 380 165
+reflexivemsg 131212 synchronous
+  to durationcanvas_ref 131084
+  yz 213 2015 explicitmsg "AfficherMessageReussi()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 323 225
+msg 131596 return
+  from durationcanvas_ref 131340
+  to durationcanvas_ref 131468
+  yz 284 2015 explicitmsg "False"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 378 270
+reflexivemsg 131852 synchronous
+  to durationcanvas_ref 131724
+  yz 315 2015 explicitmsg "AfficherMessageErreur()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 317 327
+end

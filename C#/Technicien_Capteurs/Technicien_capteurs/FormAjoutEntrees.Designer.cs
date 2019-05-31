@@ -159,12 +159,12 @@
 
         private System.Windows.Forms.Label lbl_input;
         private System.Windows.Forms.Label lbl_capteur;
-        private System.Windows.Forms.ComboBox cmbBox_input;
         private System.Windows.Forms.Button btn_ok;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Button btn_aide;
-        private System.Windows.Forms.ComboBox cmbBox_capteur;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtBox_nom_entree;
+        public System.Windows.Forms.ComboBox cmbBox_input;
+        public System.Windows.Forms.ComboBox cmbBox_capteur;
+        public System.Windows.Forms.TextBox txtBox_nom_entree;
     }
 }

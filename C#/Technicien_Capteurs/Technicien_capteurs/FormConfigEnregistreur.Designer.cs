@@ -55,6 +55,7 @@
             this.tab_listeEnr.Size = new System.Drawing.Size(353, 150);
             this.tab_listeEnr.TabIndex = 0;
             this.tab_listeEnr.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tab_listeEnr_CellClick);
+            this.tab_listeEnr.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tab_listeEnr_CellDoubleClick);
             // 
             // btn_ok
             // 
@@ -87,6 +88,7 @@
             // 
             // btn_modifier
             // 
+            this.btn_modifier.Enabled = false;
             this.btn_modifier.Location = new System.Drawing.Point(135, 215);
             this.btn_modifier.Name = "btn_modifier";
             this.btn_modifier.Size = new System.Drawing.Size(114, 23);
@@ -97,12 +99,14 @@
             // 
             // btn_delete
             // 
+            this.btn_delete.Enabled = false;
             this.btn_delete.Location = new System.Drawing.Point(255, 215);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(114, 23);
             this.btn_delete.TabIndex = 6;
             this.btn_delete.Text = "Supprimer";
             this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.Click += new System.EventHandler(this.Btn_delete_Click);
             // 
             // label1
             // 

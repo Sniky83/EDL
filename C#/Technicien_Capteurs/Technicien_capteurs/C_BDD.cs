@@ -53,9 +53,9 @@ namespace Technicien_capteurs
             return Query(requeteCount, requeteMain, 2);
         }*/
 
-        public MySqlDataReader SeConnecter(string username, string password)
+        public MySqlDataReader SeConnecter(string nom, string password)
         {
-            string requete = "SELECT `Pseudo`,`MDP` FROM `membres` WHERE `Pseudo`='" + username + "' AND `MDP`='" + password + "';";
+            string requete = "SELECT `Nom`,`MDP` FROM `membres` WHERE `Nom`='" + nom + "' AND `MDP`='" + password + "';";
             MySqlDataReader rdr = Query(requete);
             return rdr;
         }
@@ -86,7 +86,7 @@ namespace Technicien_capteurs
             catch (Exception)
             {
                 FermerConnexion();
-                MessageBox.Show("Problème lors de l'envoi des informations à la base de données !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Problème de connexion ou de requête !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
         }
@@ -102,7 +102,7 @@ namespace Technicien_capteurs
             }
             catch
             {
-                MessageBox.Show("Erreur de connexion ou de requête !", "Succès !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Problème de connexion ou de requête !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return null;
             }
         }
@@ -158,13 +158,13 @@ namespace Technicien_capteurs
         public bool RequeteInsertCapteur(string nom, string adresseIp, string marque, string model, byte calibre, float a, float b)
         {
             string nom_config = $"INT_ALT_A:{a}_B:{b}";
-            string requete = "INSERT INTO `capteurs`(`Nom`,`Type`,`Adresse_IP`,`Grandeur`,`Calibre_Max`,`A`,`B`,`Nom_Config`,`Model`,`Marque`)VALUES('"+nom+ "','Intensite','"+adresseIp+"','Alternatif','" + calibre+"','"+a+"','"+b+"','"+nom_config+"','"+model+"','"+marque+"')";
+            string requete = "INSERT INTO `capteurs`(`Nom`,`Adresse_IP`,`Calibre_Max`,`Type_Courant`,`A`,`B`,`Nom_Config`,`Model`,`Marque`)VALUES('"+ nom+"','"+adresseIp+"','"+calibre+ "','Alternatif','"+a+"','"+b+"','"+nom_config+"','"+model+"','"+marque+"')";
             return NonQuery(requete);
         }
 
         public bool RequeteDeleteCapteur(int id)
         {
-            string requete = "DELETE FROM `capteurs` WHERE `id` = '"+ id +"';";
+            string requete = "DELETE FROM `capteurs` WHERE `id` = '"+id+"';";
             return NonQuery(requete);
         }
 
@@ -177,26 +177,26 @@ namespace Technicien_capteurs
 
         public MySqlDataReader RequeteSelectCapteurs()
         {
-            string requete = "SELECT `id`,`Adresse_IP`,`Nom`,`Marque`,`Model`,`Calibre_Max`,`A`,`B` FROM `capteurs` WHERE `Type` = 'Intensite';";
+            string requete = "SELECT `id`,`Nom`,`Marque`,`Model`,`Calibre_Max`,`A`,`B` FROM `capteurs`;";
             MySqlDataReader rdr = Query(requete);
             return rdr;
         }
 
         public MySqlDataReader RequeteSelectIdNomCapteurs()
         {
-            string requete = "SELECT `id`,`Nom` FROM `capteurs` WHERE `Type` = 'Intensite';";
+            string requete = "SELECT `id`,`Nom` FROM `capteurs`;";
             MySqlDataReader rdr = Query(requete);
             return rdr;
         }
 
         public MySqlDataReader RequeteCountCapteurs()
         {
-            string requete = "SELECT COUNT(`Nom`) FROM `capteurs` WHERE `Type` = 'Intensite';";
+            string requete = "SELECT COUNT(`Nom`) FROM `capteurs`;";
             MySqlDataReader rdr = Query(requete);
             return rdr;
         }
 
-        public MySqlDataReader RequeteSelectLastIdCapteur()
+        public MySqlDataReader RequeteSelectLastIdCapteurs()
         {
             string requete = "SELECT MAX(`id`) FROM `capteurs`;";
             MySqlDataReader rdr = Query(requete);
@@ -215,29 +215,34 @@ namespace Technicien_capteurs
 
         public MySqlDataReader RequeteSelectEntrees(string ip)
         {
-            string requete = $"SELECT `cpt`.`ID`,`Nom`,`Ligne`,`Nom_Ligne` FROM `capteurs` cpt INNER JOIN `config_enregistrement` conf ON `conf`.`ID_Capteur` = `cpt`.`ID`;";
+            string requete = $"SELECT `conf`.`ID`,`Ligne`,`Nom_Ligne`,`cpt`.`Nom` FROM `capteurs` cpt INNER JOIN `config_enregistrement` conf ON `conf`.`ID_Capteur` = `cpt`.`ID`;";
             MySqlDataReader rdr = Query(requete);
             //WHERE `cpt`.`Adresse_IP` = '{ip}'
             return rdr;
         }
-        public void RequeteInsertEntree(string nom, byte ligne, byte id_capteur)
+        public bool RequeteInsertEntree(string nom, byte ligne, ushort id_capteur)
         {
-            string requete = $"INSERT INTO `config_enregistrement`(`Nom_Ligne`,`Ligne`,`ID_Capteur`,`Utilisisation`)VALUES('{nom}','{ligne}','{id_capteur}','0');";
+            string requete = $"INSERT INTO `config_enregistrement`(`Ligne`,`ID_Capteur`,`Nom_Ligne`)VALUES({ligne},{id_capteur},'{nom}');";
+            return NonQuery(requete);
         }
 
-        public void RequeteUpdateEntree()
+        public bool RequeteUpdateEntree(string nom, byte ligne, ushort id_capteur, ushort id)
         {
-
+            string requete = $"UPDATE `config_enregistrement` SET `Nom_Ligne` = '{nom}',`Ligne` = {ligne},`ID_Capteur` = {id_capteur} WHERE `ID` = {id};";
+            return NonQuery(requete);
         }
 
-        public void RequeteDeleteEntree()
+        public bool RequeteDeleteEntree(ushort id)
         {
-
+            string requete = $"DELETE FROM `config_enregistrement` WHERE `id` = {id};";
+            return NonQuery(requete);
         }
 
-        public void RequeteSelectEntree()
+        public MySqlDataReader RequeteSelectLastIdEntrees()
         {
-
+            string requete = "SELECT MAX(`id`) FROM `config_enregistrement`;";
+            MySqlDataReader rdr = Query(requete);
+            return rdr;
         }
         #endregion
     }

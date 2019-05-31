@@ -4,90 +4,84 @@ classinstance 128012 class_ref 128524 // IHM
   name ""   xyz 255.5 23 2000 life_line_z 2000
 classinstance 128140 class_ref 128652 // Technicien
   name ""   xyz 51.5 23 2000 life_line_z 2000
-fragment 128268 "alt"
-  xyzwh 211.5 124.5 2000 378 221
-  separator 5152
-end
 classinstance 128396 class_ref 128396 // C_Config
-  name ""   xyz 546.5 30 2000 life_line_z 2000
+  name ""   xyz 490.5 22 2000 life_line_z 2000
 classinstance 128524 class_ref 128012 // C_BDD
   name ""   xyz 410.5 23 2000 life_line_z 2000
 note 131084 "Au démarrage de la form d'accueil"
-  xyzwh 640 92 2000 131 49
-durationcanvas 128652 classinstance_ref 128012 // :IHM
-  xyzwh 274 200.5 2010 11 40
-end
-durationcanvas 128780 classinstance_ref 128012 // :IHM
-  xyzwh 274 166.5 2010 11 25
-end
-durationcanvas 128908 classinstance_ref 128524 // :C_BDD
-  xyzwh 429 166.5 2010 11 40
+  xyzwh 632 93 2000 131 49
+fragment 131468 "alt"
+  xyzwh 220 117 2000 386 191
+  separator 5270
 end
 durationcanvas 129036 classinstance_ref 128140 // :Technicien
-  xyzwh 74 98.5 2010 11 40
-end
-durationcanvas 129164 classinstance_ref 128012 // :IHM
-  xyzwh 274 302.5 2010 11 40
-end
-durationcanvas 129292 classinstance_ref 128012 // :IHM
-  xyzwh 274 271.5 2010 11 25
-end
-durationcanvas 129420 classinstance_ref 128524 // :C_BDD
-  xyzwh 429 131.5 2010 11 35
+  xyzwh 74 98 2010 11 40
 end
 durationcanvas 129548 classinstance_ref 128396 // :C_Config
-  xyzwh 570 103.5 2010 11 34
-end
-durationcanvas 129676 classinstance_ref 128012 // :IHM
-  xyzwh 274 131.5 2010 11 40
+  xyzwh 514 119 2010 11 29
 end
 durationcanvas 129804 classinstance_ref 128012 // :IHM
-  xyzwh 274 106.5 2010 11 162
+  xyzwh 274 104 2010 11 43
 end
 durationcanvas 129932 classinstance_ref 128012 // :IHM
-  xyzwh 274 98.5 2010 11 25
+  xyzwh 274 98 2010 11 25
 end
-durationcanvas 130060 classinstance_ref 128524 // :C_BDD
-  xyzwh 429 271.5 2010 11 40
+durationcanvas 131596 classinstance_ref 128012 // :IHM
+  xyzwh 274 170 2010 11 40
 end
-msg 130188 synchronous
-  from durationcanvas_ref 129676
-  to durationcanvas_ref 129420
-  yz 145.5 2015 explicitmsg "TesterConnexion()"
-  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 322.5 129.5
+durationcanvas 131724 classinstance_ref 128524 // :C_BDD
+  xyzwh 429 170 2010 11 34
+end
+durationcanvas 131980 classinstance_ref 128012 // :IHM
+  xyzwh 274 230 2010 11 40
+end
+durationcanvas 132236 classinstance_ref 128396 // :C_Config
+  xyzwh 514 153 2010 11 40
+end
+durationcanvas 132620 classinstance_ref 128524 // :C_BDD
+  xyzwh 429 285 2010 11 25
+end
+durationcanvas 132748 classinstance_ref 128012 // :IHM
+  xyzwh 274 285 2010 11 26
+end
 msg 130316 synchronous
   from durationcanvas_ref 129804
   to durationcanvas_ref 129548
-  yz 106.5 2015 msg operation_ref 136204 // "LoadConfig()"
+  yz 135 2015 msg operation_ref 136204 // "LoadConfig()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 351.5 90.5
-reflexivemsg 130444 synchronous
-  to durationcanvas_ref 128652
-  yz 200 2015 explicitmsg "AfficherMessageReussi()"
-  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 298.5 207.5
-reflexivemsg 130572 synchronous
-  to durationcanvas_ref 129164
-  yz 302 2015 explicitmsg "AfficherMessageErreur()"
-  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 292.5 314.5
+  label_xy 351 119
 msg 130700 synchronous
   from durationcanvas_ref 129036
   to durationcanvas_ref 129932
-  yz 100.5 2015 explicitmsg "Si le fichier existe"
+  yz 100 2015 explicitmsg "Si le fichier existe"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 129.5 83.5
-msg 130828 return
-  from durationcanvas_ref 128908
-  to durationcanvas_ref 128780
-  yz 176.5 2015 explicitmsg "True"
+  label_xy 129 83
+msg 131852 synchronous
+  from durationcanvas_ref 131596
+  to durationcanvas_ref 131724
+  yz 170 2015 msg operation_ref 128268 // "TesterConnexion()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 355.5 160.5
-msg 130956 return
-  from durationcanvas_ref 130060
-  to durationcanvas_ref 129292
-  yz 273.5 2015 explicitmsg "False"
+  label_xy 322 156
+reflexivemsg 132108 synchronous
+  to durationcanvas_ref 131980
+  yz 230 2015 explicitmsg "RendreAccessibleBoutonConfigurationReseau()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 353.5 257.5
+  label_xy 290 242
+reflexivemsg 132364 synchronous
+  to durationcanvas_ref 132236
+  yz 153 2020 msg operation_ref 150156 // "DecryptFile()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 530 164
+msg 132492 return
+  from durationcanvas_ref 131724
+  to durationcanvas_ref 131596
+  yz 193 2015 explicitmsg "True"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 346 179
+msg 132876 return
+  from durationcanvas_ref 132620
+  to durationcanvas_ref 132748
+  yz 285 2015 explicitmsg "False"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 344 271
 end

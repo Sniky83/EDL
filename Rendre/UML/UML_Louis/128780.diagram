@@ -3,11 +3,12 @@ format 221
 classinstance 128012 class_ref 128652 // Technicien
   name ""   xyz 62 4 2000 life_line_z 2000
 classinstance 128140 class_ref 128012 // C_BDD
-  name ""   xyz 462 12 2000 life_line_z 2000
+  name ""   xyz 453 12 2000 life_line_z 2000
 classinstance 128268 class_ref 128524 // IHM
   name ""   xyz 276 19 2000 life_line_z 2000
 fragment 129420 "alt"
-  xyzwh 229 117 2000 278 215
+  xyzwh 255 112 2000 238 212
+  separator 4716
 end
 note 130434 "Au lancement de la form"
   xyzwh 515 84 2000 95 57
@@ -18,13 +19,13 @@ durationcanvas 128396 classinstance_ref 128012 // :Technicien
   xyzwh 85 53 2010 11 40
 end
 durationcanvas 128514 classinstance_ref 128140 // :C_BDD
-  xyzwh 481 73 2010 11 71
+  xyzwh 472 101 2010 11 41
 end
 durationcanvas 128524 classinstance_ref 128268 // :IHM
   xyzwh 295 53 2010 11 27
 end
 durationcanvas 128780 classinstance_ref 128140 // :C_BDD
-  xyzwh 481 236 2010 11 40
+  xyzwh 472 236 2010 11 40
 end
 durationcanvas 128908 classinstance_ref 128268 // :IHM
   xyzwh 295 236 2010 11 25
@@ -33,7 +34,7 @@ durationcanvas 129164 classinstance_ref 128268 // :IHM
   xyzwh 295 287 2010 11 40
 end
 durationcanvas 130562 classinstance_ref 128268 // :IHM
-  xyzwh 295 133 2010 11 25
+  xyzwh 295 131 2010 11 27
 end
 durationcanvas 130818 classinstance_ref 128268 // :IHM
   xyzwh 295 165 2010 11 40
@@ -41,9 +42,9 @@ end
 msg 128642 asynchronous
   from durationcanvas_ref 128386
   to durationcanvas_ref 128514
-  yz 105 2015 msg operation_ref 128396 // "RequeteSelectCapteurs() : MySqlDataReader"
+  yz 103 2015 msg operation_ref 128396 // "RequeteSelectCapteurs() : MySqlDataReader"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 341 94
+  label_xy 341 92
 msg 128652 synchronous
   from durationcanvas_ref 128396
   to durationcanvas_ref 128524
@@ -64,9 +65,9 @@ reflexivemsg 129292 synchronous
 msg 130690 return
   from durationcanvas_ref 128514
   to durationcanvas_ref 130562
-  yz 133 2015 explicitmsg "Données capteur"
+  yz 131 2015 explicitmsg "Données capteur"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 354 121
+  label_xy 354 119
 reflexivemsg 130946 synchronous
   to durationcanvas_ref 130818
   yz 165 2015 explicitmsg "AfficherDonneesCapteurs()"

@@ -32,15 +32,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMesures));
             this.btn_cancel = new System.Windows.Forms.Button();
             this.btn_aide = new System.Windows.Forms.Button();
             this.tab_Mesures = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
             this.Entrée = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nom_entree_mesuree = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nom_Capteur = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Intensite_mesuree = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
+            this.Puissance = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.tab_Mesures)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,7 +76,8 @@
             this.Entrée,
             this.nom_entree_mesuree,
             this.Nom_Capteur,
-            this.Intensite_mesuree});
+            this.Intensite_mesuree,
+            this.Puissance});
             this.tab_Mesures.Location = new System.Drawing.Point(12, 41);
             this.tab_Mesures.MultiSelect = false;
             this.tab_Mesures.Name = "tab_Mesures";
@@ -83,6 +86,16 @@
             this.tab_Mesures.Size = new System.Drawing.Size(423, 134);
             this.tab_Mesures.TabIndex = 6;
             this.tab_Mesures.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tbl_Mesures_CellClick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(20, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(398, 25);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Liste des capteurs présents sur l\'enregistreur";
             // 
             // Entrée
             // 
@@ -100,7 +113,6 @@
             this.nom_entree_mesuree.HeaderText = "Nom Entrée Mesurée";
             this.nom_entree_mesuree.Name = "nom_entree_mesuree";
             this.nom_entree_mesuree.ReadOnly = true;
-            this.nom_entree_mesuree.Width = 160;
             // 
             // Nom_Capteur
             // 
@@ -120,15 +132,14 @@
             this.Intensite_mesuree.ReadOnly = true;
             this.Intensite_mesuree.Width = 60;
             // 
-            // label1
+            // Puissance
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(20, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(405, 25);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Liste des entrées branchées sur l\'enregistreur";
+            dataGridViewCellStyle5.NullValue = "276W";
+            this.Puissance.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Puissance.HeaderText = "Puissance";
+            this.Puissance.Name = "Puissance";
+            this.Puissance.ReadOnly = true;
+            this.Puissance.Width = 60;
             // 
             // FormMesures
             // 
@@ -159,5 +170,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nom_entree_mesuree;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nom_Capteur;
         private System.Windows.Forms.DataGridViewTextBoxColumn Intensite_mesuree;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Puissance;
     }
 }

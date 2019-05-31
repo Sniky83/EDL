@@ -12,21 +12,22 @@ namespace Technicien_capteurs
 {
     public partial class FormGestionCapteurs : Form
     {
-        private C_BDD BDD;
-
         private C_Config confIni;
 
-        private BindingList<C_Capteur> capteurList { get; set; } = new BindingList<C_Capteur>();
+        private C_BDD BDD;
+
+        private BindingList<C_Capteur> capteurList;
 
         private byte indexCapteur;
 
-        private C_Capteur capteurToAdd;
-
-        public FormGestionCapteurs(C_Config configIni)
+        public bool IsNewCapteur = false;
+        public FormGestionCapteurs(C_Config configIni, BindingList<C_Capteur> cptList)
         {
             InitializeComponent();
 
             confIni = configIni;
+
+            capteurList = cptList;
 
             BDD = new C_BDD(confIni.ip, confIni.dbn, confIni.username, confIni.password);
 
@@ -62,78 +63,28 @@ namespace Technicien_capteurs
             //    BDD.connection.Close();
             //}
 
-            var rdr = BDD.RequeteSelectCapteurs();
-            string stockage = "";
-            while (rdr.Read())
-            {
-                capteurToAdd = new C_Capteur();
-                for (byte i = 0; i < 8; i++)
-                {
-                    stockage = rdr[i].ToString();
-                    switch (i)
-                    {
-                        case 0:
-                            capteurToAdd.Id = ushort.Parse(stockage);
-                            break;
-                        case 1:
-                            capteurToAdd.IpArduino = stockage;
-                            break;
-                        case 2:
-                            capteurToAdd.Nom = stockage;
-                            break;
-                        case 3:
-                            capteurToAdd.Marque = stockage;
-                            break;
-                        case 4:
-                            capteurToAdd.Model = stockage;
-                            break;
-                        case 5:
-                            capteurToAdd.Calibre = byte.Parse(stockage);
-                            break;
-                        case 6:
-                            capteurToAdd.A = float.Parse(stockage);
-                            break;
-                        case 7:
-                            capteurToAdd.B = float.Parse(stockage);
-                            break;
-                        default:
-
-                            break;
-                    }
-                }
-                if(capteurToAdd.Nom != "")
-                {
-                    capteurList.Add(capteurToAdd);
-                }
-            }
-
             if (capteurList.Count == 0)
             {
                 btn_delete.Enabled = false;
                 btn_modifier.Enabled = false;
-                MessageBox.Show("Aucun capteur n'est présent dans la liste, vous pouvez en ajouter un !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                tab_listeCapteurs.DataSource = capteurList;
-                tab_listeCapteurs.Columns[4].HeaderText = "Modèle";
-
-                for (byte i = 0; i < 2; i++)
-                {
-                    tab_listeCapteurs.Columns[i].Visible = false;
-                }
-
-                for (byte i = 6; i < 8; i++)
-                {
-                    tab_listeCapteurs.Columns[i].Width = 60;
-                }
-
-                tab_listeCapteurs.Columns[2].Width = 140;
-                tab_listeCapteurs.Columns[5].Width = 50;
+                MessageBox.Show("Aucun capteur n'est présent dans la liste, vous pouvez en ajouter un !", "Attention !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                /*C_Capteur capteurToAdd = new C_Capteur();
+                capteurToAdd.A;
+                capteurToAdd.B;
+                capteurToAdd.Calibre;
+                capteurToAdd.*/
             }
 
-            rdr.Close();
-            BDD.connection.Close();
+            tab_listeCapteurs.DataSource = capteurList;
+
+            tab_listeCapteurs.Columns[3].HeaderText = "Modèle";
+
+            tab_listeCapteurs.Columns[0].Visible = false;
+
+            tab_listeCapteurs.Columns[4].Width = 60;
+            tab_listeCapteurs.Columns[6].Width = 60;
+            tab_listeCapteurs.Columns[2].Width = 140;
+            tab_listeCapteurs.Columns[5].Width = 50;
         }
 
         private void tab_listeCapteurs_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -154,8 +105,8 @@ namespace Technicien_capteurs
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            FormAjoutCapteur fAddCpt = new FormAjoutCapteur(confIni);
-            if (fAddCpt.txtBox_name.Text != "")
+            FormAjoutCapteur fAddCpt = new FormAjoutCapteur(confIni,false);
+            /*if (fAddCpt.txtBox_name.Text != "")
             {
                 fAddCpt.txtBox_name.Text = "";
                 fAddCpt.txtBox_marque.Text = "";
@@ -163,31 +114,37 @@ namespace Technicien_capteurs
                 fAddCpt.numUpDown_calibre.Value = 0;
                 fAddCpt.txtBox_a.Text = "";
                 fAddCpt.txtBox_b.Text = "";
-            }
+            }*/
 
             fAddCpt.ShowDialog();
-
-            var rdr = BDD.RequeteSelectLastIdCapteur();
-
-            string stockage = "";
-            while (rdr.Read())
+            if(fAddCpt.IsSendToServer == true)
             {
-                stockage = rdr[0].ToString();
+                var rdr = BDD.RequeteSelectLastIdCapteurs();
+
+                string stockage = "";
+                while (rdr.Read())
+                {
+                    stockage = rdr[0].ToString();
+                }
+                if (stockage == "")
+                {
+                    stockage = "1";
+                }
+                rdr.Close();
+                BDD.connection.Close();
+
+                C_Capteur capteurToAdd = new C_Capteur();
+                capteurToAdd.Id = ushort.Parse(stockage);
+                capteurToAdd.Nom = fAddCpt.Tableau[0];
+                capteurToAdd.Marque = fAddCpt.Tableau[1];
+                capteurToAdd.Model = fAddCpt.Tableau[2];
+                capteurToAdd.Calibre = byte.Parse(fAddCpt.Tableau[3]);
+                capteurToAdd.A = float.Parse(fAddCpt.Tableau[4]);
+                capteurToAdd.B = float.Parse(fAddCpt.Tableau[5]);
+
+                capteurList.Add(capteurToAdd);
+                IsNewCapteur = true;
             }
-            rdr.Close();
-            BDD.connection.Close();
-
-            capteurToAdd = new C_Capteur();
-            capteurToAdd.Id = ushort.Parse(stockage);
-            capteurToAdd.IpArduino = confIni.ipArduino;
-            capteurToAdd.Nom = fAddCpt.Tableau[0];
-            capteurToAdd.Marque = fAddCpt.Tableau[1];
-            capteurToAdd.Model = fAddCpt.Tableau[2];
-            capteurToAdd.Calibre = byte.Parse(fAddCpt.Tableau[3]);
-            capteurToAdd.A = float.Parse(fAddCpt.Tableau[4]);
-            capteurToAdd.B = float.Parse(fAddCpt.Tableau[5]);
-
-            capteurList.Add(capteurToAdd);
 
             /*DataGridViewRow row = (DataGridViewRow)tab_listeCapteurs.Rows[0].Clone();
 
@@ -202,7 +159,7 @@ namespace Technicien_capteurs
 
         private void btn_modifier_Click(object sender, EventArgs e)
         {
-            FormAjoutCapteur fAddCpt = new FormAjoutCapteur(confIni);
+            FormAjoutCapteur fAddCpt = new FormAjoutCapteur(confIni,true);
             /*string[,] Datavalue = new string[tab_listeCapteurs.Rows.Count, tab_listeCapteurs.Columns.Count];
             foreach (DataGridViewRow row in tab_listeCapteurs.SelectedRows)
             {
@@ -222,7 +179,7 @@ namespace Technicien_capteurs
             //fAddCpt.numUpDown_id.Value = UInt16.Parse(tab_listeCapteurs.Rows[IndexCapteur].Cells[0].Value.ToString());
             //fAddCpt.lbl_ipArduino.Text = tab_listeCapteurs.Rows[IndexCapteur].Cells[1].Value.ToString();
             //fAddCpt.ipArduino = tab_listeCapteurs.Rows[IndexCapteur].Cells[1].Value.ToString();
-
+            //Pré-rempli les champs
             fAddCpt.id = capteurList[indexCapteur].Id;
             fAddCpt.txtBox_name.Text = capteurList[indexCapteur].Nom;
             fAddCpt.txtBox_marque.Text = capteurList[indexCapteur].Marque;
@@ -235,17 +192,15 @@ namespace Technicien_capteurs
 
             if (fAddCpt.IsSendToServer == true)
             {
-                if (indexCapteur >= 0)
-                {
-                    capteurList[indexCapteur].Id = ushort.Parse(fAddCpt.Tableau[0]);
-                    capteurList[indexCapteur].Nom = fAddCpt.Tableau[2];
-                    capteurList[indexCapteur].Marque = fAddCpt.Tableau[3];
-                    capteurList[indexCapteur].Model = fAddCpt.Tableau[4];
-                    capteurList[indexCapteur].Calibre = byte.Parse(fAddCpt.Tableau[5]);
-                    capteurList[indexCapteur].A = ushort.Parse(fAddCpt.Tableau[6]);
-                    capteurList[indexCapteur].B = ushort.Parse(fAddCpt.Tableau[7]);
-                    tab_listeCapteurs.Refresh();
-                }
+                //Modif d'un capteur et refresh
+                capteurList[indexCapteur].Id = fAddCpt.id;
+                capteurList[indexCapteur].Nom = fAddCpt.Tableau[0];
+                capteurList[indexCapteur].Marque = fAddCpt.Tableau[1];
+                capteurList[indexCapteur].Model = fAddCpt.Tableau[2];
+                capteurList[indexCapteur].Calibre = byte.Parse(fAddCpt.Tableau[3]);
+                capteurList[indexCapteur].A = ushort.Parse(fAddCpt.Tableau[4]);
+                capteurList[indexCapteur].B = ushort.Parse(fAddCpt.Tableau[5]);
+                tab_listeCapteurs.Refresh();
             }
 
             /*//Ancien code
@@ -280,6 +235,7 @@ namespace Technicien_capteurs
                     }
 
                 }*/
+
                 ushort id = ushort.Parse(tab_listeCapteurs.Rows[indexCapteur].Cells[0].Value.ToString());
                 bool result = BDD.RequeteDeleteCapteur(id);
                 if (result == true)

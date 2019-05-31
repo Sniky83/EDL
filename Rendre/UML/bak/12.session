@@ -1,0 +1,22 @@
+window_sizes 1920 1017 343 1572 904 67
+
+diagrams
+  classdiagram_ref 128012 // class
+    1467 904 100 A4 0 0
+  sequencediagram_ref 135564 // Liste entrées
+    1257 723 100 A4 0 0
+  active  sequencediagram_ref 128780 // Affichage de la liste des Capteurs
+    1257 723 100 A4 0 0
+  sequencediagram_ref 128002 // Afficher Mesures Instant
+    1257 723 100 A4 0 0
+  sequencediagram_ref 135692 // Envoi message Arduino
+    1257 723 100 A4 0 0
+end
+show_stereotypes
+selected sequencediagram_ref 128780 // Affichage de la liste des Capteurs
+open
+  class_ref 141836 // C_Recorder_BDD
+  sequencediagram_ref 135436 // Ajout d'une nouvelle Ligne
+  usecaseview_ref 128012 // Acteurs
+end
+end
