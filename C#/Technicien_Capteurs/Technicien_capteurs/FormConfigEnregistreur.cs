@@ -130,7 +130,7 @@ namespace Technicien_capteurs
                 tab_listeEnr.Refresh();
             }
 
-            if(fAEnt.IsEmpty == true)
+            if(capteurList.Count == 0)
             {
                 btn_add.Enabled = false;
             }

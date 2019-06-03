@@ -22,8 +22,6 @@ namespace Technicien_capteurs
 
         public string[] Tableau;
 
-        public bool IsEmpty = false;
-
         public bool IsSendToServer = false;
         private BindingList<C_Capteur> capteurList = new BindingList<C_Capteur>();
         //private List<byte> id = new List<byte>();
@@ -50,7 +48,6 @@ namespace Technicien_capteurs
             {
                 MessageBox.Show("Aucun capteur n'est disponible, ils sont tous utilisés dans la liste, vous pouvez toujours les modifiers en cas de nécessité !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();
-                IsEmpty = true;
             }
 
             cptList = capteurList;
@@ -126,7 +123,7 @@ namespace Technicien_capteurs
                         {
                             cmbBox_input.Text,txtBox_nom_entree.Text,cmbBox_capteur.Text,index.ToString()
                         };
-                        cmbBox_capteur.Items.RemoveAt(index);
+                        //cmbBox_capteur.Items.RemoveAt(index);
                     }
                 }
                 /*C_Capteur capteur = cmbBox_capteur.SelectedItem as C_Capteur;

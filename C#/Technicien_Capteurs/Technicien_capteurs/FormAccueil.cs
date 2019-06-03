@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -108,10 +107,10 @@ namespace Technicien_capteurs
         {
             FormConfigEnregistreur fEnr = new FormConfigEnregistreur(ConfigIni, entreeList, capteurList);
             fEnr.ShowDialog();
-            /*if(IsNewEntree == true)
+            if(entreeList.Count != 0)
             {
-                btn_mesurer.enabled = true;
-            }*/
+                btn_mesurer.Enabled = true;
+            }
         }
 
         private void btn_configRes_Click(object sender, EventArgs e)
