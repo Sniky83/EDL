@@ -16,39 +16,45 @@ namespace Technicien_capteurs
     {
         //Class chargée de communiquer avec l'arduino afin de réucpérer les mesures effectuées en instantanné.
 
-        public bool TesterConnexion(string ip)
+        private string IpArduino;
+
+        public C_EDL_Recorder(string ip)
+        {
+            IpArduino = ip;
+        }
+
+        private bool EnvoiEtReception(byte nbBytesRec, string msgEnvoi, string msgReception, bool testerConnexion)
         {
             try
             {
-                byte[] bytes = new byte[8];
-                IPAddress ipAddress = IPAddress.Parse(ip);
-                IPEndPoint remoteEP = new IPEndPoint(ipAddress, 2000);
+                IPAddress ipAddress = IPAddress.Parse(IpArduino);
+                //IPEndPoint remoteEP = new IPEndPoint(ipAddress, 2000);
                 Socket sender = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                byte[] bytes = new byte[nbBytesRec]; //nb de chars qu'on recoit
                 sender.BeginConnect(ipAddress, 2000, null, null);
-                sender.ReceiveTimeout = 2000; //si il se connecte sur la bonne ip, port mais qu'il ne reçoit rien
+                //sender.ReceiveTimeout = 3000; //si il se connecte sur la bonne ip, port mais qu'il ne reçoit rien
 
-                string reception = "";
-                bool isConnected = false;
                 byte i = 0;
-                int bytesRec = 0;
+                bool isConnected = false;
 
                 while (i < 3 && isConnected == false)
                 {
                     if(sender.Connected)//connected == true quand on ping une ip sur le port 2000 (serveur)
                     {
-                        byte[] msg = Encoding.ASCII.GetBytes("EDL_TEST?$");
+                        byte[] msg = Encoding.ASCII.GetBytes(msgEnvoi);
 
                         int bytesSent = sender.Send(msg);//count le nb de bytes envoyées
                         
-                        bytesRec = sender.Receive(bytes);//count le nb de bytes reçus
+                        int bytesRec = sender.Receive(bytes);//count le nb de bytes reçus
 
-                        reception = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                        string reception = Encoding.ASCII.GetString(bytes, 0, bytesRec);
 
-                        if(reception == "EDL_TEST!$")
+                        if(reception == msgReception)
                         {
                             isConnected = true;
                         }
 
+                        reception = "";
                         sender.Shutdown(SocketShutdown.Both);
                         sender.Close();
                     }
@@ -60,6 +66,11 @@ namespace Technicien_capteurs
                     i++;
                 }
 
+                if (testerConnexion == true && isConnected == true)
+                {
+                    MessageBox.Show("Connexion réussie avec l'enregistreur !", "Succès !", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
                 if (isConnected == false)
                 {
                     MessageBox.Show("Problème de connexion avec l'enregistreur !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -67,7 +78,6 @@ namespace Technicien_capteurs
                 }
                 else
                 {
-                    MessageBox.Show("Connexion réussie avec l'enregistreur !", "Succès !", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return true;
                 }
             }
@@ -77,7 +87,17 @@ namespace Technicien_capteurs
                 return false;
             }
         }
+        public bool TesterConnexion()
+        {
+            bool resultat = EnvoiEtReception(9, "EDL_TEST?","EDL_TEST!",true);
+            return resultat;
+        }
 
+        public bool EnvoiConfiguration(string msgEnvoi)
+        {
+            bool resultat = EnvoiEtReception(20, msgEnvoi, "EDL_ENR_GET_CONF_OK!", false);
+            return resultat;
+        }
         private string EnvoiMessageMesureInstant()
         {
             /*On va envoyer Allo?

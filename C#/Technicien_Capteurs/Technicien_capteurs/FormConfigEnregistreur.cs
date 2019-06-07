@@ -45,7 +45,7 @@ namespace Technicien_capteurs
             tab_listeEnr.Columns[3].HeaderText = "Nom Capteur";
 
             tab_listeEnr.Columns[0].Visible = false;
-            for(byte i=4;i<7;i++)
+            for(byte i=4;i<6;i++)
             {
                 tab_listeEnr.Columns[i].Visible = false;
             }
@@ -81,7 +81,8 @@ namespace Technicien_capteurs
             {
                 id[i] = (byte)entreeList[i].Id;
             }*/
-            FormAjoutEntrees fAEnt = new FormAjoutEntrees(confIni,false,capteurList);
+
+            FormAjoutEntrees fAEnt = new FormAjoutEntrees(confIni,false,capteurList,entreeList);
 
             fAEnt.ShowDialog();
             if(fAEnt.IsSendToServer == true)
@@ -105,18 +106,25 @@ namespace Technicien_capteurs
                 entreeToAdd.Entree = byte.Parse(fAEnt.Tableau[0]);
                 entreeToAdd.Nom_Entree = fAEnt.Tableau[1];
                 entreeToAdd.Nom_Capteur = fAEnt.Tableau[2];
-                entreeToAdd.Index_Capteur = fAEnt.index;
                 entreeList.Add(entreeToAdd);
+
+                C_EDL_Recorder Recorder = new C_EDL_Recorder(confIni.ipArduino);
+                var Join = capteurList.Where(item => item.Nom == entreeToAdd.Nom_Capteur);
+                var A = Join.First().A;
+                var B = Join.First().B;
+                ushort id = entreeToAdd.Id;
+                string Composition = $"EDL_TECH_SET_CONF_EDL_L{entreeToAdd.Entree}_A_{A}_B_{B}_ID_{id}?";
+                Recorder.EnvoiConfiguration(Composition);
             }
         }
 
         private void btn_modifier_Click(object sender, EventArgs e)
         {
-            FormAjoutEntrees fAEnt = new FormAjoutEntrees(confIni,true,capteurList);
-
+            FormAjoutEntrees fAEnt = new FormAjoutEntrees(confIni,true,capteurList,entreeList);
+            fAEnt.cmbBox_input.Items.Add(entreeList[indexCapteur].Entree);
             fAEnt.id = entreeList[indexCapteur].Id;
-            fAEnt.cmbBox_input.SelectedIndex = entreeList[indexCapteur].Entree-1;
-            fAEnt.cmbBox_capteur.SelectedIndex = entreeList[indexCapteur].Index_Capteur;
+            fAEnt.cmbBox_input.SelectedIndex = fAEnt.cmbBox_input.FindStringExact(entreeList[indexCapteur].Entree.ToString());
+            fAEnt.cmbBox_capteur.SelectedIndex = fAEnt.cmbBox_capteur.FindStringExact(entreeList[indexCapteur].Nom_Capteur);
             fAEnt.txtBox_nom_entree.Text = entreeList[indexCapteur].Nom_Entree;
 
             fAEnt.ShowDialog();
@@ -126,7 +134,6 @@ namespace Technicien_capteurs
                 entreeList[indexCapteur].Entree = byte.Parse(fAEnt.Tableau[0]);
                 entreeList[indexCapteur].Nom_Capteur = fAEnt.Tableau[1];
                 entreeList[indexCapteur].Nom_Entree = fAEnt.Tableau[2];
-                entreeList[indexCapteur].Index_Capteur = fAEnt.index;
                 tab_listeEnr.Refresh();
             }
 

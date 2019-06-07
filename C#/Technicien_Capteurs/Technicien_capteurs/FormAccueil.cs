@@ -39,19 +39,23 @@ namespace Technicien_capteurs
             /*if (ConfigIni.ipArduino != "")
             {
                 C_EDL_Recorder Enregistreur;
-                Enregistreur = new C_EDL_Recorder();
+                Enregistreur = new C_EDL_Recorder(ConfigIni.ipArduino);
 
-                TesterConnexionArduino = Enregistreur.TesterConnexion(ConfigIni.ipArduino);
+                TesterConnexionArduino = Enregistreur.TesterConnexion();
 
                 if(TesterConnexionArduino == true)
                 {
                     lbl_etat_enr.Text = "Connecté";
                     lbl_etat_enr.ForeColor = Color.Green;
-                    flagArduino = true;
+                    //flagArduino = true;
                 }
-            }*/
+                else
+                {
+                    ConfigIni.ipArduino = "";
+                }
+            }
 
-            /*if (ConfigIni.ip != "" && ConfigIni.username != "" /*&& ConfigIni.txtBox_password != ""*/ /*&& ConfigIni.dbn != "")
+            if (ConfigIni.ip != "" && ConfigIni.username != "" /*&& ConfigIni.txtBox_password != ""*/ /*&& ConfigIni.dbn != "")
             {
                 BDD = new C_BDD(ConfigIni.ip, ConfigIni.dbn, ConfigIni.username, ConfigIni.password);
 
@@ -62,7 +66,7 @@ namespace Technicien_capteurs
                     lbl_etat_bdd.Text = "Connecté";
                     lbl_etat_bdd.ForeColor = Color.Green;
                     btn_connexion.Enabled = true;
-                    flagBDD = true;
+                    //flagBDD = true;
                 }
             }*/
 
@@ -187,13 +191,11 @@ namespace Technicien_capteurs
             {
                 btn_connexion.Enabled = false;
 
-                C_Capteur capteurToAdd;
-
                 var rdr = BDD.RequeteSelectCapteurs();
                 string stockage = "";
                 while (rdr.Read())
                 {
-                    capteurToAdd = new C_Capteur();
+                    C_Capteur capteurToAdd = new C_Capteur();
                     for (byte i = 0; i < 7; i++)
                     {
                         stockage = rdr[i].ToString();
@@ -227,13 +229,14 @@ namespace Technicien_capteurs
                     }
                     capteurList.Add(capteurToAdd);
                 }
+                rdr.Close();
+                BDD.connection.Close();
+
                 if (capteurList.Count == 0)
                 {
                     btn_configEnr.Enabled = false;
                     btn_mesurer.Enabled = false;
                 }
-                rdr.Close();
-                BDD.connection.Close();
 
                 var reader = BDD.RequeteSelectEntrees(ConfigIni.ipArduino);
                 string stock = "";
@@ -264,25 +267,51 @@ namespace Technicien_capteurs
                     }
                     entreeList.Add(entreeToAdd);
                 }
+                reader.Close();
+                BDD.connection.Close();
+
                 if (entreeList.Count == 0)
                 {
                     btn_mesurer.Enabled = false;
                 }
-                reader.Close();
-                BDD.connection.Close();
-            }
+                else
+                {
+                    btn_configEnr.Enabled = true;
+                    if (ConfigIni.ipArduino != "")
+                    {
+                        btn_gestCapteur.Enabled = true;
+                        btn_configEnr.Enabled = true;
 
-            if (ConfigIni.ipArduino != "" && fConn.IsConnexionDone == true)
-            {
-                btn_gestCapteur.Enabled = true;
-                btn_configEnr.Enabled = true;
-                btn_mesurer.Enabled = true;
-            }
-            else
-            {
-                btn_configEnr.Enabled = true;
-                //Thread.Sleep(2000);
-                //MessageBox.Show("Vous devez vous connecter à l'enregistreur en rentrant son adresse IP dans la partie 'Configuration Réseau' pour pouvoir utiliser les autres fonctionnalitées !", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        bool result = false;
+                        C_EDL_Recorder Recorder = new C_EDL_Recorder(ConfigIni.ipArduino);
+                        for (byte i = 0; i < entreeList.Count; i++)
+                        {
+                            var Join = capteurList.Where(item => item.Nom == entreeList[i].Nom_Capteur);
+                            var obj = Join.First();
+                            var A = obj.A;
+                            var B = obj.B;
+                            ushort id = entreeList[i].Id;
+                            string Composition = $"EDL_TECH_SET_CONF_EDL_L{entreeList[i].Entree}_A_{A}_B_{B}_ID_{id}?";
+                            result = Recorder.EnvoiConfiguration(Composition);
+                            if(result == true)
+                            {
+                                Thread.Sleep(1000);//on sleep pour laisser le temps à l'arduino de répondre
+                            }
+                        }
+
+
+                        if (result == true)
+                        {
+                            btn_mesurer.Enabled = true;
+                        }
+                        else
+                        {
+                            btn_mesurer.Enabled = false;
+                        }
+                        //Thread.Sleep(2000);
+                        //MessageBox.Show("Vous devez vous connecter à l'enregistreur en rentrant son adresse IP dans la partie 'Configuration Réseau' pour pouvoir utiliser les autres fonctionnalitées !", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
             }
         }
     }

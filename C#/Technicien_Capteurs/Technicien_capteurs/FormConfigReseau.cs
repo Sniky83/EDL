@@ -76,8 +76,8 @@ namespace Technicien_capteurs
 
             if (txtBox_ipArduino.Text != "")
             {
-                Enregistreur = new C_EDL_Recorder();
-                TesterConnexionEnregistreur = Enregistreur.TesterConnexion(txtBox_ipArduino.Text);
+                Enregistreur = new C_EDL_Recorder(txtBox_ipArduino.Text);
+                TesterConnexionEnregistreur = Enregistreur.TesterConnexion();
 
                 if(TesterConnexionEnregistreur == true)
                 {
@@ -122,6 +122,18 @@ namespace Technicien_capteurs
             if (Regex.IsMatch(e.KeyChar.ToString(), @"[^0-9^.]"))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void Btn_aide_Click(object sender, EventArgs e)
+        {
+            if (ConfigIni.ip != "")
+            {
+                System.Diagnostics.Process.Start($"http://{ConfigIni.ip}/EDL/index.php?rubrique=2");
+            }
+            else
+            {
+                MessageBox.Show("Ici, vous pouvez rentrer les informations concernant la base de données ainsi que l'adresse IP de l'enregistreur. Il est important de tout rentrer si vous souhaitez accéder au reste de l'application.", "Aide", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

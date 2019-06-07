@@ -23,13 +23,21 @@ namespace Technicien_capteurs
         public string[] Tableau;
 
         public bool IsSendToServer = false;
+
         private BindingList<C_Capteur> capteurList = new BindingList<C_Capteur>();
-        //private List<byte> id = new List<byte>();
-        public FormAjoutEntrees(C_Config configIni, bool modif, BindingList<C_Capteur> cptList)
+
+        private C_Config confIni = new C_Config();
+
+        private BindingList<C_Entree> entreeList = new BindingList<C_Entree>();
+        public FormAjoutEntrees(C_Config configIni, bool modif, BindingList<C_Capteur> cptList, BindingList<C_Entree> entrList)
         {
             InitializeComponent();
 
-            if(modif == true)
+            BDD = new C_BDD(configIni.ip, configIni.dbn, configIni.username, configIni.password);
+
+            cmbBox_input.Sorted = true;
+
+            if (modif == true)
             {
                 this.Text = "Modification";
             }
@@ -44,14 +52,26 @@ namespace Technicien_capteurs
                 cmbBox_capteur.Items.Add(cptList[i].Nom);
             }
 
-            if(countCapteurs == 0)
+            if (countCapteurs == 0)
             {
                 MessageBox.Show("Aucun capteur n'est disponible, ils sont tous utilisés dans la liste, vous pouvez toujours les modifiers en cas de nécessité !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();
             }
 
+            if (entrList.Count != 0)
+            {
+                for (byte i = 0; i < entrList.Count; i++)
+                {
+                    byte entree = entrList[i].Entree;
+                    cmbBox_input.Items.Remove($"{entree}");
+                }
+            }
+
             cptList = capteurList;
 
+            configIni = confIni;
+
+            entrList = entreeList;
             //Dictionary<int, C_Capteur> dico = new Dictionary<int, C_Capteur>();
             /*dico.Add("a", new C_Capteur());
             dico.Add("b", new C_Capteur());
@@ -59,8 +79,6 @@ namespace Technicien_capteurs
             dico["b"];*/
 
             //confIni = configIni;
-
-            BDD = new C_BDD(configIni.ip, configIni.dbn, configIni.username, configIni.password);
 
             /*byte nbEntrees = 0;
             var rdr = BDD.RequeteCountCapteurs();
@@ -111,6 +129,7 @@ namespace Technicien_capteurs
                         {
                             cmbBox_input.Text,cmbBox_capteur.Text,txtBox_nom_entree.Text
                         };
+                        Set_Config_Arduino();
                     }
                 }
                 else
@@ -123,7 +142,6 @@ namespace Technicien_capteurs
                         {
                             cmbBox_input.Text,txtBox_nom_entree.Text,cmbBox_capteur.Text,index.ToString()
                         };
-                        //cmbBox_capteur.Items.RemoveAt(index);
                     }
                 }
                 /*C_Capteur capteur = cmbBox_capteur.SelectedItem as C_Capteur;
@@ -134,6 +152,17 @@ namespace Technicien_capteurs
             {
                 MessageBox.Show("Veuillez remplir tous les champs !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void Set_Config_Arduino()
+        {
+            C_EDL_Recorder Recorder = new C_EDL_Recorder(confIni.ipArduino);
+            var Join = capteurList.Where(item => item.Nom == entreeList[index].Nom_Capteur);
+            var A = Join.First().A;
+            var B = Join.First().B;
+            ushort id = entreeList[index].Id;
+            string Composition = $"EDL_TECH_SET_CONF_EDL_L{entreeList[index].Entree}_A_{A}_B_{B}_ID_{id}?";
+            Recorder.EnvoiConfiguration(Composition);
         }
     }
 }

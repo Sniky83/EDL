@@ -12,7 +12,6 @@ namespace Technicien_capteurs
         public byte Entree { get; set; }
         public string Nom_Entree { get; set; }
         public string Nom_Capteur { get; set; }
-        public int Index_Capteur { get; set; }
         public float Intensite { get; set; }
         public float Puissance { get; set; }
 

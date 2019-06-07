@@ -132,6 +132,7 @@
             this.btn_aide.TabIndex = 9;
             this.btn_aide.Text = "Aide ?";
             this.btn_aide.UseVisualStyleBackColor = true;
+            this.btn_aide.Click += new System.EventHandler(this.Btn_aide_Click);
             // 
             // btn_cancel
             // 
