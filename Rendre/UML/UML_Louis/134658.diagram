@@ -156,7 +156,7 @@ msg 129538 synchronous
 msg 129922 synchronous
   from durationcanvas_ref 129666
   to durationcanvas_ref 129794
-  yz 179 2015 msg operation_ref 128130 // "Mesurer(in A : float, in B : float) : string"
+  yz 179 2015 msg operation_ref 128130 // "Mesurer() : float"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
   label_xy 263 165
 msg 130306 synchronous

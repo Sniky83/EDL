@@ -28,11 +28,11 @@ namespace Technicien_capteurs
             try
             {
                 IPAddress ipAddress = IPAddress.Parse(IpArduino);
-                //IPEndPoint remoteEP = new IPEndPoint(ipAddress, 2000);
                 Socket sender = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
                 byte[] bytes = new byte[nbBytesRec]; //nb de chars qu'on recoit
                 sender.BeginConnect(ipAddress, 2000, null, null);
-                //sender.ReceiveTimeout = 3000; //si il se connecte sur la bonne ip, port mais qu'il ne reçoit rien
+                sender.ReceiveTimeout = 3000;
+                Thread.Sleep(200);
 
                 byte i = 0;
                 bool isConnected = false;
@@ -41,7 +41,7 @@ namespace Technicien_capteurs
                 {
                     if(sender.Connected)//connected == true quand on ping une ip sur le port 2000 (serveur)
                     {
-                        byte[] msg = Encoding.ASCII.GetBytes(msgEnvoi);
+                        byte[] msg = Encoding.ASCII.GetBytes(msgEnvoi);//bytes du message envoyé
 
                         int bytesSent = sender.Send(msg);//count le nb de bytes envoyées
                         
@@ -53,10 +53,9 @@ namespace Technicien_capteurs
                         {
                             isConnected = true;
                         }
-
-                        reception = "";
                         sender.Shutdown(SocketShutdown.Both);
                         sender.Close();
+                        reception = "";
                     }
                     else
                     {
@@ -73,7 +72,7 @@ namespace Technicien_capteurs
 
                 if (isConnected == false)
                 {
-                    MessageBox.Show("Problème de connexion avec l'enregistreur !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Problème de connexion avec l'enregistreur, vérifiez qu'il soit connecté a internet, ou qu'il ne soit pas en train d'effectuer des mesures !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
                 else
@@ -83,7 +82,7 @@ namespace Technicien_capteurs
             }
             catch (Exception)
             {
-                MessageBox.Show("Erreur de saisie dans l'adresse IP de l'enregistreur !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Erreur de saisie dans l'adresse IP de l'enregistreur ou problème de reception du message !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
         }
@@ -97,36 +96,6 @@ namespace Technicien_capteurs
         {
             bool resultat = EnvoiEtReception(20, msgEnvoi, "EDL_ENR_GET_CONF_OK!", false);
             return resultat;
-        }
-        private string EnvoiMessageMesureInstant()
-        {
-            /*On va envoyer Allo?
-              Tant que rep == "" -> on continue dès qu'on a la réponse alors on sort du while faire un sleep de 200ms
-              et au bout de 5 essays on sort de la boucle et on dit que y'a personne au bout du fil.*/
-            string message = "";
-            try
-            {
-                return message;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public void LectureMesureInstant()
-        {
-            //Utilisation de la méthode Envoi 
-            string message = EnvoiMessageMesureInstant();
-
-            if(message != null)
-            {
-
-            }
-            else
-            {
-                MessageBox.Show("Problème de connexion avec l'enregistreur !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
         }
     }
 }

@@ -24,11 +24,11 @@ namespace Technicien_capteurs
 
         private bool TesterConnexionEnregistreur = false;
 
-        public bool IsConnectionDoneBDD { get; set; }
+        public bool IsConnectionDoneBDD = false;
 
-        public bool IsConnectionDoneArduino { get; set; }
+        public bool IsConnectionDoneArduino = false;
 
-        public bool IsFullConnected { get; set; }
+        public bool IsFullConnected = false;
 
         public FormConfigReseau(C_Config configIni)
         {

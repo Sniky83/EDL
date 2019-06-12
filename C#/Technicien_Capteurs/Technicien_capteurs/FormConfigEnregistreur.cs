@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -37,6 +38,11 @@ namespace Technicien_capteurs
             if (entreeList.Count == 0)
             {
                 MessageBox.Show("Aucune entrée n'est présent dans la liste, vous pouvez en ajouter un !", "Attention !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                btn_Envoi_Config.Enabled = false;
+            }
+            else
+            {
+                btn_Envoi_Config.Enabled = true;
             }
 
             tab_listeEnr.DataSource = entreeList;
@@ -54,6 +60,15 @@ namespace Technicien_capteurs
             for (byte i = 2; i < 4; i++)
             {
                 tab_listeEnr.Columns[i].Width = 150;
+            }
+
+            for (byte i = 0; i < entreeList.Count; i++)
+            {
+                var Join = capteurList.Where(item => item.Id == entreeList[i].Capteur.Id);
+                if(Join.Any() == false)
+                {
+                    entreeList.RemoveAt(i);
+                }
             }
         }
 
@@ -75,16 +90,10 @@ namespace Technicien_capteurs
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            /*byte Length = (byte)entreeList.Count;
-            id = new byte[Length];
-            for (byte i = 0; i < Length;i++)
-            {
-                id[i] = (byte)entreeList[i].Id;
-            }*/
-
             FormAjoutEntrees fAEnt = new FormAjoutEntrees(confIni,false,capteurList,entreeList);
 
             fAEnt.ShowDialog();
+
             if(fAEnt.IsSendToServer == true)
             {
                 var rdr = BDD.RequeteSelectLastIdEntrees();
@@ -105,16 +114,14 @@ namespace Technicien_capteurs
                 entreeToAdd.Id = ushort.Parse(stockage);
                 entreeToAdd.Entree = byte.Parse(fAEnt.Tableau[0]);
                 entreeToAdd.Nom_Entree = fAEnt.Tableau[1];
-                entreeToAdd.Nom_Capteur = fAEnt.Tableau[2];
+                entreeToAdd.Capteur = capteurList.First(x => x.Nom == fAEnt.Tableau[2]);
                 entreeList.Add(entreeToAdd);
 
-                C_EDL_Recorder Recorder = new C_EDL_Recorder(confIni.ipArduino);
-                var Join = capteurList.Where(item => item.Nom == entreeToAdd.Nom_Capteur);
-                var A = Join.First().A;
-                var B = Join.First().B;
-                ushort id = entreeToAdd.Id;
-                string Composition = $"EDL_TECH_SET_CONF_EDL_L{entreeToAdd.Entree}_A_{A}_B_{B}_ID_{id}?";
-                Recorder.EnvoiConfiguration(Composition);
+                btn_Envoi_Config.Enabled = true;
+            }
+            else
+            {
+                btn_Envoi_Config.Enabled = false;
             }
         }
 
@@ -124,7 +131,7 @@ namespace Technicien_capteurs
             fAEnt.cmbBox_input.Items.Add(entreeList[indexCapteur].Entree);
             fAEnt.id = entreeList[indexCapteur].Id;
             fAEnt.cmbBox_input.SelectedIndex = fAEnt.cmbBox_input.FindStringExact(entreeList[indexCapteur].Entree.ToString());
-            fAEnt.cmbBox_capteur.SelectedIndex = fAEnt.cmbBox_capteur.FindStringExact(entreeList[indexCapteur].Nom_Capteur);
+            fAEnt.cmbBox_capteur.SelectedIndex = fAEnt.cmbBox_capteur.FindStringExact(entreeList[indexCapteur].Capteur.Nom);
             fAEnt.txtBox_nom_entree.Text = entreeList[indexCapteur].Nom_Entree;
 
             fAEnt.ShowDialog();
@@ -132,7 +139,7 @@ namespace Technicien_capteurs
             {
                 entreeList[indexCapteur].Id = fAEnt.id;
                 entreeList[indexCapteur].Entree = byte.Parse(fAEnt.Tableau[0]);
-                entreeList[indexCapteur].Nom_Capteur = fAEnt.Tableau[1];
+                entreeList[indexCapteur].Capteur.Nom = fAEnt.Tableau[1];
                 entreeList[indexCapteur].Nom_Entree = fAEnt.Tableau[2];
                 tab_listeEnr.Refresh();
             }
@@ -170,8 +177,44 @@ namespace Technicien_capteurs
                     entreeList.RemoveAt(indexCapteur);
                 }
             }
+            if(entreeList.Count == 0)
+            {
+                btn_Envoi_Config.Enabled = false;
+            }
+            else
+            {
+                btn_Envoi_Config.Enabled = true;
+            }
             btn_delete.Enabled = false;
             btn_modifier.Enabled = false;
+        }
+
+        private void Btn_aide_Click(object sender, EventArgs e)
+        {
+
+            System.Diagnostics.Process.Start($"http://{confIni.ip}/EDL/index.php?rubrique=4");
+        }
+
+        private void Btn_Envoi_Config_Click(object sender, EventArgs e)
+        {
+            C_EDL_Recorder Recorder = new C_EDL_Recorder(confIni.ipArduino);
+            for (byte i = 0; i < entreeList.Count; i++)
+            {
+                var Join = entreeList[i].Capteur;
+                var A = Join.A;
+                var B = Join.B;
+                ushort id = entreeList[i].Id;
+                string Composition = $"EDL_TECH_SET_CONF_EDL_L{entreeList[i].Entree}_A_{A}_B_{B}_ID_{id}?";
+                bool IsSendToArduino = Recorder.EnvoiConfiguration(Composition);
+                if (IsSendToArduino == true && i < entreeList.Count - 1)
+                {
+                    Thread.Sleep(2000);//on sleep pour laisser le temps à l'arduino de répondre
+                }
+                else
+                {
+                    i = (byte)entreeList.Count;
+                }
+            }
         }
     }
 }

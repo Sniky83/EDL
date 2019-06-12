@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -49,7 +50,7 @@ namespace Technicien_capteurs
             {
                 if (id != 0)
                 {
-                    bool result = BDD.RequeteUpdateCapteur(txtBox_name.Text, configIni.ipArduino,txtBox_marque.Text, txtBox_model.Text, (byte)numUpDown_calibre.Value, float.Parse(txtBox_a.Text), float.Parse(txtBox_b.Text), id);
+                    bool result = BDD.RequeteUpdateCapteur(txtBox_name.Text, configIni.ipArduino,txtBox_marque.Text, txtBox_model.Text, (byte)numUpDown_calibre.Value, txtBox_a.Text, txtBox_b.Text, id);
                     if (result == true)
                     {
                         IsSendToServer = result;
@@ -61,7 +62,7 @@ namespace Technicien_capteurs
                 }
                 else
                 {
-                    bool result = BDD.RequeteInsertCapteur(txtBox_name.Text, configIni.ipArduino, txtBox_marque.Text, txtBox_model.Text, (byte)numUpDown_calibre.Value, float.Parse(txtBox_a.Text), float.Parse(txtBox_b.Text));
+                    bool result = BDD.RequeteInsertCapteur(txtBox_name.Text, configIni.ipArduino, txtBox_marque.Text, txtBox_model.Text, (byte)numUpDown_calibre.Value, txtBox_a.Text, txtBox_b.Text);
                     if (result == true)
                     {
                         IsSendToServer = result;

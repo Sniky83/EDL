@@ -13,23 +13,12 @@ namespace Technicien_capteurs
         public string Marque { get; set; }
         public string Model { get; set; }
         public byte Calibre { get; set; }
-        public float A { get; set; }
-        public float B { get; set; }
+        public string A { get; set; }
+        public string B { get; set; }
 
-        /*public C_Capteur(ushort Id, string ipArduino, string nom, string marque, string modele, byte calibre, float a, float b)
+        public override string ToString()
         {
-            id = Id;
-            IpArduino = ipArduino;
-            Nom = nom;
-            Marque = marque;
-            Modèle = modele;
-            Calibre = calibre;
-            A = a;
-            B = b;
-        }*/
-
-        public C_Capteur()
-        {
+            return Nom;
         }
     }
 }

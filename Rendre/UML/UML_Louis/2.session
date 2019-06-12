@@ -2,7 +2,7 @@ window_sizes 1920 1017 450 1465 917 54
 
 diagrams
   active  classdiagram_ref 128012 // class
-    1465 917 100 A4 0 0
+    1465 917 94 A4 0 0
   sequencediagram_ref 134530 // Mesures instant Technicien
     1172 733 100 A4 0 0
   sequencediagram_ref 128780 // Affichage de la liste des Capteurs
@@ -19,9 +19,11 @@ diagrams
     114 86 100 A4 0 0
 end
 show_stereotypes
-selected classdiagram_ref 128012 // class
 open
+  class_ref 128012 // C_BDD
+  class_ref 128140 // C_EDL_Recorder
   class_ref 141964 // C_Daemon_BDD
+  class_ref 142092 // Arduino
   class_ref 134658 // Daemon_Main
   sequencediagram_ref 128396 // Aide en ligne
   sequencediagram_ref 128140 // Connexion à l'application

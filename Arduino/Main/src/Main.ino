@@ -6,8 +6,8 @@
 C_Recorder Enregistreur;
 
 byte mac[] = { 0x90, 0xA2, 0xDA, 0x11, 0x1B, 0xE3 };
-//IPAddress ip(10,73,8,62);
-IPAddress ip(192,168,1,42);
+IPAddress ip(10,73,8,62);
+//IPAddress ip(192,168,1,42);
 //IPAddress gateway(10,73,8,112);
 //IPAddress subnet(255,255,255,128);
 //byte serv[] = {10,73,8,63};
@@ -20,8 +20,8 @@ int bouton1 = 4; //bouton droite
 int bouton2 = 5; //bouton gauche
 
 String msg = "";
+
 bool flag = false;
-//byte val = 0;
 
 void ConnexionApplication()
 {
@@ -31,9 +31,9 @@ void ConnexionApplication()
   }
 }
 
-void GetConfiguration(String msg)
+void GetConfiguration()
 {
-  //"EDL_TECH_SET_CONF_EDL_L1_A_2_B_3_ID_12?"L=22
+  //"EDL_TECH_SET_CONF_EDL_L1_A_2_B_3_ID_12?"
   if(msg[0] == 'E' && msg[9] == 'S' && msg[18] == 'E')
   {
     byte countMsg = msg.length() - 1;
@@ -46,10 +46,14 @@ void GetConfiguration(String msg)
     {
       if(msg[i] != '_' && flag == false)
       {
-        flag = true;
         A = A + msg[i];
       }
-      else if(msg[i] != '_' && msg[i] != 'B' && flag == true)
+      else
+      {
+        flag = true;
+      }
+      
+      if(msg[i] != '_' && msg[i] != 'B' && flag == true)
       {
         B = B + msg[i];
       }
@@ -63,32 +67,62 @@ void GetConfiguration(String msg)
         }
       }
     }
-    Enregistreur.A[Enregistreur.val] = A.toFloat();
-    Enregistreur.B[Enregistreur.val] = B.toFloat();
+    Enregistreur.A[Enregistreur.val] = A;
+    Enregistreur.B[Enregistreur.val] = B;
     Enregistreur.ID[Enregistreur.val] = ID.toInt();
 
-    Enregistreur.Entree[Enregistreur.val] = msg[23] - 49;
-    Enregistreur.val++;
+    Enregistreur.Entree[Enregistreur.val] = msg[23] - 48;
+    if(Enregistreur.Entree[Enregistreur.val] == 1)
+    {
+      Enregistreur.val = 0;
+    }
+    
+    Enregistreur.val = Enregistreur.val + 1;
+    Enregistreur.reset = Enregistreur.val - 1;
+
     server.write("EDL_ENR_GET_CONF_OK!");
+    digitalWrite(led2,HIGH);
+    delay(3000);
+    digitalWrite(led2,LOW);
   }
 }
 
-void Emettre()
+void EnvoyerMesures()
 {
-  Serial.println("Lancement des mesures en instantané ...");
-  digitalWrite(led2,HIGH);
-  bool flagStop = false;
-
-  while(flagStop == false)
+  if(msg == "EDL_TECH_MESURES?")
   {
-      String trame = Enregistreur.ComposerTrame();
+    bool flagStart = false;
+
+    while(flagStart == false)
+    {
+      Serial.println("En attente du lancement des mesures ...");
+      digitalWrite(led2,HIGH);
+      delay(500);
+      digitalWrite(led2,LOW);
+      delay(500);
+      if(digitalRead(bouton1) == HIGH)
+      {
+        Serial.println("Lancement des mesures en instantané ...");
+        digitalWrite(led2,HIGH);
+        flagStart = true;
+      }
+    }
+    
+    bool flagStop = false;
+
+    while(flagStop == false)
+    {
+      String trame = Enregistreur.Emettre();
+      Serial.println(trame);
       server.print(trame);
+      
       if(digitalRead(bouton2) == HIGH)
       {
         flagStop = true;
         digitalWrite(led2,LOW);
         Serial.println("Arrêt des mesures en instantané ...");
       }
+    }
   }
 }
 
@@ -98,8 +132,6 @@ void setup(){
   pinMode(led2, OUTPUT);
   pinMode(bouton1, INPUT);
   pinMode(bouton2, INPUT);
-  digitalWrite(led1, HIGH);
-  digitalWrite(led2, HIGH);
   Ethernet.begin(mac,ip);
   Serial.print("Mon IP : ");
   Serial.println(Ethernet.localIP());
@@ -114,19 +146,16 @@ void loop(){
       if (client.available() > 0){
         char reception = client.read(); //on lit ce qu'il raconte
         msg = msg + reception; // Remise à zero de la variable de réception
-          if(reception == '?'){
-            // interpretation d'une commande
-            Serial.println("Message Reçu : "+ msg);
-            ConnexionApplication();
-            GetConfiguration(msg);
-            // fin d'interprétation des messages
-            msg = "";
-          } // fermeture du if(reception)
-        } // fermeture if (client.available)
-      } // fermeture while
+        if(reception == '?'){
+          // interpretation d'une commande
+          Serial.println("Message Reçu : "+ msg);
+          ConnexionApplication();
+          GetConfiguration();
+          EnvoyerMesures();
+          // fin d'interprétation des messages
+          msg = "";
+        } // fermeture du if(reception)
+      } // fermeture if (client.available)
+    } // fermeture while
   } // fermeture if(client)
-  if(digitalRead(bouton1) == HIGH)
-  {
-    Emettre();
-  }
 }

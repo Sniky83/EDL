@@ -172,6 +172,7 @@
             // txtBox_b
             // 
             this.txtBox_b.Location = new System.Drawing.Point(93, 142);
+            this.txtBox_b.MaxLength = 8;
             this.txtBox_b.Name = "txtBox_b";
             this.txtBox_b.Size = new System.Drawing.Size(163, 20);
             this.txtBox_b.TabIndex = 27;
@@ -180,6 +181,7 @@
             // txtBox_a
             // 
             this.txtBox_a.Location = new System.Drawing.Point(93, 116);
+            this.txtBox_a.MaxLength = 8;
             this.txtBox_a.Name = "txtBox_a";
             this.txtBox_a.Size = new System.Drawing.Size(163, 20);
             this.txtBox_a.TabIndex = 28;

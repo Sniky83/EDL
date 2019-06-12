@@ -84,9 +84,7 @@
     <Compile Include="C_Capteur.cs" />
     <Compile Include="C_EDL_Recorder.cs" />
     <Compile Include="C_BDD.cs" />
-    <Compile Include="C_Config_Capteur.cs" />
     <Compile Include="C_Entree.cs" />
-    <Compile Include="C_Mesure.cs" />
     <Compile Include="C_Config.cs" />
     <Compile Include="FormAccueil.cs">
       <SubType>Form</SubType>

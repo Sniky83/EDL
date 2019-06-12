@@ -1,7 +1,7 @@
 format 221
 "UML_Louis"
-  revision 13
-  modified_by 12 "BTS_SN"
+  revision 14
+  modified_by 2 "PC"
 
 
   
@@ -355,6 +355,44 @@ ${members}}
 	
 	
       end
+
+      operation 137602 "RequeteSelectMesuresInstant"
+	public explicit_return_type "MySqlDataReader"
+	nparams 1
+	  param in name "id" explicit_type "ushort"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137730 "RequeteSelectLastIdEntrees"
+	public explicit_return_type "MySqlDataReader"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137858 "RequeteDeleteEntreeFromGestionCapteurs"
+	public explicit_return_type "bool"
+	nparams 1
+	  param in name "id_capteur" explicit_type "ushort"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
     class 128140 "C_EDL_Recorder"
@@ -411,7 +449,7 @@ ${members}}
 	    classrelation_ref 137484 // <association>
       end
 
-      operation 129026 "EnvoiConfigurationActuelle"
+      operation 129026 "EnvoiConfiguration"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -423,23 +461,15 @@ ${members}}
 	
       end
 
-      operation 129410 "EnvoiMessageMesuresInstant"
-	public explicit_return_type ""
-	nparams 0
+      operation 129410 "EnvoiEtReception"
+	private explicit_return_type "bool"
+	nparams 4
+	  param in name "nbBytesRec" explicit_type "byte"
+	  param in name "msgEnvoi" explicit_type "string"
+	  param in name "msgReception" explicit_type "string"
+	  param in name "testerConnexion" explicit_type "bool"
 	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 129538 "LectureMesuresInstant"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -808,10 +838,8 @@ ${members}}
       end
 
       operation 128130 "Mesurer"
-	public explicit_return_type "string"
-	nparams 2
-	  param in name "A" explicit_type "float"
-	  param in name "B" explicit_type "float"
+	private explicit_return_type "float"
+	nparams 0
 	
 	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
   ${body}}
@@ -822,7 +850,7 @@ ${members}}
       end
 
       operation 128258 "ComposerTrame"
-	public explicit_return_type "string"
+	private explicit_return_type "string"
 	nparams 1
 	  param in name "mesures" explicit_type "string"
 	
@@ -1018,7 +1046,19 @@ ${members}}
 	
       end
 
-      operation 129282 "DecompositionConfiguration"
+      operation 137346 "GetConfiguration"
+	private explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137474 "EnvoyerMesures"
 	private explicit_return_type ""
 	nparams 0
 	
@@ -1132,7 +1172,7 @@ ${members}}
       end
 
       attribute 128642 "A"
-	public explicit_type "float"
+	public explicit_type "string"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1144,7 +1184,7 @@ ${members}}
       end
 
       attribute 128770 "B"
-	public explicit_type "float"
+	public explicit_type "string"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1153,6 +1193,10 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+      end
+
+      classrelation 142210 // <association>
+	relation_ref 141442 // <association>
       end
     end
 
@@ -1204,8 +1248,8 @@ ${members}}
 	MysqlColumn
       end
 
-      attribute 129282 "Nom_Capteur"
-	public explicit_type "string"
+      attribute 129282 "Capteur"
+	public type class_ref 128002 // C_Capteur
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1250,6 +1294,18 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+      end
+
+      classrelation 142082 // <association>
+	relation 141442 ----
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 142082 // <association>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 142210 // <association>
       end
     end
 
@@ -1318,6 +1374,30 @@ ${members}}
 
       classrelation 135554 // <association>
 	relation_ref 134914 // <association>
+      end
+
+      operation 137090 "EnvoiMessageMesuresInstant"
+	private explicit_return_type "bool"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137218 "LectureMesuresInstant"
+	private explicit_return_type "string"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
       end
     end
 

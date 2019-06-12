@@ -36,6 +36,7 @@
             this.btn_modifier = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btn_Envoi_Config = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tab_listeEnr)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,7 +60,7 @@
             // 
             // btn_ok
             // 
-            this.btn_ok.Location = new System.Drawing.Point(16, 244);
+            this.btn_ok.Location = new System.Drawing.Point(16, 273);
             this.btn_ok.Name = "btn_ok";
             this.btn_ok.Size = new System.Drawing.Size(174, 23);
             this.btn_ok.TabIndex = 1;
@@ -69,16 +70,17 @@
             // 
             // btn_aide
             // 
-            this.btn_aide.Location = new System.Drawing.Point(195, 244);
+            this.btn_aide.Location = new System.Drawing.Point(195, 273);
             this.btn_aide.Name = "btn_aide";
             this.btn_aide.Size = new System.Drawing.Size(174, 23);
             this.btn_aide.TabIndex = 2;
             this.btn_aide.Text = "Aide ?";
             this.btn_aide.UseVisualStyleBackColor = true;
+            this.btn_aide.Click += new System.EventHandler(this.Btn_aide_Click);
             // 
             // btn_add
             // 
-            this.btn_add.Location = new System.Drawing.Point(16, 215);
+            this.btn_add.Location = new System.Drawing.Point(16, 244);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(114, 23);
             this.btn_add.TabIndex = 4;
@@ -89,7 +91,7 @@
             // btn_modifier
             // 
             this.btn_modifier.Enabled = false;
-            this.btn_modifier.Location = new System.Drawing.Point(135, 215);
+            this.btn_modifier.Location = new System.Drawing.Point(135, 244);
             this.btn_modifier.Name = "btn_modifier";
             this.btn_modifier.Size = new System.Drawing.Size(114, 23);
             this.btn_modifier.TabIndex = 5;
@@ -100,7 +102,7 @@
             // btn_delete
             // 
             this.btn_delete.Enabled = false;
-            this.btn_delete.Location = new System.Drawing.Point(255, 215);
+            this.btn_delete.Location = new System.Drawing.Point(255, 244);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(114, 23);
             this.btn_delete.TabIndex = 6;
@@ -118,11 +120,23 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Liste des entrées";
             // 
+            // btn_Envoi_Config
+            // 
+            this.btn_Envoi_Config.Enabled = false;
+            this.btn_Envoi_Config.Location = new System.Drawing.Point(16, 215);
+            this.btn_Envoi_Config.Name = "btn_Envoi_Config";
+            this.btn_Envoi_Config.Size = new System.Drawing.Size(353, 23);
+            this.btn_Envoi_Config.TabIndex = 8;
+            this.btn_Envoi_Config.Text = "Envoyer la configuration à l\'enregistreur";
+            this.btn_Envoi_Config.UseVisualStyleBackColor = true;
+            this.btn_Envoi_Config.Click += new System.EventHandler(this.Btn_Envoi_Config_Click);
+            // 
             // FormConfigEnregistreur
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(385, 278);
+            this.ClientSize = new System.Drawing.Size(385, 303);
+            this.Controls.Add(this.btn_Envoi_Config);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_modifier);
@@ -134,7 +148,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormConfigEnregistreur";
-            this.Text = "Configuration enregistreur";
+            this.Text = "Configuration de l\'Enregistreur";
             ((System.ComponentModel.ISupportInitialize)(this.tab_listeEnr)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -150,5 +164,6 @@
         private System.Windows.Forms.Button btn_modifier;
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btn_Envoi_Config;
     }
 }

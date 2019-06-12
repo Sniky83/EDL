@@ -72,41 +72,6 @@ namespace Technicien_capteurs
             configIni = confIni;
 
             entrList = entreeList;
-            //Dictionary<int, C_Capteur> dico = new Dictionary<int, C_Capteur>();
-            /*dico.Add("a", new C_Capteur());
-            dico.Add("b", new C_Capteur());
-
-            dico["b"];*/
-
-            //confIni = configIni;
-
-            /*byte nbEntrees = 0;
-            var rdr = BDD.RequeteCountCapteurs();
-
-            while (rdr.Read())
-            {
-                nbEntrees = byte.Parse(rdr[0].ToString());//Nombre d'entrées
-            }
-            rdr.Close();
-            BDD.connection.Close();
-
-            id_capteur = new byte[nbEntrees];
-
-            rdr = BDD.RequeteSelectIdNomCapteurs();
-            byte i = 0;
-            string stockage = "";
-
-            while (rdr.Read())
-            {
-                id_capteur[i] = byte.Parse(rdr[0].ToString());//id
-                //id.Add(byte.Parse(rdr[0].ToString()));//id
-                //stockage = rdr[1].ToString();//nom
-
-                cmbBox_capteur.Items.Add(stockage);
-                i++;
-            }
-            rdr.Close();
-            BDD.connection.Close();*/
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
@@ -129,7 +94,6 @@ namespace Technicien_capteurs
                         {
                             cmbBox_input.Text,cmbBox_capteur.Text,txtBox_nom_entree.Text
                         };
-                        Set_Config_Arduino();
                     }
                 }
                 else
@@ -144,25 +108,12 @@ namespace Technicien_capteurs
                         };
                     }
                 }
-                /*C_Capteur capteur = cmbBox_capteur.SelectedItem as C_Capteur;
-                int id_capteur = capteur.Id;*/
                 Close();
             }
             else
             {
                 MessageBox.Show("Veuillez remplir tous les champs !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-
-        private void Set_Config_Arduino()
-        {
-            C_EDL_Recorder Recorder = new C_EDL_Recorder(confIni.ipArduino);
-            var Join = capteurList.Where(item => item.Nom == entreeList[index].Nom_Capteur);
-            var A = Join.First().A;
-            var B = Join.First().B;
-            ushort id = entreeList[index].Id;
-            string Composition = $"EDL_TECH_SET_CONF_EDL_L{entreeList[index].Entree}_A_{A}_B_{B}_ID_{id}?";
-            Recorder.EnvoiConfiguration(Composition);
         }
     }
 }

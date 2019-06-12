@@ -7,14 +7,15 @@ class C_Recorder
 {
 	public:
 	byte val;
-	byte Entree[];
-	float A[];
-	float B[];
-	uint16_t ID[];
+	byte reset;
+	byte Entree[9];
+	String A[9];
+	String B[9];
+	uint16_t ID[9];
+	String Emettre();
 
+	private:
 	float Mesurer();
 	String ComposerTrame();
-  
-	//private:
 };
 #endif

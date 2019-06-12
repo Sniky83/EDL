@@ -28,33 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMesures));
-            this.btn_cancel = new System.Windows.Forms.Button();
+            this.btn_ok = new System.Windows.Forms.Button();
             this.btn_aide = new System.Windows.Forms.Button();
             this.tab_Mesures = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.Entrée = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nom_entree_mesuree = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nom_Capteur = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Intensite_mesuree = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Puissance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Timer_Refresh_Tab = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tab_Mesures)).BeginInit();
             this.SuspendLayout();
             // 
-            // btn_cancel
+            // btn_ok
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(12, 181);
-            this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.Size = new System.Drawing.Size(209, 23);
-            this.btn_cancel.TabIndex = 3;
-            this.btn_cancel.Text = "Valider";
-            this.btn_cancel.UseVisualStyleBackColor = true;
-            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            this.btn_ok.Location = new System.Drawing.Point(12, 181);
+            this.btn_ok.Name = "btn_ok";
+            this.btn_ok.Size = new System.Drawing.Size(209, 23);
+            this.btn_ok.TabIndex = 3;
+            this.btn_ok.Text = "Valider";
+            this.btn_ok.UseVisualStyleBackColor = true;
+            this.btn_ok.Click += new System.EventHandler(this.btn_ok_Click);
             // 
             // btn_aide
             // 
@@ -64,20 +56,16 @@
             this.btn_aide.TabIndex = 4;
             this.btn_aide.Text = "Aide ?";
             this.btn_aide.UseVisualStyleBackColor = true;
+            this.btn_aide.Click += new System.EventHandler(this.Btn_aide_Click);
             // 
             // tab_Mesures
             // 
+            this.tab_Mesures.AllowUserToAddRows = false;
             this.tab_Mesures.AllowUserToDeleteRows = false;
             this.tab_Mesures.AllowUserToResizeColumns = false;
             this.tab_Mesures.AllowUserToResizeRows = false;
             this.tab_Mesures.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.tab_Mesures.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tab_Mesures.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Entrée,
-            this.nom_entree_mesuree,
-            this.Nom_Capteur,
-            this.Intensite_mesuree,
-            this.Puissance});
             this.tab_Mesures.Location = new System.Drawing.Point(12, 41);
             this.tab_Mesures.MultiSelect = false;
             this.tab_Mesures.Name = "tab_Mesures";
@@ -86,6 +74,7 @@
             this.tab_Mesures.Size = new System.Drawing.Size(423, 134);
             this.tab_Mesures.TabIndex = 6;
             this.tab_Mesures.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tbl_Mesures_CellClick);
+            this.tab_Mesures.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Tab_Mesures_CellDoubleClick);
             // 
             // label1
             // 
@@ -97,49 +86,11 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Liste des capteurs présents sur l\'enregistreur";
             // 
-            // Entrée
+            // Timer_Refresh_Tab
             // 
-            dataGridViewCellStyle1.NullValue = "E1";
-            this.Entrée.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Entrée.HeaderText = "Entrée";
-            this.Entrée.Name = "Entrée";
-            this.Entrée.ReadOnly = true;
-            this.Entrée.Width = 50;
-            // 
-            // nom_entree_mesuree
-            // 
-            dataGridViewCellStyle2.NullValue = "Cuisine";
-            this.nom_entree_mesuree.DefaultCellStyle = dataGridViewCellStyle2;
-            this.nom_entree_mesuree.HeaderText = "Nom Entrée Mesurée";
-            this.nom_entree_mesuree.Name = "nom_entree_mesuree";
-            this.nom_entree_mesuree.ReadOnly = true;
-            // 
-            // Nom_Capteur
-            // 
-            dataGridViewCellStyle3.NullValue = "Capteur Bleu";
-            this.Nom_Capteur.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Nom_Capteur.HeaderText = "Nom Capteur";
-            this.Nom_Capteur.Name = "Nom_Capteur";
-            this.Nom_Capteur.ReadOnly = true;
-            this.Nom_Capteur.Width = 150;
-            // 
-            // Intensite_mesuree
-            // 
-            dataGridViewCellStyle4.NullValue = "1,2 A";
-            this.Intensite_mesuree.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Intensite_mesuree.HeaderText = "Intensité Mesurée";
-            this.Intensite_mesuree.Name = "Intensite_mesuree";
-            this.Intensite_mesuree.ReadOnly = true;
-            this.Intensite_mesuree.Width = 60;
-            // 
-            // Puissance
-            // 
-            dataGridViewCellStyle5.NullValue = "276W";
-            this.Puissance.DefaultCellStyle = dataGridViewCellStyle5;
-            this.Puissance.HeaderText = "Puissance";
-            this.Puissance.Name = "Puissance";
-            this.Puissance.ReadOnly = true;
-            this.Puissance.Width = 60;
+            this.Timer_Refresh_Tab.Enabled = true;
+            this.Timer_Refresh_Tab.Interval = 2000;
+            this.Timer_Refresh_Tab.Tick += new System.EventHandler(this.Timer_Refresh_Tab_Tick);
             // 
             // FormMesures
             // 
@@ -149,7 +100,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tab_Mesures);
             this.Controls.Add(this.btn_aide);
-            this.Controls.Add(this.btn_cancel);
+            this.Controls.Add(this.btn_ok);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -162,14 +113,10 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btn_cancel;
+        private System.Windows.Forms.Button btn_ok;
         private System.Windows.Forms.Button btn_aide;
         private System.Windows.Forms.DataGridView tab_Mesures;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Entrée;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nom_entree_mesuree;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nom_Capteur;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Intensite_mesuree;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Puissance;
+        private System.Windows.Forms.Timer Timer_Refresh_Tab;
     }
 }

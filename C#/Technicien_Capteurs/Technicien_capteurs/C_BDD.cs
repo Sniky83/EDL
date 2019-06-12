@@ -36,6 +36,7 @@ namespace Technicien_capteurs
             {
                 OuvrirConnexion();
                 MessageBox.Show("Connexion réussie à la base de données !","Succès !", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                FermerConnexion();
                 return true;
             }
             catch (Exception)
@@ -45,13 +46,6 @@ namespace Technicien_capteurs
                 return false;
             }
         }
-
-        /*public string[,] SeConnecter(TextBox username, TextBox password)
-        {
-            string requeteCount = "SELECT COUNT(*) FROM `membres` WHERE `Pseudo`='" + username.Text + "' AND `MDP`='" + password.Text + "';";
-            string requeteMain = "SELECT `Pseudo`,`MDP` FROM `membres` WHERE `Pseudo`='" + username.Text + "' AND `MDP`='" + password.Text + "';";
-            return Query(requeteCount, requeteMain, 2);
-        }*/
 
         public MySqlDataReader SeConnecter(string nom, string password)
         {
@@ -102,60 +96,15 @@ namespace Technicien_capteurs
             }
             catch
             {
+                FermerConnexion();
                 MessageBox.Show("Problème de connexion ou de requête !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return null;
             }
         }
-
-        /*private string[,] Query(string requeteCount, string requeteMain, short nbChamps)
-        {
-            try
-            {
-                OuvrirConnexion();
-
-                MySqlCommand sqlcomCount = new MySqlCommand(requeteCount, connection);
-                MySqlDataReader rdrCount = sqlcomCount.ExecuteReader();
-
-                short ligne = 0;
-                short colonne = 0;
-                ushort nbEntrees = 0;
-
-                while (rdrCount.Read())
-                {
-                    nbEntrees = rdrCount.GetUInt16(0);
-                }
-                rdrCount.Close();
-
-                string[,] stockage = new string[nbEntrees, nbChamps];
-
-                MySqlCommand sqlcomMain = new MySqlCommand(requeteMain, connection);
-                MySqlDataReader rdrMain = sqlcomMain.ExecuteReader();
-
-                while (rdrMain.Read())
-                {
-                    while(colonne < nbChamps)
-                    {
-                        stockage[ligne, colonne] = rdrMain.GetValue(colonne).ToString();
-                        colonne++;
-                    }
-                    ligne++;
-                    colonne = 0;
-                }
-                rdrMain.Close();
-                MessageBox.Show("Récup !", "Succès !", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                FermerConnexion();
-                return stockage;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Problème lors de la récupération des informations !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return null;
-            }
-        }*/
         #endregion
 
         #region Capteur
-        public bool RequeteInsertCapteur(string nom, string adresseIp, string marque, string model, byte calibre, float a, float b)
+        public bool RequeteInsertCapteur(string nom, string adresseIp, string marque, string model, byte calibre, string a, string b)
         {
             string nom_config = $"INT_ALT_A:{a}_B:{b}";
             string requete = "INSERT INTO `capteurs`(`Nom`,`Adresse_IP`,`Calibre_Max`,`Type_Courant`,`A`,`B`,`Nom_Config`,`Model`,`Marque`)VALUES('"+ nom+"','"+adresseIp+"','"+calibre+ "','Alternatif','"+a+"','"+b+"','"+nom_config+"','"+model+"','"+marque+"')";
@@ -168,16 +117,16 @@ namespace Technicien_capteurs
             return NonQuery(requete);
         }
 
-        public bool RequeteUpdateCapteur(string nom, string ipArduino, string marque, string model, byte calibre, float a, float b, ushort id)
+        public bool RequeteUpdateCapteur(string nom, string ipArduino, string marque, string model, byte calibre, string a, string b, ushort id)
         {
             string nom_config = $"INT_ALT_A:{a}_B:{b}";
-            string requete = "UPDATE `capteurs` SET `Nom` = '"+nom+"', `Adresse_IP` = '"+ipArduino+"',`Calibre_MAX` = '"+calibre+"', `A` = '"+a+"', `B` = '"+b+"', `Nom_Config` = '"+nom_config+"', `Model` = '"+model+"', `Marque` = '"+marque+"' WHERE id = '"+id+"';";
+            string requete = $"UPDATE `capteurs` SET `Nom` = '{nom}', `Adresse_IP` = '{ipArduino}',`Calibre_MAX` = '{calibre}', `A` = '{a}', `B` = '{b}', `Nom_Config` = '{nom_config}', `Model` = '{model}', `Marque` = '{marque}' WHERE id = {id};";
             return NonQuery(requete);
         }
 
-        public MySqlDataReader RequeteSelectCapteurs()
+        public MySqlDataReader RequeteSelectCapteurs(string ip)
         {
-            string requete = "SELECT `id`,`Nom`,`Marque`,`Model`,`Calibre_Max`,`A`,`B` FROM `capteurs`;";
+            string requete = $"SELECT `id`,`Nom`,`Marque`,`Model`,`Calibre_Max`,`A`,`B` FROM `capteurs` WHERE `Adresse_IP` = '{ip}';";
             MySqlDataReader rdr = Query(requete);
             return rdr;
         }
@@ -202,22 +151,14 @@ namespace Technicien_capteurs
             MySqlDataReader rdr = Query(requete);
             return rdr;
         }
-
-        /*public string[,] RequeteSelectCapteur()
-        {
-            string requeteCount = "SELECT COUNT(*) FROM `capteurs` WHERE `Type` = 'Intensite';";
-            string requeteMain = "SELECT `Nom`,`Marque`,`Model`,`Calibre_Max`,`A`,`B` FROM `capteurs` WHERE `Type` = 'Intensite';";
-            return Query(requeteCount, requeteMain, 6);
-        }*/
         #endregion
 
         #region Entrées
 
         public MySqlDataReader RequeteSelectEntrees(string ip)
         {
-            string requete = $"SELECT `conf`.`ID`,`Ligne`,`Nom_Ligne`,`cpt`.`Nom` FROM `capteurs` cpt INNER JOIN `config_enregistrement` conf ON `conf`.`ID_Capteur` = `cpt`.`ID`;";
+            string requete = $"SELECT `conf`.`ID`,`Ligne`,`Nom_Ligne`,`cpt`.`Nom` FROM `capteurs` cpt INNER JOIN `config_enregistrement` conf ON `conf`.`ID_Capteur` = `cpt`.`ID` WHERE `cpt`.`Adresse_IP` = '{ip}';";
             MySqlDataReader rdr = Query(requete);
-            //WHERE `cpt`.`Adresse_IP` = '{ip}'
             return rdr;
         }
         public bool RequeteInsertEntree(string nom, byte ligne, ushort id_capteur)
@@ -238,9 +179,35 @@ namespace Technicien_capteurs
             return NonQuery(requete);
         }
 
+        public bool RequeteDeleteEntreeFromGestionCapteurs(ushort id_capteur)
+        {
+            string requete = $"DELETE FROM `config_enregistrement` WHERE `ID_Capteur` = {id_capteur};";
+            try
+            {
+                OuvrirConnexion();
+                MySqlCommand sqlcom = new MySqlCommand(requete, connection);
+                sqlcom.ExecuteNonQuery();
+                FermerConnexion();
+                return true;
+            }
+            catch (Exception)
+            {
+                FermerConnexion();
+                MessageBox.Show("Problème de connexion ou de requête !", "Erreur !", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+        }
+
         public MySqlDataReader RequeteSelectLastIdEntrees()
         {
             string requete = "SELECT MAX(`id`) FROM `config_enregistrement`;";
+            MySqlDataReader rdr = Query(requete);
+            return rdr;
+        }
+
+        public MySqlDataReader RequeteSelectMesuresInstant(ushort id)
+        {
+            string requete = $"SELECT `Intensite`,`Puissance`,`ID_config_enregistrement` FROM `mesures_conso_instant` WHERE `ID_config_enregistrement` = {id} ORDER BY `ID` DESC Limit 0,1;";
             MySqlDataReader rdr = Query(requete);
             return rdr;
         }

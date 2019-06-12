@@ -43,7 +43,7 @@ msg 128642 synchronous
 msg 129154 synchronous
   from durationcanvas_ref 128898
   to durationcanvas_ref 129026
-  yz 168 2015 msg operation_ref 129026 // "EnvoiConfigurationActuelle()"
+  yz 168 2015 msg operation_ref 129026 // "EnvoiConfiguration()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
   label_xy 315 155
 msg 129794 synchronous
@@ -54,7 +54,7 @@ msg 129794 synchronous
   label_xy 467 190
 reflexivemsg 130050 synchronous
   to durationcanvas_ref 129922
-  yz 236 2015 msg operation_ref 129282 // "DecompositionConfiguration()"
+  yz 236 2015 explicitmsg "DecompositionConfiguration"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
   label_xy 644 248
 end

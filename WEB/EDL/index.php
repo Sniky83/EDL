@@ -2,7 +2,6 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="style.css" rel="stylesheet" id="bootstrap-css">
-<!------ Include the above in your HEAD tag ---------->
 <!doctype html>
 <html lang="fr">
 	<div class="container">
@@ -21,17 +20,32 @@
 								<table class="table">
 									<tr>
 										<td>
-											<span class="glyphicon glyphicon-home"></span><a href="./index.php">Page de présentation</a>
+											<span class="glyphicon glyphicon-home"></span><a href="./index.php">Page de Présentation</a>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<a href="./index.php?rubrique=1">Ecran d'accueil</a>
+											<a href="./index.php?rubrique=1">Ecran d'Accueil</a>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<a href="./index.php?rubrique=2">Gestion des capteurs</a>
+											<a href="./index.php?rubrique=2">Configuration Réseau</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<a href="./index.php?rubrique=3">Gestion des Capteurs</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<a href="./index.php?rubrique=4">Configuration de l'Enregistreur</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<a href="./index.php?rubrique=5">Mesurer</a>
 										</td>
 									</tr>
 								</table>
@@ -50,13 +64,22 @@
 								include("inc/aideEcrAccueil.php");
 							break;
 							case 2:
+								include("inc/aideConfRes.php");
+							break;
+							case 3:
 								include("inc/aideGestCapt.php");
+							break;
+							case 4:
+								include("inc/aideConfEnr.php");
+							break;
+							case 5:
+								include("inc/aideMesurer.php");
 							break;
 						}
 					}
 					else
 					{
-						include("inc/acceuil.php");
+						include("inc/presentation.php");
 					}
 				?>
 			</div>

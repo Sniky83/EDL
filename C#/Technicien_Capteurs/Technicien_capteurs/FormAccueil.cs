@@ -36,10 +36,9 @@ namespace Technicien_capteurs
                 ConfigIni.LoadConfig();
             }
 
-            /*if (ConfigIni.ipArduino != "")
+            if (ConfigIni.ipArduino != "")
             {
-                C_EDL_Recorder Enregistreur;
-                Enregistreur = new C_EDL_Recorder(ConfigIni.ipArduino);
+                C_EDL_Recorder Enregistreur = new C_EDL_Recorder(ConfigIni.ipArduino);
 
                 TesterConnexionArduino = Enregistreur.TesterConnexion();
 
@@ -47,7 +46,7 @@ namespace Technicien_capteurs
                 {
                     lbl_etat_enr.Text = "Connecté";
                     lbl_etat_enr.ForeColor = Color.Green;
-                    //flagArduino = true;
+                    flagArduino = true;
                 }
                 else
                 {
@@ -55,7 +54,7 @@ namespace Technicien_capteurs
                 }
             }
 
-            if (ConfigIni.ip != "" && ConfigIni.username != "" /*&& ConfigIni.txtBox_password != ""*/ /*&& ConfigIni.dbn != "")
+            if (ConfigIni.ip != "" && ConfigIni.username != "" /*&& ConfigIni.txtBox_password != ""*/ && ConfigIni.dbn != "")
             {
                 BDD = new C_BDD(ConfigIni.ip, ConfigIni.dbn, ConfigIni.username, ConfigIni.password);
 
@@ -66,25 +65,19 @@ namespace Technicien_capteurs
                     lbl_etat_bdd.Text = "Connecté";
                     lbl_etat_bdd.ForeColor = Color.Green;
                     btn_connexion.Enabled = true;
-                    //flagBDD = true;
+                    flagBDD = true;
                 }
-            }*/
+            }
 
             if (TesterConnexionArduino == true && TesterConnexionBDD == true)
             {
                 btn_configRes.Enabled = false;
             }
-            //A supprimer après finition
-            btn_gestCapteur.Enabled = true;
-            btn_configEnr.Enabled = true;
-            btn_mesurer.Enabled = true;
-            btn_connexion.Enabled = true;
-            BDD = new C_BDD(ConfigIni.ip, ConfigIni.dbn, ConfigIni.username, ConfigIni.password);
         }
 
         private void btn_mesurer_Click(object sender, EventArgs e)
         {
-            FormMesures fMesurer = new FormMesures();
+            FormMesures fMesurer = new FormMesures(ConfigIni, entreeList);
             fMesurer.ShowDialog();
         }
 
@@ -95,15 +88,13 @@ namespace Technicien_capteurs
 
         private void btn_aide_Click(object sender, EventArgs e)
         {
-            /*FormAide fAide = new FormAide();
-            fAide.ShowDialog();*/
             if(ConfigIni.ip != "")
             {
                 System.Diagnostics.Process.Start($"http://{ConfigIni.ip}/EDL/index.php?rubrique=1");
             }
             else
             {
-                MessageBox.Show("Pour vous connecter à l'enregisteur, il vous suffira de clicker sur le bouton 'Configurartion Réseau', une fois la connexion établie, vous pourez vous connecter avec votre compte pour accéder au reste en cliquant sur le bouton 'Se Connecter'.", "Aide", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Pour vous connecter à l'enregisteur, il vous suffira de cliquer sur le bouton 'Configurartion Réseau'. Une fois la connexion établie avec la base de données et l'enregistreur, vous pourrez vous connecter avec votre compte Client pour accéder à la suite de l'application en cliquant sur le bouton 'Se Connecter'.", "Aide", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -111,9 +102,14 @@ namespace Technicien_capteurs
         {
             FormConfigEnregistreur fEnr = new FormConfigEnregistreur(ConfigIni, entreeList, capteurList);
             fEnr.ShowDialog();
-            if(entreeList.Count != 0)
+
+            if (entreeList.Count != 0)
             {
                 btn_mesurer.Enabled = true;
+            }
+            else
+            {
+                btn_mesurer.Enabled = false;
             }
         }
 
@@ -147,27 +143,40 @@ namespace Technicien_capteurs
                 lbl_etat_bdd.Text = "Connecté";
                 lbl_etat_bdd.ForeColor = Color.Green;
                 btn_connexion.Enabled = true;
-                flagBDD = true;
-            }
-            else
-            {
-                flagBDD = false;
             }
 
             if(fConfRes.IsConnectionDoneArduino == true && TesterConnexionArduino == false)
             {
                 lbl_etat_enr.Text = "Connecté";
                 lbl_etat_enr.ForeColor = Color.Green;
-                flagArduino = true;
-            }
-            else
-            {
-                flagArduino = false;
             }
 
             if (fConfRes.IsFullConnected == true)
             {
                 btn_configRes.Enabled = false;
+                btn_gestCapteur.Enabled = true;
+                if(capteurList.Count != 0)
+                {
+                    btn_configEnr.Enabled = true;
+                }
+                else
+                {
+                    btn_configEnr.Enabled = true;
+                }
+
+                if(entreeList.Count != 0)
+                {
+                    btn_mesurer.Enabled = true;
+                }
+                else
+                {
+                    btn_mesurer.Enabled = false;
+                }
+            }
+            else
+            {
+                btn_configRes.Enabled = true;
+                btn_gestCapteur.Enabled = false;
             }
         }
 
@@ -176,9 +185,14 @@ namespace Technicien_capteurs
             FormGestionCapteurs fGestCapt = new FormGestionCapteurs(ConfigIni, capteurList);
 
             fGestCapt.ShowDialog();
-            if(fGestCapt.IsNewCapteur == true)
+
+            if(capteurList.Count == 0)
             {
-                btn_configRes.Enabled = true;
+                btn_configEnr.Enabled = false;
+            }
+            else
+            {
+                btn_configEnr.Enabled = true;
             }
         }
 
@@ -191,11 +205,12 @@ namespace Technicien_capteurs
             {
                 btn_connexion.Enabled = false;
 
-                var rdr = BDD.RequeteSelectCapteurs();
+                var rdr = BDD.RequeteSelectCapteurs(ConfigIni.ipArduino);
                 string stockage = "";
+                C_Capteur capteurToAdd = new C_Capteur();
+
                 while (rdr.Read())
                 {
-                    C_Capteur capteurToAdd = new C_Capteur();
                     for (byte i = 0; i < 7; i++)
                     {
                         stockage = rdr[i].ToString();
@@ -217,10 +232,10 @@ namespace Technicien_capteurs
                                 capteurToAdd.Calibre = byte.Parse(stockage);
                                 break;
                             case 5:
-                                capteurToAdd.A = float.Parse(stockage);
+                                capteurToAdd.A = stockage.Replace(',', '.');
                                 break;
                             case 6:
-                                capteurToAdd.B = float.Parse(stockage);
+                                capteurToAdd.B = stockage.Replace(',', '.');
                                 break;
                             default:
 
@@ -232,17 +247,22 @@ namespace Technicien_capteurs
                 rdr.Close();
                 BDD.connection.Close();
 
-                if (capteurList.Count == 0)
+                if (capteurList.Count == 0 || TesterConnexionArduino == false)
                 {
                     btn_configEnr.Enabled = false;
                     btn_mesurer.Enabled = false;
                 }
+                else
+                {
+                    btn_configEnr.Enabled = true;
+                }
 
                 var reader = BDD.RequeteSelectEntrees(ConfigIni.ipArduino);
                 string stock = "";
+                C_Entree entreeToAdd = new C_Entree();
+
                 while (reader.Read())
                 {
-                    C_Entree entreeToAdd = new C_Entree();
                     for (byte i = 0; i < 4; i++)
                     {
                         stock = reader[i].ToString();
@@ -258,7 +278,7 @@ namespace Technicien_capteurs
                                 entreeToAdd.Nom_Entree = stock;
                                 break;
                             case 3:
-                                entreeToAdd.Nom_Capteur = stock;
+                                entreeToAdd.Capteur = capteurList.First(x => x.Nom == stock);
                                 break;
                             default:
 
@@ -270,47 +290,20 @@ namespace Technicien_capteurs
                 reader.Close();
                 BDD.connection.Close();
 
-                if (entreeList.Count == 0)
+                if (entreeList.Count == 0 || TesterConnexionArduino == false)
                 {
                     btn_mesurer.Enabled = false;
                 }
                 else
                 {
+                    btn_mesurer.Enabled = true;
+                    btn_gestCapteur.Enabled = true;
                     btn_configEnr.Enabled = true;
-                    if (ConfigIni.ipArduino != "")
-                    {
-                        btn_gestCapteur.Enabled = true;
-                        btn_configEnr.Enabled = true;
+                }
 
-                        bool result = false;
-                        C_EDL_Recorder Recorder = new C_EDL_Recorder(ConfigIni.ipArduino);
-                        for (byte i = 0; i < entreeList.Count; i++)
-                        {
-                            var Join = capteurList.Where(item => item.Nom == entreeList[i].Nom_Capteur);
-                            var obj = Join.First();
-                            var A = obj.A;
-                            var B = obj.B;
-                            ushort id = entreeList[i].Id;
-                            string Composition = $"EDL_TECH_SET_CONF_EDL_L{entreeList[i].Entree}_A_{A}_B_{B}_ID_{id}?";
-                            result = Recorder.EnvoiConfiguration(Composition);
-                            if(result == true)
-                            {
-                                Thread.Sleep(1000);//on sleep pour laisser le temps à l'arduino de répondre
-                            }
-                        }
-
-
-                        if (result == true)
-                        {
-                            btn_mesurer.Enabled = true;
-                        }
-                        else
-                        {
-                            btn_mesurer.Enabled = false;
-                        }
-                        //Thread.Sleep(2000);
-                        //MessageBox.Show("Vous devez vous connecter à l'enregistreur en rentrant son adresse IP dans la partie 'Configuration Réseau' pour pouvoir utiliser les autres fonctionnalitées !", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                if(ConfigIni.ipArduino == "")
+                {
+                    MessageBox.Show("Vous devez vous connecter à l'enregistreur en rentrant son adresse IP dans la partie 'Configuration Réseau' pour pouvoir utiliser les autres fonctionnalitées !", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }

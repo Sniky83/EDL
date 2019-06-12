@@ -10,7 +10,7 @@ classinstance 131074 class_ref 134658 // Daemon_Main
   name ""   xyz 635 34 2000 life_line_z 2000
 fragment 133378 "alt"
   xyzwh 242 193 3005 445 199
-  separator 5184
+  separator 5183
 end
 note 134530 "EX:
 \"EDL_Mesures_Inst?\""
@@ -74,7 +74,7 @@ msg 128898 synchronous
 msg 131458 synchronous
   from durationcanvas_ref 131202
   to durationcanvas_ref 131330
-  yz 147 2015 msg operation_ref 129410 // "EnvoiMessageMesuresInstant()"
+  yz 147 2015 msg operation_ref 129410 // "EnvoiEtReception(in nbBytesRec : byte, in msgEnvoi : string, in msgReception : string, in testerConnexion : bool) : bool"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
   label_xy 273 132
 msg 131842 synchronous
@@ -91,7 +91,7 @@ msg 132226 return
   label_xy 481 205
 reflexivemsg 132482 synchronous
   to durationcanvas_ref 132354
-  yz 233 2015 msg operation_ref 129538 // "LectureMesuresInstant()"
+  yz 233 2015 explicitmsg "LectureMesuresInstant"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
   label_xy 444 244
 msg 133250 return
@@ -114,7 +114,7 @@ msg 134146 return
   label_xy 278 362
 reflexivemsg 134402 synchronous
   to durationcanvas_ref 134274
-  yz 333 2015 msg operation_ref 129538 // "LectureMesuresInstant()"
+  yz 333 2015 explicitmsg "LectureMesuresInstant"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
   label_xy 438 344
 end
