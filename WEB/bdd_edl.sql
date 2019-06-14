@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  lun. 27 mai 2019 à 07:01
+-- Généré le :  ven. 14 juin 2019 à 14:58
 -- Version du serveur :  5.7.24
 -- Version de PHP :  7.2.14
 
@@ -37,11 +37,18 @@ CREATE TABLE IF NOT EXISTS `capteurs` (
   `Type_Courant` varchar(10) NOT NULL,
   `A` float NOT NULL,
   `B` float NOT NULL,
-  `Nom_Config` varchar(20) NOT NULL,
+  `Nom_Config` varchar(28) NOT NULL,
   `Model` varchar(15) NOT NULL,
   `Marque` varchar(15) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `capteurs`
+--
+
+INSERT INTO `capteurs` (`ID`, `Nom`, `Adresse_IP`, `Calibre_Max`, `Type_Courant`, `A`, `B`, `Nom_Config`, `Model`, `Marque`) VALUES
+(44, 'Capteur Bleu', '192.168.1.42', 30, 'Alternatif', 0.011, 5.555, 'INT_ALT_A:0.011_B:5.555', 'XP-12', 'W&W');
 
 -- --------------------------------------------------------
 
@@ -56,14 +63,14 @@ CREATE TABLE IF NOT EXISTS `config_enregistrement` (
   `ID_Capteur` int(11) NOT NULL,
   `Nom_Ligne` varchar(30) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `config_enregistrement`
 --
 
 INSERT INTO `config_enregistrement` (`ID`, `Ligne`, `ID_Capteur`, `Nom_Ligne`) VALUES
-(1, 2, 1, 'Prise Cuisine');
+(39, 1, 44, 'Cuisine');
 
 -- --------------------------------------------------------
 
@@ -87,35 +94,6 @@ CREATE TABLE IF NOT EXISTS `membres` (
 
 INSERT INTO `membres` (`ID`, `Nom`, `Prenom`, `MDP`, `Admin`) VALUES
 (1, 'Client', 'Jean', '123456', 0);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `mesures_conso`
---
-
-DROP TABLE IF EXISTS `mesures_conso`;
-CREATE TABLE IF NOT EXISTS `mesures_conso` (
-  `ID` int(5) NOT NULL AUTO_INCREMENT,
-  `Date` date NOT NULL,
-  `Heure` time NOT NULL,
-  `Intensite` float NOT NULL,
-  `Puissance` float NOT NULL,
-  `Energie_KWh` float NOT NULL,
-  `Ligne_Mesure` varchar(30) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `mesures_conso`
---
-
-INSERT INTO `mesures_conso` (`ID`, `Date`, `Heure`, `Intensite`, `Puissance`, `Energie_KWh`, `Ligne_Mesure`) VALUES
-(1, '2019-02-28', '10:00:00', 10, 15, 15000, 'prise salon'),
-(2, '2019-02-28', '11:00:00', 8, 230, 1500, 'prise chambre 1'),
-(3, '2019-02-28', '12:00:00', 5, 500, 2350, 'Prise Salon'),
-(4, '2019-02-28', '13:00:00', 8, 230, 1500, 'prise chambre 1'),
-(5, '2019-02-28', '14:00:00', 5, 500, 2350, 'Prise Salon');
 
 -- --------------------------------------------------------
 
@@ -145,10 +123,9 @@ CREATE TABLE IF NOT EXISTS `mesures_conso_instant` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Intensite` float NOT NULL,
   `Puissance` float NOT NULL,
-  `KWh` float NOT NULL,
   `ID_config_enregistrement` int(5) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=651 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
