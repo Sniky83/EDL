@@ -71,7 +71,6 @@
             this.txtBox_nom.Name = "txtBox_nom";
             this.txtBox_nom.Size = new System.Drawing.Size(145, 20);
             this.txtBox_nom.TabIndex = 3;
-            this.txtBox_nom.Text = "Client";
             // 
             // txtBox_password
             // 
@@ -80,7 +79,6 @@
             this.txtBox_password.PasswordChar = '*';
             this.txtBox_password.Size = new System.Drawing.Size(145, 20);
             this.txtBox_password.TabIndex = 4;
-            this.txtBox_password.Text = "123456";
             // 
             // btn_cancel
             // 

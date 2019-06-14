@@ -12,7 +12,7 @@ namespace EDL_Daemon
 {
     class Program
     {
-        private static IPAddress ipAddress = IPAddress.Parse("192.168.1.42");
+        private static IPAddress ipAddress = IPAddress.Parse("10.73.8.25");
         public static Socket sender = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
         private static byte[] bytes = new byte[37]; //nb de chars qu'on recoit
 

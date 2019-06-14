@@ -1,6 +1,0 @@
-On peut se co à la BDD mais arduino pas obligé si l'arduino n'est pas co on met un message
-
-Dans le cas ou on veut faire une mesure instant et que l'arduino ne rep pas on message box pour prévenir
-que l'arduino n'est pas connecté ou pas configuré
-
-Faire l'update et le delete en fonction de la cellule
